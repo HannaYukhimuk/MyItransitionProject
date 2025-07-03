@@ -1,0 +1,274 @@
+using AutoMapper;
+using MyFormixApp.Domain.Entities;
+using MyFormixApp.Domain.DTOs.Forms;
+using MyFormixApp.Application.Repositories;
+using MyFormixApp.Domain.DTOs.Templates;
+using MyFormixApp.Domain.DTOs.Answers;  
+using MyFormixApp.Application.Services;
+
+namespace MyFormixApp.Infrastructure.Services
+{
+    public class FormService : IFormService
+    {
+        private readonly IFormRepository _formRepository;
+        private readonly ITemplateRepository _templateRepository;
+        private readonly IMapper _mapper;
+
+        public FormService(
+            IFormRepository formRepository,
+            ITemplateRepository templateRepository,
+            IMapper mapper)
+        {
+            _formRepository = formRepository;
+            _templateRepository = templateRepository;
+            _mapper = mapper;
+        }
+
+        public async Task<FormDetailsDto?> GetByIdAsync(Guid id, Guid currentUserId)
+        {
+            var form = await _formRepository.GetByIdWithDetailsAsync(id);
+            return form == null ? null : MapToFormDetailsDto(form);
+        }
+
+        public async Task<IEnumerable<FormDetailsDto>> GetByUserAsync(Guid userId) => 
+            _mapper.Map<IEnumerable<FormDetailsDto>>(await _formRepository.GetByUserAsync(userId));
+
+        public async Task<FormDetailsDto> CreateAsync(FormDto dto, Guid userId)
+        {
+            await ValidateFormCreation(dto, userId);
+            
+            var form = new Form
+            {
+                TemplateId = dto.TemplateId,
+                UserId = userId,
+                Answers = dto.Answers.Select(MapToAnswer).ToList()
+            };
+
+            var created = await _formRepository.CreateAsync(form);
+            return await GetByIdAsync(created.Id, userId) ?? 
+                   throw new Exception("Failed to retrieve created form");
+        }
+
+        public async Task<bool> UpdateAsync(FormDto dto, Guid userId, bool isAdmin = false)
+{
+    var form = await _formRepository.GetByIdWithDetailsAsync(dto.Id!.Value);
+    if (form == null || (form.UserId != userId && !isAdmin)) return false;
+
+    UpdateFormAnswers(form, dto.Answers);
+    await _formRepository.UpdateAsync(form);
+    return true;
+}
+
+
+        public async Task<bool> DeleteAsync(Guid id, Guid userId)
+{
+    var form = await _formRepository.GetByIdAsync(id);
+    if (form == null) return false;
+
+    await _formRepository.DeleteAsync(id);
+    return true;
+}
+
+
+        public async Task<bool> CreateResponseAsync(Guid templateId, Guid userId, Dictionary<Guid, string> responses)
+        {
+            var template = await ValidateTemplateAccess(templateId, userId);
+            ValidateRequiredQuestions(template, responses.Keys);
+
+            var form = new Form
+            {
+                TemplateId = templateId,
+                UserId = userId,
+                CreatedAt = DateTime.UtcNow,
+                Answers = responses.Select(r => new Answer { QuestionId = r.Key, ValueText = r.Value }).ToList()
+            };
+
+            await _formRepository.CreateAsync(form);
+            return true;
+        }
+
+        public async Task<IEnumerable<FormDetailsDto>> GetAllFormsAsync() => 
+            _mapper.Map<IEnumerable<FormDetailsDto>>(await _formRepository.GetAllWithDetailsAsync());
+
+        public async Task<IEnumerable<FormDetailsDto>> GetByTemplateAsync(Guid templateId, Guid currentUserId)
+        {
+            await ValidateTemplateAccess(templateId, currentUserId);
+            return _mapper.Map<IEnumerable<FormDetailsDto>>(await _formRepository.GetByTemplateAsync(templateId));
+        }
+
+        public async Task<TemplateStatisticsDto> GetTemplateStatisticsAsync(Guid templateId, Guid currentUserId)
+        {
+            var template = await ValidateTemplateAccess(templateId, currentUserId);
+            var forms = await _formRepository.GetByTemplateWithDetailsAsync(templateId);
+
+            return new TemplateStatisticsDto
+            {
+                TemplateId = templateId,
+                TemplateTitle = template.Title,
+               // TotalSubmissions = forms.Count,
+                SubmissionsByDay = forms.GroupBy(f => f.CreatedAt.Date)
+                    .ToDictionary(g => g.Key.ToString("yyyy-MM-dd"), g => g.Count()),
+                QuestionStatistics = template.Questions.ToDictionary(
+                    q => q.Title,
+                    q => GetQuestionStatistics(q, forms))
+            };
+        }
+
+        public async Task<FormDetailsDto?> GetByUserAndTemplateAsync(Guid userId, Guid templateId) => 
+            _mapper.Map<FormDetailsDto>(await _formRepository.GetByUserAndTemplateAsync(userId, templateId));
+
+        private async Task ValidateFormCreation(FormDto dto, Guid userId)
+        {
+            if (await _formRepository.GetByUserAndTemplateAsync(userId, dto.TemplateId) != null)
+                throw new InvalidOperationException("You have already submitted a form for this template");
+
+            var template = await _templateRepository.GetByIdWithDetailsAsync(dto.TemplateId) ?? 
+                           throw new ArgumentException("Template not found");
+
+            if (!template.IsPublic && template.UserId != userId && !template.Accesses.Any(a => a.UserId == userId))
+                throw new UnauthorizedAccessException("You don't have access to this template");
+
+            var missingQuestions = template.Questions
+                .Where(q => q.IsRequired)
+                .Select(q => q.Id)
+                .Except(dto.Answers.Select(a => a.QuestionId))
+                .ToList();
+
+            if (missingQuestions.Any())
+                throw new ArgumentException($"Missing answers for required questions: {string.Join(", ", missingQuestions)}");
+        }
+
+        private async Task<Template> ValidateTemplateAccess(Guid templateId, Guid userId)
+        {
+            var template = await _templateRepository.GetByIdWithDetailsAsync(templateId) ?? 
+                          throw new ArgumentException("Template not found");
+
+            if (!template.IsPublic && template.UserId != userId && !template.Accesses.Any(a => a.UserId == userId))
+                throw new UnauthorizedAccessException("You don't have access to this template");
+
+            return template;
+        }
+
+        private static void ValidateRequiredQuestions(Template template, IEnumerable<Guid> answeredQuestionIds)
+        {
+            var missingRequired = template.Questions
+                .Where(q => q.IsRequired)
+                .Select(q => q.Id)
+                .Except(answeredQuestionIds)
+                .ToList();
+
+            if (missingRequired.Any())
+                throw new ArgumentException($"Missing answers for required questions: {string.Join(", ", missingRequired)}");
+        }
+
+        private static Answer MapToAnswer(AnswerDto answerDto) => new()
+        {
+            QuestionId = answerDto.QuestionId,
+            ValueText = answerDto.MultiTextValue != null ? string.Join(";", answerDto.MultiTextValue) : answerDto.TextValue,
+            ValueNumber = answerDto.NumberValue != null ? Convert.ToInt32(answerDto.NumberValue) : null,
+            ValueBool = answerDto.BoolValue
+        };
+
+        private static void UpdateFormAnswers(Form form, IEnumerable<AnswerDto> answerDtos)
+        {
+            foreach (var answerDto in answerDtos)
+            {
+                var question = form.Template.Questions.FirstOrDefault(q => q.Id == answerDto.QuestionId);
+                if (question == null) continue;
+
+                var valueToStore = GetStoredValue(answerDto, question);
+                var existingAnswer = form.Answers.FirstOrDefault(a => a.QuestionId == answerDto.QuestionId);
+
+                if (existingAnswer != null)
+                    existingAnswer.ValueText = valueToStore;
+                else
+                    form.Answers.Add(new Answer { QuestionId = answerDto.QuestionId, ValueText = valueToStore });
+            }
+        }
+
+        private static string GetStoredValue(AnswerDto answerDto, Question question)
+        {
+            if (answerDto.MultiTextValue?.Any() == true)
+                return string.Join(";", question.Options
+                    .Where(o => answerDto.MultiTextValue.Contains(o.Text))
+                    .Select(o => o.Id.ToString()));
+
+            if (!string.IsNullOrEmpty(answerDto.TextValue))
+            {
+                return (question.Type == "radio" || question.Type == "select")
+                    ? question.Options.FirstOrDefault(o => o.Text == answerDto.TextValue)?.Id.ToString() ?? answerDto.TextValue
+                    : answerDto.TextValue;
+            }
+
+            return string.Empty;
+        }
+
+        private static Dictionary<string, int> GetQuestionStatistics(Question question, IEnumerable<Form> forms)
+        {
+            var answers = forms.SelectMany(f => f.Answers.Where(a => a.QuestionId == question.Id));
+
+            return question.Type switch
+            {
+                "boolean" => new Dictionary<string, int>
+                {
+                    ["Yes"] = answers.Count(a => a.ValueBool == true),
+                    ["No"] = answers.Count(a => a.ValueBool == false)
+                },
+                "radio" or "checkbox" => question.Options?.ToDictionary(
+                    o => o.Text,
+                    o => answers.Count(a => a.ValueText?.Contains(o.Text) == true)) ?? new Dictionary<string, int>(),
+                _ => new Dictionary<string, int>()
+            };
+        }
+
+        private static FormDetailsDto MapToFormDetailsDto(Form form) => new()
+        {
+            Id = form.Id,
+            TemplateId = form.TemplateId,
+            UserId = form.UserId,
+            CreatedAt = form.CreatedAt,
+            Answers = form.Answers.Select(a => MapToAnswerDetailsDto(a)).ToList()
+        };
+
+        private static AnswerDetailsDto MapToAnswerDetailsDto(Answer answer)
+        {
+            var question = answer.Question;
+            var options = question.Options?
+                .OrderBy(o => o.Position)
+                .Select(o => o.Text)
+                .ToList() ?? new List<string>();
+
+            return new AnswerDetailsDto
+            {
+                Id = answer.Id,
+                QuestionId = question.Id,
+                QuestionTitle = question.Title,
+                QuestionDescription = question.Description ?? string.Empty,
+                QuestionType = question.Type,
+                Options = options,
+                TextValue = GetDisplayValue(answer, question),
+                MultiTextValue = GetMultiTextValue(answer, question)
+            };
+        }
+
+        private static string GetDisplayValue(Answer answer, Question question)
+        {
+            if (question.Type != "radio" && question.Type != "select") 
+                return answer.ValueText;
+
+            return question.Options.FirstOrDefault(o => o.Id.ToString() == answer.ValueText)?.Text ?? answer.ValueText;
+        }
+
+        private static List<string>? GetMultiTextValue(Answer answer, Question question)
+        {
+            if (question.Type != "checkbox" || string.IsNullOrEmpty(answer.ValueText)) 
+                return null;
+
+            return answer.ValueText
+                .Split(';')
+                .Select(id => question.Options.FirstOrDefault(o => o.Id.ToString() == id)?.Text)
+                .Where(text => text != null)
+                .ToList()!;
+        }
+    }
+}

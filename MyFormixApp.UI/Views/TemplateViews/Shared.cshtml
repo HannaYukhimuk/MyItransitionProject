@@ -1,0 +1,51 @@
+@model IEnumerable<MyFormixApp.Domain.DTOs.Templates.TemplateListItemDto>
+
+@{
+    ViewData["Title"] = "Shared Templates";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            You don't have access to any private templates yet.
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var template in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">@template.Title</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">@(template.Description ?? "No description")</p>
+                            <div class="mb-2">
+                                @foreach (var tag in template.Tags)
+                                {
+                                    <span class="badge bg-secondary me-1">@tag</span>
+                                }
+                            </div>
+                            <p class="text-muted small">
+                                Author: @template.AuthorName<br>
+                                Questions: @template.QuestionsCount<br>
+                                Created: @template.CreatedAt.ToString("d")
+                            </p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a asp-action="View" asp-route-id="@template.Id" 
+                               class="btn btn-primary btn-sm">View</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

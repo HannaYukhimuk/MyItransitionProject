@@ -1,0 +1,108 @@
+@using MyFormixApp.Domain.DTOs.Answers;
+@using MyFormixApp.Domain.DTOs.Questions;
+@model MyFormixApp.Domain.DTOs.Forms.FormDetailsDto
+@{
+    ViewData["Title"] = "Form Response Details";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h2>@ViewData["Title"]</h2>
+            <p class="mb-0"><strong>Submitted:</strong> @Model.CreatedAt.ToString("g")</p>
+        </div>
+        <div class="card-body">
+            <form id="answersForm" asp-controller="Forms" asp-action="Edit" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <input type="hidden" name="TemplateId" value="@Model.TemplateId" />
+
+                <div class="d-flex justify-content-end mb-3">
+                    <button id="editBtn" type="button" class="btn btn-primary me-2">
+                        <i class="bi bi-pencil"></i> Edit Answers
+                    </button>
+                </div>
+
+                @for (int i = 0; i < Model.Answers.Count; i++)
+                {
+                    var answer = Model.Answers[i];
+                    <div class="card mb-4">
+                        <div class="card-body">
+
+
+        
+                            <h5>@answer.QuestionTitle</h5>
+                            <input type="hidden" name="Answers[@i].Id" value="@answer.Id" />
+                            <input type="hidden" name="Answers[@i].QuestionId" value="@answer.QuestionId" />
+
+                            @if (answer.QuestionType == "text")
+                            {
+                                <input name="Answers[@i].TextValue" class="form-control answer-field" value="@answer.TextValue" disabled />
+                            }
+                            else if (answer.QuestionType == "radio")
+                            {
+                                @foreach (var option in answer.Options)
+                                {
+                                    <div class="form-check">
+                                        <input class="form-check-input answer-field" type="radio"
+                                            name="Answers[@i].TextValue"
+                                            value="@option"
+                                            @(option == answer.TextValue ? "checked" : "")
+                                            disabled />
+                                        <label class="form-check-label">@option</label>
+                                    </div>
+                                }
+                            }
+                            else if (answer.QuestionType == "checkbox")
+                            {
+                                @foreach (var option in answer.Options)
+                                {
+                                    <div class="form-check">
+                                        <input class="form-check-input answer-field" type="checkbox"
+                                            name="Answers[@i].MultiTextValue"
+                                            value="@option"
+                                            @(answer.MultiTextValue?.Contains(option) == true ? "checked" : "")
+                                            disabled />
+                                        <label class="form-check-label">@option</label>
+                                    </div>
+                                }
+                            }
+                            else if (answer.QuestionType == "select")
+                            {
+                                <select name="Answers[@i].TextValue" class="form-select answer-field" disabled>
+                                    @foreach (var option in answer.Options)
+                                    {
+                                        <option value="@option" selected="@(option == answer.TextValue)">
+                                            @option
+                                        </option>
+                                    }
+                                </select>
+                            }
+                        </div>
+                    </div>
+                }
+
+                <div id="editControls" class="d-none mt-4">
+                    <button type="submit" class="btn btn-success me-2">
+                        <i class="bi bi-check-circle"></i> Save Changes
+                    </button>
+                    <button id="cancelEdit" type="button" class="btn btn-secondary">
+                        <i class="bi bi-x-circle"></i> Cancel
+                    </button>
+                </div>
+            </form>
+
+            <form asp-controller="Forms" asp-action="Delete" asp-route-id="@Model.Id" method="post" class="d-inline">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this form?');">
+                    <i class="bi bi-trash"></i> Delete Form
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/forms/form-details.js"></script>
+    <script src="~/js/shared/confirmation.js"></script>
+}

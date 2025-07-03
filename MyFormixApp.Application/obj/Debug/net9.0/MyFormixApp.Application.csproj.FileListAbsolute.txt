@@ -1,0 +1,80 @@
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Application.deps.json
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Application.dll
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Application.pdb
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Domain.dll
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Domain.pdb
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.AssemblyInfo.cs
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.sourcelink.json
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormix.ECD49D35.Up2Date
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.dll
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\refint\MyFormixApp.Application.dll
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.pdb
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\ref\MyFormixApp.Application.dll
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.AssemblyInfo.cs
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.sourcelink.json
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Application.deps.json
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Application.dll
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Application.pdb
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Domain.dll
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Domain.pdb
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormix.ECD49D35.Up2Date
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.dll
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\refint\MyFormixApp.Application.dll
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.pdb
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\ref\MyFormixApp.Application.dll
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Application.deps.json
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Application.dll
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Application.pdb
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Domain.dll
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Domain.pdb
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.AssemblyInfo.cs
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.sourcelink.json
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormix.ECD49D35.Up2Date
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.dll
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\refint\MyFormixApp.Application.dll
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.pdb
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\ref\MyFormixApp.Application.dll
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Application.deps.json
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Application.dll
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Application.pdb
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Domain.dll
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Domain.pdb
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.AssemblyInfo.cs
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.sourcelink.json
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormix.ECD49D35.Up2Date
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.dll
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\refint\MyFormixApp.Application.dll
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.pdb
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\ref\MyFormixApp.Application.dll
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Application.deps.json
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Application.dll
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Application.pdb
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Domain.dll
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Application\bin\Debug\net9.0\MyFormixApp.Domain.pdb
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.AssemblyInfo.cs
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.sourcelink.json
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormix.ECD49D35.Up2Date
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.dll
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\refint\MyFormixApp.Application.dll
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\MyFormixApp.Application.pdb
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Application\obj\Debug\net9.0\ref\MyFormixApp.Application.dll

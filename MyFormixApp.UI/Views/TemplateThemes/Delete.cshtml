@@ -1,0 +1,44 @@
+@model MyFormixApp.Domain.DTOs.Templates.TemplateThemeDto
+
+@{
+    ViewData["Title"] = "Delete Theme";
+}
+
+<div class="container py-4">
+    <div class="card shadow border-danger">
+        <div class="card-header bg-danger text-white py-3">
+            <h3 class="h5 mb-0">
+                <i class="fas fa-exclamation-triangle me-2"></i>@ViewData["Title"]
+            </h3>
+        </div>
+        <div class="card-body p-4">
+            <div class="alert alert-danger">
+                <h5 class="alert-heading">Warning!</h5>
+                <p class="mb-0">You are about to permanently delete this theme. This action cannot be undone.</p>
+            </div>
+
+            <div class="border p-4 rounded mb-4">
+                <h5 class="fw-bold mb-3">Theme Details</h5>
+                <dl class="row">
+                    <dt class="col-sm-3">ID</dt>
+                    <dd class="col-sm-9">@Model.Id</dd>
+
+                    <dt class="col-sm-3">Name</dt>
+                    <dd class="col-sm-9 fw-bold">@Model.Name</dd>
+                </dl>
+            </div>
+
+            <form asp-action="Delete" class="mt-4">
+                <input type="hidden" asp-for="Id" />
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Cancel
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt me-2"></i>Confirm Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

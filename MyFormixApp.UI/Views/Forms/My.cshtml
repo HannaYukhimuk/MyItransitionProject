@@ -1,0 +1,129 @@
+@model IEnumerable<MyFormixApp.Domain.DTOs.Forms.FormDetailsDto>
+@{
+    ViewData["Title"] = "My Submitted Forms";
+}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="display-6 fw-bold">
+            <i class="fas fa-file-alt text-primary me-3"></i>@ViewData["Title"]
+        </h2>
+        <div class="input-group" style="width: 300px;">
+            <span class="input-group-text bg-transparent">
+                <i class="fas fa-search"></i>
+            </span>
+            <input type="text" class="form-control" placeholder="Search forms...">
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-white border-bottom-0 py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Your Form Submissions</h5>
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown">
+                        <i class="fas fa-filter me-2"></i>Filter
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">All Forms</a></li>
+                        <li><a class="dropdown-item" href="#">Recent First</a></li>
+                        <li><a class="dropdown-item" href="#">Oldest First</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="card-body text-center py-5">
+                <i class="fas fa-file-alt fa-4x text-muted mb-4"></i>
+                <h4 class="text-muted">No forms submitted yet</h4>
+                <p class="text-muted mb-4">Start by filling out one of our templates</p>
+                <a asp-controller="Templates" asp-action="Index" class="btn btn-primary px-4">
+                    <i class="fas fa-clipboard-list me-2"></i>Browse Templates
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="list-group list-group-flush">
+                @foreach (var form in Model)
+                {
+                    <a asp-controller="Forms" asp-action="Details" asp-route-id="@form.Id" 
+                       class="list-group-item list-group-item-action border-0 py-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar me-3">
+                                    <div class="avatar-initial bg-primary bg-opacity-10 text-primary rounded-circle">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">Submission #@form.Id</h6>
+                                    <div class="d-flex flex-wrap gap-2 align-items-center">
+                                        <small class="text-muted">
+                                            <i class="fas fa-calendar-alt me-1"></i>
+                                            @form.CreatedAt.ToString("MMMM dd, yyyy")
+                                        </small>
+                                        <span class="bullet">•</span>
+                                        <small class="text-muted">
+                                            <i class="fas fa-clock me-1"></i>
+                                            @form.CreatedAt.ToString("h:mm tt")
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge bg-primary rounded-pill">
+                                    <i class="fas fa-check-circle me-1"></i>
+                                    @form.Answers.Count answers
+                                </span>
+                                <i class="fas fa-chevron-right text-muted"></i>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        }
+
+        <div class="card-footer bg-white border-top-0 py-3">
+            <nav aria-label="Forms pagination">
+                <ul class="pagination justify-content-center mb-0">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<style>
+    .avatar {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .avatar-initial {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .list-group-item:hover {
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+    .bullet {
+        opacity: 0.6;
+        padding: 0 0.25rem;
+    }
+</style>

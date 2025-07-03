@@ -1,0 +1,78 @@
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('/images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+.tag-cloud {
+    line-height: 2;
+}
+
+.card-img-top {
+    height: 180px;
+    object-fit: cover;
+}
+
+
+
+/* Стили для комментариев */
+.card {
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.reply-form {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin-top: 0.5rem;
+}
+
+.replies-container {
+    border-left: 2px solid #dee2e6;
+    padding-left: 1rem;
+    margin-top: 1rem;
+}
+
+.field-validation-error {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+
+/*
+.bg-primary {
+    background-color: #008484 !important;
+}*/
+
+
+
+
+
+/* Стили для комментариев */
+.card {
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.reply-form {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin-top: 0.5rem;
+}
+
+.replies-container {
+    border-left: 2px solid #dee2e6;
+    padding-left: 1rem;
+    margin-top: 1rem;
+}
+
+.field-validation-error {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: none;
+}

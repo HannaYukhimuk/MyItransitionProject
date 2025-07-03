@@ -1,0 +1,126 @@
+@using MyFormixApp.Domain.DTOs.Templates
+@model MyFormixApp.Domain.DTOs.Templates.TemplateDto
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="Title" class="form-label">Template Title *</label>
+            <input asp-for="Title" class="form-control" required />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="Description" class="form-label">Description</label>
+            <textarea asp-for="Description" class="form-control" rows="2"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="ThemeId" class="form-label">Theme *</label>
+            <select asp-for="ThemeId" class="form-select" required>
+                @foreach (var theme in ViewBag.Themes ?? new List<TemplateThemeDto>())
+                {
+                    <option value="@theme.Id">@theme.Name</option>
+                }
+            </select>
+            <span asp-validation-for="ThemeId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-check form-switch mt-4 pt-2">
+            <input asp-for="IsPublic" class="form-check-input" type="checkbox">
+            <label asp-for="IsPublic" class="form-check-label">Make template public</label>
+        </div>
+    </div>
+</div>
+
+<div class="form-group mb-3">
+    <label class="form-label">Header Image</label>
+    <input type="file" class="form-control" name="templateImage" accept="image/*">
+    <small class="text-muted">Upload an image to display at the top of your template</small>
+</div>
+
+<div class="row mb-3" id="allowedUsersSection" style="display: none;">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label class="form-label">Grant access to specific users</label>
+            <input type="text" id="userEmailInput" class="form-control" placeholder="Enter user email">
+            <small class="text-muted">Press Enter to add user</small>
+            <div id="allowedUsersContainer" class="mt-2">
+                @if (Model.AllowedUserIds != null)
+                {
+                    foreach (var userId in Model.AllowedUserIds)
+                    {
+                        <span class="badge bg-secondary me-1 mb-1">
+                            @userId
+                            <input type="hidden" name="AllowedUserIds" value="@userId" />
+                            <button type="button" class="btn-close btn-close-white btn-sm ms-1" aria-label="Remove"></button>
+                        </span>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group mb-4">
+    <label class="form-label">Tags</label>
+    <input type="text" id="tagInput" class="form-control" placeholder="Add tags (press Enter)">
+    <small class="text-muted">Press Enter to add tags</small>
+    <div id="tagsContainer" class="mt-2">
+        @if (Model.Tags != null)
+        {
+            foreach (var tag in Model.Tags)
+            {
+                <span class="badge bg-primary me-1 mb-1">
+                    @tag
+                    <input type="hidden" name="Tags" value="@tag" />
+                    <button type="button" class="btn-close btn-close-white btn-sm ms-1" aria-label="Remove"></button>
+                </span>
+            }
+        }
+    </div>
+</div>
+
+<hr class="my-4" />
+
+<div class="row">
+    <div class="col-md-8">
+        <h4>Questions</h4>
+        <div id="questionsContainer">
+            @if (Model.Questions != null && Model.Questions.Any())
+            {
+                foreach (var question in Model.Questions.OrderBy(q => q.Position))
+                {
+                    <partial name="Partials/_QuestionEditor" model="question" />
+                }
+            }
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card sticky-top" style="top: 20px;">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Add Question</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">Question Type</label>
+                    <select id="questionTypeSelect" class="form-select">
+                        <option value="text">Text Answer</option>
+                        <option value="radio">Single Choice</option>
+                        <option value="checkbox">Multiple Choice</option>
+                        <option value="select">Dropdown</option>
+                    </select>
+                </div>
+                <button type="button" id="addQuestionBtn" class="btn btn-primary w-100">
+                    <i class="fas fa-plus me-1"></i> Add Question
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

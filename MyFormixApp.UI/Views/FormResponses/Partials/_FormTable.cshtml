@@ -1,0 +1,47 @@
+@model IEnumerable<MyFormixApp.Domain.DTOs.Forms.FormDetailsDto>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                @if (!ViewData.ContainsKey("HideTemplateColumn"))
+                {
+                    <th>Template</th>
+                }
+                @if (!ViewData.ContainsKey("HideUserColumn"))
+                {
+                    <th>Submitted By</th>
+                }
+                <th>Date</th>
+                <th>Answers</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var form in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Forms" asp-action="Details" asp-route-id="@form.Id">
+                            @form.Id
+                        </a>
+                    </td>
+                    @if (!ViewData.ContainsKey("HideTemplateColumn"))
+                    {
+                        <td>@(form.TemplateTitle ?? $"Template {form.TemplateId}")</td>
+                    }
+                    @if (!ViewData.ContainsKey("HideUserColumn"))
+                    {
+                        <td>@(form.UserName ?? $"User {form.UserId}")</td>
+                    }
+                    <td>@form.CreatedAt.ToString("g")</td>
+                    <td>@form.Answers.Count</td>
+                    <td>
+                        <partial name="Partials/_FormActions" model="form" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

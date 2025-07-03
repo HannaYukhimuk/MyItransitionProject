@@ -1,0 +1,106 @@
+@model MyFormixApp.Domain.DTOs.Users.UserDto
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h4 mb-0 text-center">
+                        <i class="fas fa-user-plus me-2"></i>Create Your Formix Account
+                    </h2>
+                </div>
+                
+                <div class="card-body p-4">
+                    @if (ViewData.ModelState.ErrorCount > 0)
+                    {
+                        <div class="alert alert-danger mb-4">
+                            <h5 class="alert-heading">Registration Errors</h5>
+                            <div asp-validation-summary="All"></div>
+                        </div>
+                    }
+
+                    <form method="post">
+                        <div class="mb-4">
+                            <label asp-for="Username" class="form-label fw-bold">
+                                <i class="fas fa-user me-2"></i>Username
+                            </label>
+                            <input asp-for="Username" class="form-control form-control-lg" placeholder="Choose your username">
+                            <span asp-validation-for="Username" class="text-danger small"></span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label asp-for="Email" class="form-label fw-bold">
+                                <i class="fas fa-envelope me-2"></i>Email Address
+                            </label>
+                            <input asp-for="Email" type="email" class="form-control form-control-lg" placeholder="Enter your email">
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label asp-for="Password" class="form-label fw-bold">
+                                <i class="fas fa-lock me-2"></i>Password
+                            </label>
+                            <input asp-for="Password" type="password" class="form-control form-control-lg" placeholder="Create a password">
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">
+                                <i class="fas fa-lock me-2"></i>Confirm Password
+                            </label>
+                            <input type="password" class="form-control form-control-lg" placeholder="Confirm your password">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                                <label class="form-check-label" for="agreeTerms">
+                                    I agree to the <a href="#" class="text-decoration-none">Terms of Service</a> and <a href="#" class="text-decoration-none">Privacy Policy</a>
+                                </label>
+                                <span class="text-danger small field-validation-valid" data-valmsg-for="agreeTerms" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-user-plus me-2"></i>Create Account
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div class="text-center mt-4">
+                        <p class="text-muted mb-3">Or sign up with</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="#" class="btn btn-outline-success rounded-circle">
+                                <i class="fab fa-google"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <p class="text-muted">Already have an account? 
+                            <a asp-action="Login" class="text-decoration-none fw-bold">Sign in</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Добавляем валидацию для checkbox
+        document.addEventListener('DOMContentLoaded', function() {
+            $("form").validate({
+                rules: {
+                    agreeTerms: "required"
+                },
+                messages: {
+                    agreeTerms: "You must agree to the terms"
+                }
+            });
+        });
+    </script>
+}

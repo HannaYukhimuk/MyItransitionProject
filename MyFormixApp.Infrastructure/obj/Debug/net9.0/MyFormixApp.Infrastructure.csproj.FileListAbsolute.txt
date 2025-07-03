@@ -1,0 +1,100 @@
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.deps.json
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.runtimeconfig.json
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.pdb
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Application.dll
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Domain.dll
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Domain.pdb
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Application.pdb
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.AssemblyInfo.cs
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.sourcelink.json
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormix.AFB5246A.Up2Date
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\refint\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.pdb
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.genruntimeconfig.cache
+C:\Users\user\Desktop\tyta\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\ref\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.AssemblyInfo.cs
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.sourcelink.json
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.deps.json
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.runtimeconfig.json
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.pdb
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Application.dll
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Domain.dll
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Domain.pdb
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Application.pdb
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormix.AFB5246A.Up2Date
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\refint\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.pdb
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.genruntimeconfig.cache
+C:\Users\user\Desktop\tytyty\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\ref\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.deps.json
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.runtimeconfig.json
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.pdb
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Application.dll
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Domain.dll
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Domain.pdb
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Application.pdb
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.AssemblyInfo.cs
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.sourcelink.json
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormix.AFB5246A.Up2Date
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\refint\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.pdb
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.genruntimeconfig.cache
+C:\Users\user\Desktop\Protect\1 working reg and log\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\ref\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.deps.json
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.runtimeconfig.json
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.pdb
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Application.dll
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Domain.dll
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Domain.pdb
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Application.pdb
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.AssemblyInfo.cs
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.sourcelink.json
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormix.AFB5246A.Up2Date
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\refint\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.pdb
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.genruntimeconfig.cache
+C:\Users\user\Desktop\for Admin\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\ref\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.deps.json
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.runtimeconfig.json
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Infrastructure.pdb
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Application.dll
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Domain.dll
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Domain.pdb
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\bin\Debug\net9.0\MyFormixApp.Application.pdb
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.AssemblyInfo.cs
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.sourcelink.json
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormix.AFB5246A.Up2Date
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\refint\MyFormixApp.Infrastructure.dll
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.pdb
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\MyFormixApp.Infrastructure.genruntimeconfig.cache
+C:\Users\user\Desktop\Formix\MyFormixApp\MyFormixApp.Infrastructure\obj\Debug\net9.0\ref\MyFormixApp.Infrastructure.dll

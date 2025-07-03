@@ -1,0 +1,63 @@
+@using MyFormixApp.Domain.DTOs.Answers
+@model MyFormixApp.Domain.DTOs.Answers.AnswerEditorModel
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5>@Model.Answer.QuestionTitle</h5>
+        <input type="hidden" name="Answers[@Model.Index.ToString()].Id" value="@Model.Answer.Id" />
+        <input type="hidden" name="Answers[@Model.Index.ToString()].QuestionId" value="@Model.Answer.QuestionId" />
+
+        @switch (Model.Answer.QuestionType.ToLower())
+        {
+            case "text":
+                <input name="Answers[@Model.Index.ToString()].TextValue" 
+                       class="form-control answer-field" 
+                       value="@Model.Answer.TextValue" 
+                       disabled />
+                break;
+                
+            @case "radio":
+                foreach (var option in Model.Answer.Options)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input answer-field" 
+                            type="radio"
+                            name="Answers[@Model.Index].TextValue"
+                            value="@option"
+                            @(option == Model.Answer.TextValue ? "checked" : "")
+                            disabled />
+                        <label class="form-check-label">@option</label>
+                    </div>
+                }
+                break;
+                
+            @case "checkbox":
+                foreach (var option in Model.Answer.Options)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input answer-field" 
+                            type="checkbox"
+                            name="Answers[@Model.Index].MultiTextValue"
+                            value="@option"
+                            @(Model.Answer.MultiTextValue?.Contains(option) == true ? "checked" : "")
+                            disabled />
+                        <label class="form-check-label">@option</label>
+                    </div>
+                }
+                break;
+                
+            case "select":
+                <select name="Answers[@Model.Index.ToString()].TextValue" 
+                        class="form-select answer-field" 
+                        disabled>
+                    @foreach (var option in Model.Answer.Options)
+                    {
+                        <option value="@option" selected="@(option == Model.Answer.TextValue)">
+                            @option
+                        </option>
+                    }
+                </select>
+                break;
+        }
+    </div>
+</div>

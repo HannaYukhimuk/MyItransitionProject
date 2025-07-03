@@ -1,0 +1,35 @@
+@model MyFormixApp.Domain.DTOs.Templates.TemplateDto
+
+@{
+    ViewData["Title"] = "Create New Template";
+    ViewData["FormAction"] = "Create";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">
+                <i class="fas fa-plus-circle me-2"></i> @ViewData["Title"]
+            </h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="@ViewData["FormAction"]" id="templateForm" enctype="multipart/form-data">
+                <partial name="Partials/_TemplateForm" model="Model" />
+                
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-1"></i> Create Template
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-times me-1"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/templates/create-edit.js"></script>
+}

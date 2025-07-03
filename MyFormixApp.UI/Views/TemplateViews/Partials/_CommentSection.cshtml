@@ -1,0 +1,28 @@
+@using MyFormixApp.Domain.DTOs.Comments;
+
+@model MyFormixApp.Domain.DTOs.Templates.TemplateDetailsDto
+
+<div class="card">
+    <div class="card-header">
+        <h3>Comments (@Model.Comments.Count)</h3>
+    </div>
+    <div class="card-body">
+        @if (ViewBag.IsAuthenticated)
+        {
+            @await Html.PartialAsync("Partials/_CommentForm", new CommentCreateDto { TemplateId = (Guid)Model.Id })
+        }
+        else
+        {
+            <div class="alert alert-info">
+                <a asp-controller="Account" asp-action="Login">Login</a> to leave a comment
+            </div>
+        }
+
+        <div class="mt-4">
+            @foreach (var comment in Model.Comments)
+            {
+                @await Html.PartialAsync("Partials/_CommentItem", comment)
+            }
+        </div>
+    </div>
+</div>

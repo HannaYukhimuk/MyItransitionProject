@@ -1,0 +1,168 @@
+@using MyFormixApp.Domain.DTOs.Templates
+@model IEnumerable<TemplateListItemDto>
+
+@{
+    ViewData["Title"] = "My Templates";
+}
+
+<div class="container py-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5">
+        <div class="mb-3 mb-md-0">
+            <h1 class="display-6 fw-bold">
+                <i class="fas fa-file-alt text-primary me-3"></i>@ViewData["Title"]
+            </h1>
+            <p class="text-muted mb-0">Manage your form templates and designs</p>
+        </div>
+        <div>
+            <a asp-controller="Templates" asp-action="Create" class="btn btn-primary btn-lg px-4">
+    <i class="fas fa-plus me-2"></i>Create New
+</a>
+
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="card shadow-sm text-center py-5">
+            <div class="card-body">
+                <i class="fas fa-file-alt fa-4x text-muted mb-4"></i>
+                <h4 class="text-muted">No templates created yet</h4>
+                <p class="text-muted mb-4">Start by creating your first template</p>
+                <a asp-controller="Templates" asp-action="Create" class="btn btn-primary px-4">
+    <i class="fas fa-plus me-2"></i>Create Template
+</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
+            @foreach (var template in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0 template-card">
+                        <!-- Template Header -->
+                        <div class="card-header bg-white border-bottom-0 pb-0">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h5 class="card-title mb-0 text-truncate" title="@template.Title">@template.Title</h5>
+                                <span class="badge bg-primary">Active</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Template Body -->
+                        <div class="card-body">
+                            <p class="card-text text-muted mb-3">
+                                @if (!string.IsNullOrEmpty(template.Description))
+                                {
+                                    @(template.Description.Length > 100 ? 
+                                        template.Description.Substring(0, 100) + "..." : 
+                                        template.Description)
+                                }
+                                else
+                                {
+                                    <span class="text-muted">No description</span>
+                                }
+                            </p>
+                            
+                            <!-- Tags -->
+                            @if (template.Tags.Any())
+                            {
+                                <div class="mb-3">
+                                    @foreach (var tag in template.Tags.Take(3))
+                                    {
+                                        <span class="badge bg-light text-dark me-1 mb-1">#@tag</span>
+                                    }
+                                    @if (template.Tags.Count > 3)
+                                    {
+                                        <span class="badge bg-light text-dark mb-1">+@(template.Tags.Count - 3)</span>
+                                    }
+                                </div>
+                            }
+                            
+                            <!-- Stats -->
+                            <div class="d-flex justify-content-between text-muted small">
+                                <span title="Questions">
+                                    <i class="fas fa-question-circle me-1"></i> @template.QuestionsCount
+                                </span>
+                                <span title="Submissions">
+                                    <i class="fas fa-file-alt me-1"></i> @template.FormsCount
+                                </span>
+                                <span title="Likes">
+                                    <i class="fas fa-heart me-1"></i> @template.LikesCount
+                                </span>
+                                
+                            </div>
+                        </div>
+                        
+                        <!-- Template Footer -->
+                        <div class="card-footer bg-white border-top-0 pt-0">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a asp-action="Details" asp-route-id="@template.Id" 
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-eye me-1"></i>View
+                                </a>
+                                <div class="btn-group">
+                                    <a asp-action="Edit" asp-route-id="@template.Id" 
+                                       class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@template.Id" 
+                                       class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        
+        <nav aria-label="Template pagination" class="mt-5">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(ViewBag.CurrentPage <= 1 ? "disabled" : "")">
+            <a class="page-link" href="?page=@(ViewBag.CurrentPage - 1)">Previous</a>
+        </li>
+
+        @for (int i = 1; i <= (int)ViewBag.TotalPages; i++)
+        {
+            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                <a class="page-link" href="?page=@i">@i</a>
+            </li>
+        }
+
+        <li class="page-item @(ViewBag.CurrentPage >= ViewBag.TotalPages ? "disabled" : "")">
+            <a class="page-link" href="?page=@(ViewBag.CurrentPage + 1)">Next</a>
+        </li>
+    </ul>
+</nav>
+
+    }
+</div>
+
+<style>
+    .template-card {
+        transition: all 0.2s ease;
+        border-radius: 0.5rem;
+    }
+    .template-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+    }
+    .card-title {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .card-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: 4.5em;
+    }
+    .badge.bg-light {
+        box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+    }
+</style>

@@ -1,0 +1,32 @@
+@model IEnumerable<MyFormixApp.Domain.DTOs.Forms.FormDetailsDto>
+@{
+    ViewData["Title"] = "Admin - All Forms";
+    ViewData["IsAdmin"] = true;
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">
+                <i class="fas fa-list-alt me-2"></i> @ViewData["Title"]
+            </h2>
+        </div>
+        <div class="card-body">
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i> No forms have been submitted yet.
+                </div>
+            }
+            else
+            {
+                <partial name="~/Views/FormResponses/Partials/_FormActions.cshtml" model="Model" />
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/forms/form-table.js"></script>
+    <script src="~/js/shared/confirmation.js"></script>
+}

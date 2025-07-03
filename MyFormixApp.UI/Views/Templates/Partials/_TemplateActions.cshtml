@@ -1,0 +1,136 @@
+@model MyFormixApp.Domain.DTOs.Templates.TemplateDetailsDto
+@using System.Security.Claims
+@inject MyFormixApp.Application.Services.IFormService FormService
+
+@{
+    var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    var isOwner = Model.Author.Id.ToString() == currentUserId;
+    var existingForm = await FormService.GetByUserAndTemplateAsync(Guid.Parse(currentUserId), Model.Id);
+}
+
+<div class="d-flex align-items-center gap-2 template-actions">
+    <!-- Like Button -->
+    <partial name="Partials/_LikeSection" model="Model" />
+
+    @if (isOwner)
+    {
+        <!-- Owner Actions -->
+        <div class="btn-group">
+            <a asp-action="Edit" asp-route-id="@Model.Id" 
+               class="btn btn-outline-primary btn-sm" 
+               title="Edit template">
+                <i class="fas fa-edit"></i>
+            </a>
+            
+            <a asp-action="Statistics" asp-route-id="@Model.Id" 
+               class="btn btn-outline-info btn-sm" 
+               title="View statistics">
+                <i class="fas fa-chart-bar"></i>
+            </a>
+            
+            <button type="button" 
+                    class="btn btn-outline-danger btn-sm" 
+                    title="Delete template"
+                    data-bs-toggle="modal" 
+                    data-bs-target="#deleteTemplateModal">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </div>
+    }
+    else if (existingForm == null)
+    {
+        <!-- Take Template Button -->
+        <button class="btn btn-primary btn-sm" 
+                data-bs-toggle="modal" 
+                data-bs-target="#takeTemplateModal">
+            Take Template
+        </button>
+    }
+    else
+    {
+        <!-- Already Taken Indicator -->
+        <div class="alert alert-info alert-sm mb-0 py-1 px-2">
+            <i class="fas fa-check-circle me-1"></i>
+            <a asp-controller="Forms" asp-action="Details" asp-route-id="@existingForm.Id">
+                View your response
+            </a>
+        </div>
+    }
+
+    <!-- Share Button -->
+    <div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" 
+                type="button" 
+                id="shareDropdown" 
+                data-bs-toggle="dropdown" 
+                aria-expanded="false"
+                title="Share template">
+            <i class="fas fa-share-alt"></i>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="shareDropdown">
+            <li>
+                <button class="dropdown-item" 
+                        onclick="navigator.clipboard.writeText('@Url.Action("View", "Templates", new { id = Model.Id }, Context.Request.Scheme)')">
+                    <i class="fas fa-copy me-2"></i> Copy link
+                </button>
+            </li>
+            @if (isOwner && !Model.IsPublic)
+            {
+                <li>
+                    <button class="dropdown-item" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#shareTemplateModal">
+                        <i class="fas fa-user-plus me-2"></i> Manage access
+                    </button>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+<!-- Delete Template Modal -->
+@if (isOwner)
+{
+    <div class="modal fade" id="deleteTemplateModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Confirm Deletion</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this template?</p>
+                    <p class="text-muted small">This will also delete all forms created from this template.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .template-actions .alert-sm {
+        font-size: 0.875rem;
+        padding: 0.25rem 0.5rem;
+    }
+    
+    .template-actions .btn-sm {
+        padding: 0.25rem 0.5rem;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize tooltips
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[title]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+</script>
