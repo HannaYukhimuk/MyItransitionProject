@@ -20,7 +20,22 @@
             }
             else
             {
-                <partial name="~/Views/FormResponses/Partials/_FormActions.cshtml" model="Model" />
+                <table class="table">
+                    <!-- Your table headers here -->
+                    <tbody>
+                        @foreach (var form in Model)
+                        {
+                            <tr>
+                                <td>@form.TemplateTitle</td>
+                                <td>@form.UserName</td>
+                                <td>@form.CreatedAt</td>
+                                <td>
+                                    <partial name="~/Views/FormResponses/Partials/_FormActions.cshtml" model="form" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             }
         </div>
     </div>
