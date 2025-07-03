@@ -11,5 +11,11 @@ namespace MyFormixApp.Application.Services
         Task<User?> GetUserByUsernameAsync(string username);
         Task<bool> ForgotPasswordAsync(string email);
         Task<bool> ResetPasswordAsync(ResetPasswordDto model);
+
+
+
+
+        
+    string HashPassword(string password);
     }
 }

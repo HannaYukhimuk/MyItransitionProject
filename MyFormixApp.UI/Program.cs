@@ -1,10 +1,10 @@
 using Azure.Storage.Blobs;
 using Microsoft.EntityFrameworkCore;
 using MyFormixApp.Application.Repositories;
-using System.Text;
+using MyFormixApp.Application.Services;
+using MyFormixApp.Domain.Entities;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using MyFormixApp.Application.Services;
 using MyFormixApp.Application.Validators;
 using MyFormixApp.Domain.DTOs.Templates;
 using MyFormixApp.Domain.DTOs.Comments;
@@ -136,6 +136,28 @@ try
     {
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         db.Database.Migrate();
+        // Добавим администратора, если его нет
+var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
+var authService = scope.ServiceProvider.GetRequiredService<IAuthService>();
+
+var existingAdmin = await userRepository.GetByUsernameOrEmailAsync("admin", null);
+if (existingAdmin == null)
+{
+    var adminUser = new User
+    {
+        Id = Guid.NewGuid(),
+        Username = "admin",
+        Email = "admin@myformixapp.com",
+        PasswordHash = authService.HashPassword("Admin123!"), // Подставь хеш-функцию из AuthService
+        Role = "Admin",
+        CreatedAt = DateTime.UtcNow,
+        IsActive = true
+    };
+
+    db.Users.Add(adminUser);
+    await db.SaveChangesAsync();
+}
+
     }
 }
 catch (Exception ex)

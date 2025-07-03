@@ -32,8 +32,8 @@ namespace MyFormixApp.Infrastructure.Services
             var user = await _userRepository.GetByUsernameOrEmailAsync(request.Username, request.Email);
             if (user is null || !user.IsActive) return null;
 
-            return _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password) != PasswordVerificationResult.Failed 
-                ? await CreateTokenResponse(user) 
+            return _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password) != PasswordVerificationResult.Failed
+                ? await CreateTokenResponse(user)
                 : null;
         }
 
@@ -89,7 +89,7 @@ namespace MyFormixApp.Infrastructure.Services
             return new JwtSecurityTokenHandler().WriteToken(new JwtSecurityTokenHandler().CreateToken(tokenDescriptor));
         }
 
-        public async Task<User?> GetUserByUsernameAsync(string username) => 
+        public async Task<User?> GetUserByUsernameAsync(string username) =>
             await _userRepository.GetByUsernameOrEmailAsync(username, null);
 
         public async Task<bool> ForgotPasswordAsync(string email)
@@ -102,7 +102,7 @@ namespace MyFormixApp.Infrastructure.Services
             await _userRepository.UpdateAsync(user);
 
             var resetLink = $"{_configuration["AppSettings:ClientUrl"]}/auth/resetpassword?token={user.ResetPasswordToken}";
-            await _emailService.SendEmailAsync(email, "Reset Password", 
+            await _emailService.SendEmailAsync(email, "Reset Password",
                 $"Please reset your password by clicking <a href='{resetLink}'>here</a>.");
 
             return true;
@@ -116,7 +116,7 @@ namespace MyFormixApp.Infrastructure.Services
             user.PasswordHash = _passwordHasher.HashPassword(null!, model.NewPassword);
             user.ResetPasswordToken = null;
             user.ResetPasswordTokenExpiry = null;
-            
+
             return await _userRepository.UpdateAsync(user) != null;
         }
 
@@ -127,5 +127,15 @@ namespace MyFormixApp.Infrastructure.Services
             rng.GetBytes(randomNumber);
             return Convert.ToBase64String(randomNumber).Replace("/", "_").Replace("+", "-");
         }
+        
+
+
+
+
+
+        public string HashPassword(string password)
+{
+    return _passwordHasher.HashPassword(null!, password);
+}
     }
 }

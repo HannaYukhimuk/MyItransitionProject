@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MyFormixApp.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fcc76b3a8c6ea337886b10101c995a4e9e3def1a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a8809d25bea0d4db255d325db76cee4ad72da6c6")]
 [assembly: System.Reflection.AssemblyProductAttribute("MyFormixApp.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MyFormixApp.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -188,7 +188,7 @@ namespace MyFormixApp.Infrastructure.Data.Migrations
                     IsRequired = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
                     Position = table.Column<int>(type: "integer", nullable: false),
                     ShowInTable = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "GETUTCDATE()"),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW() AT TIME ZONE 'UTC'"),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
