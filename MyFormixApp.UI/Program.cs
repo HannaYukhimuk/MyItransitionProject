@@ -136,8 +136,16 @@ try
     {
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         db.Database.Migrate();
+        var userToDelete = await db.Users.FirstOrDefaultAsync(u => u.Email == "kanta@gmail.com");
+        if (userToDelete != null)
+        {
+            db.Users.Remove(userToDelete);
+            await db.SaveChangesAsync();
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+            logger.LogInformation("User with email kanta@gmail.com was successfully deleted.");
+        }
         // Добавим администратора, если его нет
-var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
+        var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
 var authService = scope.ServiceProvider.GetRequiredService<IAuthService>();
 
 var existingAdmin = await userRepository.GetByUsernameOrEmailAsync("admin", null);

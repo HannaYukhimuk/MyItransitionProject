@@ -40,20 +40,5 @@ namespace MyFormixApp.UI.Controllers
                 ? Ok(new { Message = $"Admin privileges {action} for user." })
                 : NotFound();
         }
-
-
-        [HttpPost("delete/{userId}")]
-[Authorize(Roles = "Admin")]
-public async Task<IActionResult> DeleteUser(Guid userId)
-{
-    var result = await _userService.DeleteAsync(userId);
-    
-    if (result)
-    {
-        return Ok(); // или верните что-то полезное
-    }
-    
-    return NotFound();
-}
     }
 }
