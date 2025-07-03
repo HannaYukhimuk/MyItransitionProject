@@ -70,7 +70,7 @@ namespace MyFormixApp.Infrastructure.Data
                 entity.Property(q => q.Type).HasDefaultValue("text");
                 entity.Property(q => q.IsRequired).HasDefaultValue(true);
                 entity.Property(q => q.ShowInTable).HasDefaultValue(true);
-                entity.Property(q => q.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
+                entity.Property(q => q.CreatedAt).HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
                 entity.HasOne(q => q.Template)
                     .WithMany(t => t.Questions)
                     .HasForeignKey(q => q.TemplateId)
