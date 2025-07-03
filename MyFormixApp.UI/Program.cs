@@ -185,8 +185,5 @@ string GetConnectionString(IConfiguration config)
     var dbUser = config["DB_USER"];
     var dbPassword = config["DB_PASSWORD"];
     
-    // Логирование для отладки (удалите в продакшене)
-    Console.WriteLine($"Connecting to: Host=dpg-d1hube6r433s73bflqpg-a;Port=5432;Database=myformixapp;Username=myformixapp_user;Password=TR1Rphj7m4jxp6TPSld3uoiuz4HHwS5k");
-    
-    return $"Host=dpg-d1hube6r433s73bflqpg-a;Port=5432;Database=myformixapp;Username=myformixapp_user;Password=TR1Rphj7m4jxp6TPSld3uoiuz4HHwS5k";
+    return $"Host=dpg-d1jau33e5dus73d43hhg-a;Port=5432;Database=myformixapp_o1to;Username=myformixapp_o1to_user;Password=Nn5HwBM735DYzuKltyL8WpwKRlVExLSI";
 }
