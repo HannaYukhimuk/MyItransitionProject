@@ -20,13 +20,11 @@ using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Добавляем сервисы в контейнер
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<UserDtoValidator>();
 
-// Добавляем сервис Azure Blob Storage
 builder.Services.AddSingleton(_ => 
 {
     var connectionString = builder.Configuration.GetConnectionString("AzureBlobStorage");
@@ -37,13 +35,10 @@ builder.Services.AddSingleton(_ =>
     return new BlobServiceClient(connectionString);
 });
 
-// Настройка базы данных
 var connectionString = GetConnectionString(builder.Configuration);
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseNpgsql(connectionString));
 
-
-// Настройка AutoMapper
 builder.Services.AddAutoMapper(
        typeof(AnswerProfile),
        typeof(FormProfile),
@@ -52,7 +47,6 @@ builder.Services.AddAutoMapper(
        typeof(UserProfile)
 );
 
-// Настройка аутентификации и авторизации
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddAuthentication(options =>
@@ -68,7 +62,6 @@ builder.Services.AddAuthentication(options =>
     options.ExpireTimeSpan = TimeSpan.FromDays(7);
     options.SlidingExpiration = true;
     
-    // Важно для корректной работы ролей
     options.Events = new CookieAuthenticationEvents
     {
         OnSigningIn = async context =>
@@ -136,49 +129,17 @@ try
     {
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         db.Database.Migrate();
-        var userToDelete = await db.Users.FirstOrDefaultAsync(u => u.Email == "kanta@gmail.com");
-        if (userToDelete != null)
-        {
-            db.Users.Remove(userToDelete);
-            await db.SaveChangesAsync();
-            var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-            logger.LogInformation("User with email kanta@gmail.com was successfully deleted.");
-        }
-        // Добавим администратора, если его нет
-        var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
-var authService = scope.ServiceProvider.GetRequiredService<IAuthService>();
-
-var existingAdmin = await userRepository.GetByUsernameOrEmailAsync("admin", null);
-if (existingAdmin == null)
-{
-    var adminUser = new User
-    {
-        Id = Guid.NewGuid(),
-        Username = "admin",
-        Email = "admin@myformixapp.com",
-        PasswordHash = authService.HashPassword("Admin123!"), // Подставь хеш-функцию из AuthService
-        Role = "Admin",
-        CreatedAt = DateTime.UtcNow,
-        IsActive = true
-    };
-
-    db.Users.Add(adminUser);
-    await db.SaveChangesAsync();
-}
-
     }
 }
 catch (Exception ex)
 {
     var logger = app.Services.GetRequiredService<ILogger<Program>>();
     logger.LogError(ex, "Migration failed!");
-    throw; // Прерываем запуск приложения при ошибке миграции
+    throw;  
 }
 
-// Настройка конвейера HTTP-запросов
 if (app.Environment.IsDevelopment())
 {
-    // В разработке показываем подробные ошибки
     app.UseDeveloperExceptionPage();
 }
 else
@@ -191,11 +152,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-// Важно: UseAuthentication перед UseAuthorization
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Настройка маршрутов
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
