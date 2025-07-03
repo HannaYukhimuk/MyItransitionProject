@@ -45,33 +45,38 @@ namespace MyFormixApp.UI.Controllers
         public IActionResult RegisterAdmin() => View("Register", new UserDto { Role = "Admin" });
 
         [HttpPost]
-        public async Task<IActionResult> Register(UserDto model)
+public async Task<IActionResult> Register(UserDto model)
+{
+    if (model.Password != model.ConfirmPassword)
+    {
+        ModelState.AddModelError("ConfirmPassword", "Passwords do not match");
+    }
+
+    if (!ModelState.IsValid) return View(model);
+
+    try
+    {
+        var user = await _authService.RegisterAsync(model);
+
+        if (model.Role == "Admin")
         {
-            if (!ModelState.IsValid) return View(model);
-
-            try
+            var token = await _authService.LoginAsync(model);
+            if (token != null)
             {
-                var user = await _authService.RegisterAsync(model);
-
-                if (model.Role == "Admin")
-                {
-                    var token = await _authService.LoginAsync(model);
-                    if (token != null)
-                    {
-                        await SignInUserAsync(model, "Admin", user.Id, token.AccessToken);
-                        return RedirectToAction("Index", "Admin");
-                    }
-                }
-
-                TempData["Success"] = "Registration successful!";
-                return RedirectToAction("Login");
-            }
-            catch (ApplicationException ex)
-            {
-                ModelState.AddModelError(string.Empty, ex.Message);
-                return View(model);
+                await SignInUserAsync(model, "Admin", user.Id, token.AccessToken);
+                return RedirectToAction("Index", "Admin");
             }
         }
+
+        TempData["Success"] = "Registration successful!";
+        return RedirectToAction("Login");
+    }
+    catch (ApplicationException ex)
+    {
+        ModelState.AddModelError(string.Empty, ex.Message);
+        return View(model);
+    }
+}
 
         [HttpGet]
         public IActionResult Login() => View();
