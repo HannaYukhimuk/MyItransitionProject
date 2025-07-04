@@ -40,12 +40,10 @@
                                             <div class="card-body">
                                                 <div class="d-flex justify-content-between align-items-start mb-2">
                                                     <h5 class="card-title mb-0">@template.Title</h5>
-                                                    <span class="badge bg-primary">New</span>
                                                 </div>
                                                 <p class="card-text text-muted">@(template.Description?.Length > 100 ? template.Description.Substring(0, 100) + "..." : template.Description)</p>
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <a href="/TemplateViews/View/@template.Id" class="btn btn-sm btn-outline-primary">
-
                                                         View Template <i class="fas fa-arrow-right ms-1"></i>
                                                     </a>
                                                     @if (template.Author != null)
