@@ -31,7 +31,14 @@ namespace MyFormixApp.UI.Controllers.Forms
         public async Task<IActionResult> TemplateForms(Guid templateId)
         {
             var result = await _formService.GetTemplateFormsAsync(templateId, _currentUserId);
-            return result.Success ? View(result.Data) : RedirectToAction("Details", "Templates", new { id = templateId });
+            if (!result.Success)
+            {
+                return RedirectToAction("Details", "Templates", new { id = templateId });
+            }
+            
+            ViewBag.TemplateId = templateId;
+            ViewBag.TemplateTitle = result.Data.TemplateTitle;
+            return View(result.Data.Forms);
         }
 
         [HttpGet("templates/{templateId}/forms/statistics")]
