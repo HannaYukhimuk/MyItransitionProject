@@ -4,7 +4,8 @@
 @{
     ViewData["Title"] = Model.Title;
     var currentUserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-    var isOwner = Model.Author.Id == currentUserId;
+    var isOwner = Model.Author.Id == currentUserId; 
+    var isAdmin = User.IsInRole("Admin");
 }
 
 <div class="container mt-4">
@@ -13,7 +14,7 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
                 <h2 class="mb-0">@Model.Title</h2>
                 
-                @if (isOwner)
+                @if (isOwner || isAdmin)
                 {
                     <div class="d-flex flex-wrap gap-2">
                         <a asp-controller="Templates" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">
@@ -22,20 +23,16 @@
                         <a asp-controller="Templates" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger btn-sm">
                             <i class="fas fa-trash me-1"></i> Delete
                         </a>
-                        
-                        @if (ViewBag.CanEdit)
-                        {
-                            <div class="btn-group">
-                                <a asp-controller="FormResponses" asp-action="TemplateForms" asp-route-templateId="@Model.Id" 
-                                   class="btn btn-info btn-sm">
-                                    <i class="fas fa-list me-1"></i> Forms
-                                </a>
-                                <a asp-controller="FormResponses" asp-action="TemplateFormsStatistics" asp-route-templateId="@Model.Id" 
-                                   class="btn btn-primary btn-sm">
-                                    <i class="fas fa-chart-bar me-1"></i> Stats
-                                </a>
-                            </div>
-                        }
+                        <div class="btn-group">
+                            <a asp-controller="FormResponses" asp-action="TemplateForms" asp-route-templateId="@Model.Id" 
+                                class="btn btn-info btn-sm">
+                                <i class="fas fa-list me-1"></i> Forms
+                            </a>
+                            <a asp-controller="FormResponses" asp-action="TemplateFormsStatistics" asp-route-templateId="@Model.Id" 
+                                class="btn btn-primary btn-sm">
+                                <i class="fas fa-chart-bar me-1"></i> Stats
+                            </a>
+                        </div>
                     </div>
                 }
             </div>

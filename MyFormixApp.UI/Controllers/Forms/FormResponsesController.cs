@@ -1,3 +1,4 @@
+// FormResponsesController.cs
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyFormixApp.Application.Services;
@@ -9,72 +10,28 @@ namespace MyFormixApp.UI.Controllers.Forms
     public class FormResponsesController : Controller
     {
         private readonly IFormService _formService;
-        private readonly ITemplateService _templateService;
+        private readonly Guid _currentUserId;
 
-        public FormResponsesController(IFormService formService, ITemplateService templateService)
+        public FormResponsesController(IFormService formService, IHttpContextAccessor httpContextAccessor)
         {
             _formService = formService;
-            _templateService = templateService;
+            _currentUserId = Guid.TryParse(httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier), 
+                out var id) ? id : Guid.Empty;
         }
-
-        private Guid CurrentUserId =>
-            Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var id) ? id : Guid.Empty;
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Take(Guid id)
         {
-            try
-            {
-                if (await _formService.GetByUserAndTemplateAsync(CurrentUserId, id) != null)
-                {
-                    TempData["Error"] = "You have already submitted a response for this template";
-                    return RedirectToAction("View", "TemplateViews", new { id });
-                }
-
-                var responses = Request.Form
-                    .Where(k => k.Key.StartsWith("responses[") && k.Key.EndsWith("]"))
-                    .Select(k => new
-                    {
-                        QuestionId = Guid.TryParse(k.Key[10..^1], out var qId) ? qId : Guid.Empty,
-                        Value = string.Join(";", k.Value.ToArray())
-                    })
-                    .Where(r => r.QuestionId != Guid.Empty)
-                    .ToDictionary(r => r.QuestionId, r => r.Value);
-
-                var result = await _formService.CreateResponseAsync(id, CurrentUserId, responses);
-                TempData[result ? "Success" : "Error"] = result
-                    ? "Your responses have been saved!"
-                    : "Failed to save your responses.";
-
-                return RedirectToAction("View", "TemplateViews", new { id });
-            }
-            catch (Exception ex)
-            {
-                TempData["Error"] = ex.Message;
-                return RedirectToAction("View", "TemplateViews", new { id });
-            }
+            var result = await _formService.ProcessFormResponseAsync(id, _currentUserId, Request.Form);
+            return RedirectToAction("View", "TemplateViews", new { id, message = result.Message, isSuccess = result.IsSuccess });
         }
 
         [HttpGet("templates/{templateId}/forms")]
         public async Task<IActionResult> TemplateForms(Guid templateId)
         {
-            try
-            {
-                var template = await _templateService.GetByIdAsync(templateId, CurrentUserId);
-                if (template == null) return NotFound();
-
-                ViewBag.TemplateTitle = template.Title;
-                ViewBag.TemplateId = template.Id;
-
-                var forms = await _formService.GetByTemplateAsync(templateId, CurrentUserId);
-                return View(forms);
-            }
-            catch (Exception ex)
-            {
-                TempData["Error"] = ex.Message;
-                return RedirectToAction("Details", "Templates", new { id = templateId });
-            }
+            var result = await _formService.GetTemplateFormsAsync(templateId, _currentUserId);
+            return result.Success ? View(result.Data) : RedirectToAction("Details", "Templates", new { id = templateId });
         }
 
         [HttpGet("templates/{templateId}/forms/statistics")]
@@ -82,16 +39,11 @@ namespace MyFormixApp.UI.Controllers.Forms
         {
             try
             {
-                var template = await _templateService.GetByIdAsync(templateId, CurrentUserId);
-                if (template == null) return NotFound();
-
-                ViewBag.TemplateTitle = template.Title;
-                var statistics = await _formService.GetTemplateStatisticsAsync(templateId, CurrentUserId);
-                return View(statistics);
+                var result = await _formService.GetTemplateStatisticsAsync(templateId, _currentUserId);
+                return View(result);
             }
-            catch (Exception ex)
+            catch
             {
-                TempData["Error"] = ex.Message;
                 return RedirectToAction("Details", "Templates", new { id = templateId });
             }
         }

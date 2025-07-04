@@ -14,10 +14,8 @@ namespace MyFormixApp.Application.Repositories
         Task<IEnumerable<Template>> GetSharedTemplatesAsync(Guid userId);
         Task<IEnumerable<Template>> SearchByTitleAsync(string title);
         Task<IEnumerable<Template>> SearchByTagAsync(string tagName);
-        Task<IEnumerable<Form>> GetFormsForTemplateAsync(Guid templateId);
         Task<IEnumerable<Template>> GetPublicTemplatesPagedAsync(int page, int pageSize);
         Task<int> GetPublicTemplatesCountAsync();
-        IQueryable<Template> GetUserTemplatesQueryable(Guid userId);
         Task<List<Template>> GetUserTemplatesPagedAsync(Guid userId, int page, int pageSize);
         Task<int> GetUserTemplatesCountAsync(Guid userId);
     }

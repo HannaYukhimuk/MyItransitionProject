@@ -12,8 +12,6 @@ namespace MyFormixApp.Application.Repositories
         Task<User> UpdateAsync(User user);
         Task<bool> DeleteAsync(Guid id);
         Task<bool> MakeAdminAsync(Guid userId);
-        Task<bool> IsUserInRoleAsync(Guid userId, string role);
-        Task<List<User>> GetByIdsAsync(List<Guid> ids);
         Task<bool> RemoveAdminAsync(Guid userId);
         Task<User?> GetByResetTokenAsync(string token);
         Task<bool> ExistsAsync(Guid userId);

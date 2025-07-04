@@ -22,16 +22,16 @@ namespace MyFormixApp.Infrastructure.Repositories
             => throw new NotSupportedException("Use DeleteAsync(int id) for TemplateTheme");
 
         public async Task<bool> DeleteAsync(int id)
-{
-    var theme = await _context.TemplateThemes.FindAsync(id);
-    if (theme != null)
-    {
-        _context.TemplateThemes.Remove(theme);
-        await _context.SaveChangesAsync();
-        return true;
-    }
-    return false;
-}
+        {
+            var theme = await _context.TemplateThemes.FindAsync(id);
+            if (theme != null)
+            {
+                _context.TemplateThemes.Remove(theme);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
 
     }
 }

@@ -123,7 +123,6 @@ namespace MyFormixApp.Infrastructure.Data
                 .HasForeignKey(c => c.ParentCommentId)
                 .OnDelete(DeleteBehavior.Restrict); 
 
-            // Like
             modelBuilder.Entity<Like>()
                 .HasKey(l => new { l.UserId, l.TemplateId });
             modelBuilder.Entity<Like>()

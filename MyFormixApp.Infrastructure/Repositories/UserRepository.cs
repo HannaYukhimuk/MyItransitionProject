@@ -61,12 +61,6 @@ namespace MyFormixApp.Infrastructure.Repositories
             return true;
         }
 
-        public async Task<bool> IsUserInRoleAsync(Guid userId, string role)
-        {
-            var user = await _context.Users.FindAsync(userId);
-            return user?.Role == role;
-        }
-
         public async Task<User?> GetByUsernameOrEmailAsync(string username, string email)
             => await _context.Users.FirstOrDefaultAsync(u => u.Username == username || u.Email == email);
 
@@ -75,9 +69,6 @@ namespace MyFormixApp.Infrastructure.Repositories
 
         public async Task<User?> GetByEmailAsync(string email)
             => await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-
-        public async Task<List<User>> GetByIdsAsync(List<Guid> ids)
-            => await _context.Users.Where(u => ids.Contains(u.Id)).ToListAsync();
 
         public async Task<bool> RemoveAdminAsync(Guid userId)
         {

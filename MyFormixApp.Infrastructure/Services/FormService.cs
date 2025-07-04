@@ -1,10 +1,13 @@
 using AutoMapper;
 using MyFormixApp.Domain.Entities;
+using MyFormixApp.Application.Models;
 using MyFormixApp.Domain.DTOs.Forms;
 using MyFormixApp.Application.Repositories;
 using MyFormixApp.Domain.DTOs.Templates;
-using MyFormixApp.Domain.DTOs.Answers;  
+using MyFormixApp.Domain.DTOs.Answers;
+using Microsoft.AspNetCore.Http;
 using MyFormixApp.Application.Services;
+using MyFormixApp.Application.Results.Forms;
 
 namespace MyFormixApp.Infrastructure.Services
 {
@@ -30,13 +33,13 @@ namespace MyFormixApp.Infrastructure.Services
             return form == null ? null : MapToFormDetailsDto(form);
         }
 
-        public async Task<IEnumerable<FormDetailsDto>> GetByUserAsync(Guid userId) => 
+        public async Task<IEnumerable<FormDetailsDto>> GetByUserAsync(Guid userId) =>
             _mapper.Map<IEnumerable<FormDetailsDto>>(await _formRepository.GetByUserAsync(userId));
 
         public async Task<FormDetailsDto> CreateAsync(FormDto dto, Guid userId)
         {
             await ValidateFormCreation(dto, userId);
-            
+
             var form = new Form
             {
                 TemplateId = dto.TemplateId,
@@ -45,30 +48,28 @@ namespace MyFormixApp.Infrastructure.Services
             };
 
             var created = await _formRepository.CreateAsync(form);
-            return await GetByIdAsync(created.Id, userId) ?? 
-                   throw new Exception("Failed to retrieve created form");
+            return await GetByIdAsync(created.Id, userId)
+                   ?? throw new Exception("Failed to retrieve created form");
         }
 
         public async Task<bool> UpdateAsync(FormDto dto, Guid userId, bool isAdmin = false)
-{
-    var form = await _formRepository.GetByIdWithDetailsAsync(dto.Id!.Value);
-    if (form == null || (form.UserId != userId && !isAdmin)) return false;
+        {
+            var form = await _formRepository.GetByIdWithDetailsAsync(dto.Id!.Value);
+            if (form == null || (form.UserId != userId && !isAdmin)) return false;
 
-    UpdateFormAnswers(form, dto.Answers);
-    await _formRepository.UpdateAsync(form);
-    return true;
-}
-
+            UpdateFormAnswers(form, dto.Answers);
+            await _formRepository.UpdateAsync(form);
+            return true;
+        }
 
         public async Task<bool> DeleteAsync(Guid id, Guid userId)
-{
-    var form = await _formRepository.GetByIdAsync(id);
-    if (form == null) return false;
+        {
+            var form = await _formRepository.GetByIdAsync(id);
+            if (form == null || (form.UserId != userId)) return false;
 
-    await _formRepository.DeleteAsync(id);
-    return true;
-}
-
+            await _formRepository.DeleteAsync(id);
+            return true;
+        }
 
         public async Task<bool> CreateResponseAsync(Guid templateId, Guid userId, Dictionary<Guid, string> responses)
         {
@@ -87,7 +88,7 @@ namespace MyFormixApp.Infrastructure.Services
             return true;
         }
 
-        public async Task<IEnumerable<FormDetailsDto>> GetAllFormsAsync() => 
+        public async Task<IEnumerable<FormDetailsDto>> GetAllFormsAsync() =>
             _mapper.Map<IEnumerable<FormDetailsDto>>(await _formRepository.GetAllWithDetailsAsync());
 
         public async Task<IEnumerable<FormDetailsDto>> GetByTemplateAsync(Guid templateId, Guid currentUserId)
@@ -105,7 +106,6 @@ namespace MyFormixApp.Infrastructure.Services
             {
                 TemplateId = templateId,
                 TemplateTitle = template.Title,
-               // TotalSubmissions = forms.Count,
                 SubmissionsByDay = forms.GroupBy(f => f.CreatedAt.Date)
                     .ToDictionary(g => g.Key.ToString("yyyy-MM-dd"), g => g.Count()),
                 QuestionStatistics = template.Questions.ToDictionary(
@@ -114,18 +114,27 @@ namespace MyFormixApp.Infrastructure.Services
             };
         }
 
-        public async Task<FormDetailsDto?> GetByUserAndTemplateAsync(Guid userId, Guid templateId) => 
-            _mapper.Map<FormDetailsDto>(await _formRepository.GetByUserAndTemplateAsync(userId, templateId));
+        public async Task<FormDetailsDto?> GetByUserAndTemplateAsync(Guid userId, Guid templateId)
+        {
+            var form = await _formRepository.GetByUserAndTemplateAsync(userId, templateId);
+            return form == null ? null : _mapper.Map<FormDetailsDto>(form);
+        }
+
+        public async Task<IEnumerable<FormDetailsDto>> GetUserFormsAsync(Guid userId)
+        {
+            var forms = await _formRepository.GetByUserAsync(userId);
+            return _mapper.Map<IEnumerable<FormDetailsDto>>(forms);
+        }
 
         private async Task ValidateFormCreation(FormDto dto, Guid userId)
         {
             if (await _formRepository.GetByUserAndTemplateAsync(userId, dto.TemplateId) != null)
                 throw new InvalidOperationException("You have already submitted a form for this template");
 
-            var template = await _templateRepository.GetByIdWithDetailsAsync(dto.TemplateId) ?? 
-                           throw new ArgumentException("Template not found");
+            var template = await _templateRepository.GetByIdWithDetailsAsync(dto.TemplateId)
+                           ?? throw new ArgumentException("Template not found");
 
-            if (!template.IsPublic && template.UserId != userId && !template.Accesses.Any(a => a.UserId == userId))
+            if (!HasAccessToTemplate(template, userId))
                 throw new UnauthorizedAccessException("You don't have access to this template");
 
             var missingQuestions = template.Questions
@@ -140,13 +149,18 @@ namespace MyFormixApp.Infrastructure.Services
 
         private async Task<Template> ValidateTemplateAccess(Guid templateId, Guid userId)
         {
-            var template = await _templateRepository.GetByIdWithDetailsAsync(templateId) ?? 
-                          throw new ArgumentException("Template not found");
+            var template = await _templateRepository.GetByIdWithDetailsAsync(templateId)
+                           ?? throw new ArgumentException("Template not found");
 
-            if (!template.IsPublic && template.UserId != userId && !template.Accesses.Any(a => a.UserId == userId))
+            if (!HasAccessToTemplate(template, userId))
                 throw new UnauthorizedAccessException("You don't have access to this template");
 
             return template;
+        }
+
+        private static bool HasAccessToTemplate(Template template, Guid userId)
+        {
+            return template.IsPublic || template.UserId == userId || template.Accesses.Any(a => a.UserId == userId);
         }
 
         private static void ValidateRequiredQuestions(Template template, IEnumerable<Guid> answeredQuestionIds)
@@ -189,14 +203,14 @@ namespace MyFormixApp.Infrastructure.Services
         private static string GetStoredValue(AnswerDto answerDto, Question question)
         {
             if (answerDto.MultiTextValue?.Any() == true)
-                return string.Join(";", question.Options
+                return string.Join(";", question.Options?
                     .Where(o => answerDto.MultiTextValue.Contains(o.Text))
-                    .Select(o => o.Id.ToString()));
+                    .Select(o => o.Id.ToString()) ?? Enumerable.Empty<string>());
 
             if (!string.IsNullOrEmpty(answerDto.TextValue))
             {
                 return (question.Type == "radio" || question.Type == "select")
-                    ? question.Options.FirstOrDefault(o => o.Text == answerDto.TextValue)?.Id.ToString() ?? answerDto.TextValue
+                    ? question.Options?.FirstOrDefault(o => o.Text == answerDto.TextValue)?.Id.ToString() ?? answerDto.TextValue
                     : answerDto.TextValue;
             }
 
@@ -227,7 +241,7 @@ namespace MyFormixApp.Infrastructure.Services
             TemplateId = form.TemplateId,
             UserId = form.UserId,
             CreatedAt = form.CreatedAt,
-            Answers = form.Answers.Select(a => MapToAnswerDetailsDto(a)).ToList()
+            Answers = form.Answers.Select(MapToAnswerDetailsDto).ToList()
         };
 
         private static AnswerDetailsDto MapToAnswerDetailsDto(Answer answer)
@@ -253,22 +267,110 @@ namespace MyFormixApp.Infrastructure.Services
 
         private static string GetDisplayValue(Answer answer, Question question)
         {
-            if (question.Type != "radio" && question.Type != "select") 
+            if (question.Type != "radio" && question.Type != "select")
                 return answer.ValueText;
 
-            return question.Options.FirstOrDefault(o => o.Id.ToString() == answer.ValueText)?.Text ?? answer.ValueText;
+            return question.Options?.FirstOrDefault(o => o.Id.ToString() == answer.ValueText)?.Text ?? answer.ValueText;
         }
 
         private static List<string>? GetMultiTextValue(Answer answer, Question question)
         {
-            if (question.Type != "checkbox" || string.IsNullOrEmpty(answer.ValueText)) 
+            if (question.Type != "checkbox" || string.IsNullOrEmpty(answer.ValueText))
                 return null;
 
             return answer.ValueText
                 .Split(';')
-                .Select(id => question.Options.FirstOrDefault(o => o.Id.ToString() == id)?.Text)
+                .Select(id => question.Options?.FirstOrDefault(o => o.Id.ToString() == id)?.Text)
                 .Where(text => text != null)
                 .ToList()!;
+        }
+
+        public async Task<FormResult> ProcessFormResponseAsync(Guid templateId, Guid userId, IFormCollection formCollection)
+        {
+            try
+            {
+                if (await GetByUserAndTemplateAsync(userId, templateId) != null)
+                    return new FormResult("You have already submitted a response for this template");
+
+                var responses = formCollection
+                    .Where(k => k.Key.StartsWith("responses[") && k.Key.EndsWith("]"))
+                    .Select(k => new
+                    {
+                        QuestionId = Guid.TryParse(k.Key[10..^1], out var qId) ? qId : Guid.Empty,
+                        Value = string.Join(";", k.Value.ToArray())
+                    })
+                    .Where(r => r.QuestionId != Guid.Empty)
+                    .ToDictionary(r => r.QuestionId, r => r.Value);
+
+                var success = await CreateResponseAsync(templateId, userId, responses);
+                return new FormResult(success, success ? "Your responses have been saved!" : "Failed to save your responses");
+            }
+            catch (Exception ex)
+            {
+                return new FormResult(ex.Message);
+            }
+        }
+
+        public async Task<ServiceResult<TemplateFormsView>> GetTemplateFormsAsync(Guid templateId, Guid userId)
+        {
+            try
+            {
+                var template = await ValidateTemplateAccess(templateId, userId);
+                var forms = _mapper.Map<IEnumerable<FormDetailsDto>>(await _formRepository.GetByTemplateAsync(templateId));
+                return new ServiceResult<TemplateFormsView>(new TemplateFormsView
+                {
+                    Forms = forms,
+                    TemplateTitle = template.Title,
+                    TemplateId = template.Id
+                });
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResult<TemplateFormsView>(ex.Message);
+            }
+        }
+
+        public async Task<ServiceResult<FormDetailsDto>> GetFormDetailsAsync(Guid id, Guid userId)
+        {
+            try
+            {
+                var form = await GetByIdAsync(id, userId) ?? throw new Exception("Form not found");
+                return new ServiceResult<FormDetailsDto>(form);
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResult<FormDetailsDto>(ex.Message);
+            }
+        }
+
+        public async Task<FormOperationResult> UpdateFormAsync(FormDto dto, Guid userId, bool isAdmin)
+        {
+            try
+            {
+                if (dto?.Id == null) throw new ArgumentException("Invalid form submission");
+                var success = await UpdateAsync(dto, userId, isAdmin);
+                return new FormOperationResult(success, success ? "Form updated successfully" : "Update failed")
+                {
+                    RedirectAction = isAdmin ? "AdminEdit" : "Details"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new FormOperationResult(ex.Message);
+            }
+        }
+
+        public async Task<OperationResult> DeleteFormAsync(Guid id, Guid userId)
+        {
+            try
+            {
+                var success = await DeleteAsync(id, userId);
+                return new OperationResult(success, success ? "Form deleted" : "Failed to delete form");
+            }
+            catch (Exception ex)
+            {
+                return new OperationResult(ex.Message);
+            }
         }
     }
 }

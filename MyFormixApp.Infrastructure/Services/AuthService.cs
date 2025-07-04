@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using MyFormixApp.Application.Results;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -10,6 +11,9 @@ using MyFormixApp.Domain.Entities;
 using MyFormixApp.Domain.DTOs.Users;
 using MyFormixApp.Domain.DTOs.Account;
 using MyFormixApp.Application.Repositories;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 
 namespace MyFormixApp.Infrastructure.Services
 {
@@ -27,17 +31,40 @@ namespace MyFormixApp.Infrastructure.Services
             _emailService = emailService;
         }
 
-        public async Task<TokenResponseDto?> LoginAsync(UserDto request)
+        public async Task<AuthResult> RegisterAndSignInAsync(UserDto request, HttpContext httpContext)
         {
-            var user = await _userRepository.GetByUsernameOrEmailAsync(request.Username, request.Email);
-            if (user is null || !user.IsActive) return null;
-
-            return _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password) != PasswordVerificationResult.Failed
-                ? await CreateTokenResponse(user)
-                : null;
+            try
+            {
+                var user = await RegisterUserAsync(request);
+                if (request.Role == "Admin") return await AdminSignInAsync(request, user, httpContext);
+                
+                return new AuthResult { Success = true, RedirectAction = "Login" };
+            }
+            catch (ApplicationException ex)
+            {
+                return new AuthResult { ErrorMessage = ex.Message };
+            }
         }
 
-        public async Task<User?> RegisterAsync(UserDto request)
+        public async Task<AuthResult> LoginAndSignInAsync(UserDto request, HttpContext httpContext)
+        {
+            var token = await LoginAsync(request);
+            if (token == null) return new AuthResult { ErrorMessage = "Incorrect login or password." };
+
+            var user = await GetUserByUsernameAsync(request.Username);
+            if (user == null) return new AuthResult { ErrorMessage = "User not found." };
+
+            await SignInUserAsync(new UserDto { Username = user.Username }, user.Role, user.Id, token.AccessToken, httpContext);
+            
+            return new AuthResult 
+            { 
+                Success = true, 
+                RedirectAction = "Index", 
+                RedirectController = user.Role == "Admin" ? "Admin" : "Home" 
+            };
+        }
+
+        private async Task<User> RegisterUserAsync(UserDto request)
         {
             if (await _userRepository.GetByUsernameOrEmailAsync(request.Username, request.Email) != null)
                 throw new ApplicationException("Username or email already exists");
@@ -47,10 +74,44 @@ namespace MyFormixApp.Infrastructure.Services
                 Username = request.Username,
                 Email = request.Email,
                 PasswordHash = _passwordHasher.HashPassword(null!, request.Password),
-                Role = "User"
+                Role = request.Role ?? "User"
             };
 
             return await _userRepository.CreateAsync(user);
+        }
+
+        private async Task<AuthResult> AdminSignInAsync(UserDto request, User user, HttpContext httpContext)
+        {
+            var token = await LoginAsync(request);
+            if (token == null) return new AuthResult { ErrorMessage = "Login error after registration" };
+
+            await SignInUserAsync(request, "Admin", user.Id, token.AccessToken, httpContext);
+            return new AuthResult { Success = true, RedirectAction = "Index", RedirectController = "Admin" };
+        }
+
+        private async Task SignInUserAsync(UserDto model, string role, Guid userId, string token, HttpContext httpContext)
+        {
+            var claims = new List<Claim>
+            {
+                new(ClaimTypes.Name, model.Username),
+                new(ClaimTypes.NameIdentifier, userId.ToString()),
+                new(ClaimTypes.Role, role),
+                new("JWT", token)
+            };
+
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity),
+                new AuthenticationProperties { IsPersistent = true, ExpiresUtc = DateTimeOffset.UtcNow.AddDays(7) });
+        }
+
+        public async Task<TokenResponseDto?> LoginAsync(UserDto request)
+        {
+            var user = await _userRepository.GetByUsernameOrEmailAsync(request.Username, request.Email);
+            if (user is null || !user.IsActive) return null;
+
+            return _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password) != PasswordVerificationResult.Failed 
+                ? await CreateTokenResponse(user) 
+                : null;
         }
 
         private async Task<TokenResponseDto> CreateTokenResponse(User user)
@@ -60,7 +121,6 @@ namespace MyFormixApp.Infrastructure.Services
                 AccessToken = CreateJwtToken(user),
                 RefreshToken = GenerateToken()
             };
-
             user.RefreshToken = tokenResponse.RefreshToken;
             user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
             await _userRepository.UpdateAsync(user);
@@ -68,9 +128,8 @@ namespace MyFormixApp.Infrastructure.Services
             return tokenResponse;
         }
 
-        private string CreateJwtToken(User user)
-        {
-            var tokenDescriptor = new SecurityTokenDescriptor
+        private string CreateJwtToken(User user) =>
+            new JwtSecurityTokenHandler().WriteToken(new JwtSecurityTokenHandler().CreateToken(new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
@@ -84,27 +143,21 @@ namespace MyFormixApp.Infrastructure.Services
                     SecurityAlgorithms.HmacSha512),
                 Issuer = _configuration["AppSettings:Issuer"],
                 Audience = _configuration["AppSettings:Audience"]
-            };
+            }));
 
-            return new JwtSecurityTokenHandler().WriteToken(new JwtSecurityTokenHandler().CreateToken(tokenDescriptor));
-        }
-
-        public async Task<User?> GetUserByUsernameAsync(string username) =>
+        public async Task<User?> GetUserByUsernameAsync(string username) => 
             await _userRepository.GetByUsernameOrEmailAsync(username, null);
 
         public async Task<bool> ForgotPasswordAsync(string email)
         {
             var user = await _userRepository.GetByEmailAsync(email);
             if (user == null || !user.IsActive) return false;
-
             user.ResetPasswordToken = GenerateToken();
             user.ResetPasswordTokenExpiry = DateTime.UtcNow.AddHours(1);
             await _userRepository.UpdateAsync(user);
-
             var resetLink = $"{_configuration["AppSettings:ClientUrl"]}/auth/resetpassword?token={user.ResetPasswordToken}";
-            await _emailService.SendEmailAsync(email, "Reset Password",
+            await _emailService.SendEmailAsync(email, "Reset Password", 
                 $"Please reset your password by clicking <a href='{resetLink}'>here</a>.");
-
             return true;
         }
 
@@ -116,7 +169,7 @@ namespace MyFormixApp.Infrastructure.Services
             user.PasswordHash = _passwordHasher.HashPassword(null!, model.NewPassword);
             user.ResetPasswordToken = null;
             user.ResetPasswordTokenExpiry = null;
-
+            
             return await _userRepository.UpdateAsync(user) != null;
         }
 
@@ -127,15 +180,6 @@ namespace MyFormixApp.Infrastructure.Services
             rng.GetBytes(randomNumber);
             return Convert.ToBase64String(randomNumber).Replace("/", "_").Replace("+", "-");
         }
-        
-
-
-
-
-
-        public string HashPassword(string password)
-{
-    return _passwordHasher.HashPassword(null!, password);
-}
     }
+
 }

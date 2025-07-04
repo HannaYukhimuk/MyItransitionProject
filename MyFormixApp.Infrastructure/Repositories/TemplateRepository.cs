@@ -130,24 +130,6 @@ namespace MyFormixApp.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Template> UpdateAsync(Template template)
-        {
-            _context.Templates.Update(template);
-            await _context.SaveChangesAsync();
-            return template;
-        }
-
-        public async Task<IEnumerable<Form>> GetFormsForTemplateAsync(Guid templateId)
-        {
-            return await _context.Forms
-                .Where(f => f.TemplateId == templateId)
-                .Include(f => f.Answers)
-                    .ThenInclude(a => a.Question)
-                .Include(f => f.User)
-                .OrderByDescending(f => f.CreatedAt)
-                .ToListAsync();
-        }
-
         public async Task<IEnumerable<Template>> GetPublicTemplatesPagedAsync(int page, int pageSize)
         {
             return await _context.Templates
@@ -164,42 +146,24 @@ namespace MyFormixApp.Infrastructure.Repositories
         public async Task<int> GetPublicTemplatesCountAsync()
             => await _context.Templates.CountAsync(t => t.IsPublic);
 
-
-
-        public IQueryable<Template> GetUserTemplatesQueryable(Guid userId)
+        public async Task<List<Template>> GetUserTemplatesPagedAsync(Guid userId, int page, int pageSize)
         {
-            return _context.Templates
+            return await _context.Templates
                 .Where(t => t.UserId == userId)
                 .Include(t => t.User)
                 .Include(t => t.Tags)
-
-
-
-                    .ThenInclude(tt => tt.Tag);
+                    .ThenInclude(tt => tt.Tag)
+                .OrderByDescending(t => t.CreatedAt)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
         }
 
-
-
-
-// TemplateRepository.cs
-public async Task<List<Template>> GetUserTemplatesPagedAsync(Guid userId, int page, int pageSize)
-{
-    return await _context.Templates
-        .Where(t => t.UserId == userId)
-        .Include(t => t.User)
-        .Include(t => t.Tags)
-            .ThenInclude(tt => tt.Tag)
-        .OrderByDescending(t => t.CreatedAt)
-        .Skip((page - 1) * pageSize)
-        .Take(pageSize)
-        .ToListAsync();
-}
-
-public async Task<int> GetUserTemplatesCountAsync(Guid userId)
-{
-    return await _context.Templates
-        .Where(t => t.UserId == userId)
-        .CountAsync();
-}
+        public async Task<int> GetUserTemplatesCountAsync(Guid userId)
+        {
+            return await _context.Templates
+                .Where(t => t.UserId == userId)
+                .CountAsync();
+        }
     }
 }

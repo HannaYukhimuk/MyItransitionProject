@@ -1,8 +1,8 @@
+// FormsController.cs
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyFormixApp.Application.Services;
 using MyFormixApp.Domain.DTOs.Forms;
-using FluentValidation;
 using System.Security.Claims;
 
 namespace MyFormixApp.UI.Controllers.Forms
@@ -11,82 +11,52 @@ namespace MyFormixApp.UI.Controllers.Forms
     public class FormsController : Controller
     {
         private readonly IFormService _formService;
-        private readonly IValidator<FormDto> _validator;
+        private readonly Guid _currentUserId;
 
-        public FormsController(IFormService formService, IValidator<FormDto> validator)
+        public FormsController(IFormService formService, IHttpContextAccessor httpContextAccessor)
         {
             _formService = formService;
-            _validator = validator;
+            _currentUserId = Guid.TryParse(httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier), 
+                out var id) ? id : Guid.Empty;
         }
 
-        private Guid CurrentUserId =>
-            Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var id) ? id : Guid.Empty;
+        [HttpGet] 
+public async Task<IActionResult> Details(Guid id)
+{
+    var result = await _formService.GetFormDetailsAsync(id, _currentUserId);
+    
+    return View(result.Data);
+}
 
-        private IActionResult RedirectWithMessage(string action, string key, string message)
-        {
-            TempData[key] = message;
-            return RedirectToAction(action);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Details(Guid id)
-        {
-            var form = await _formService.GetByIdAsync(id, CurrentUserId);
-            return form == null ? NotFound() : View(form);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> My() =>
-            View(await _formService.GetByUserAsync(CurrentUserId));
+        [HttpGet] public async Task<IActionResult> My() => 
+            View(await _formService.GetUserFormsAsync(_currentUserId));
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var result = await _formService.DeleteAsync(id, CurrentUserId);
-            return result
-                ? RedirectWithMessage("My", "Success", "Форма удалена.")
-                : RedirectWithMessage("My", "Error", "Не удалось удалить форму.");
+            var result = await _formService.DeleteFormAsync(id, _currentUserId);
+            return RedirectToAction("My", new { message = result.Message, isSuccess = result.IsSuccess });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([FromForm] FormDto dto)
         {
-            if (dto?.Id == null)
-                return RedirectWithMessage(User.IsInRole("Admin") ? "Admin" : "My", "Error", "Invalid form submission.");
-
-            try
-            {
-                var isAdmin = User.IsInRole("Admin");
-                var success = await _formService.UpdateAsync(dto, CurrentUserId, isAdmin);
-
-                if (!success)
-                    return RedirectWithMessage("Details", "Error", "Update failed. You don't have permission to edit this form.");
-
-                TempData["Success"] = "Form updated successfully.";
-                return RedirectToAction(isAdmin ? "AdminEdit" : "Details", new { id = dto.Id });
-            }
-            catch (Exception ex)
-            {
-                return RedirectWithMessage("Details", "Error", ex.Message);
-            }
+            var result = await _formService.UpdateFormAsync(dto, _currentUserId, User.IsInRole("Admin"));
+            return RedirectToAction(result.RedirectAction, new { id = dto.Id, message = result.Message, isSuccess = result.IsSuccess });
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpGet]
+        [HttpGet] 
         public async Task<IActionResult> AdminEdit(Guid id)
         {
-            var form = await _formService.GetByIdAsync(id, CurrentUserId);
-            if (form == null) return NotFound();
-
-            ViewBag.IsAdminEdit = true;
-            return View("Details", form);
+            var result = await _formService.GetFormDetailsAsync(id, _currentUserId);
+            return View("Details", result.Data);
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpGet]
-        public async Task<IActionResult> Admin() =>
+        [HttpGet] public async Task<IActionResult> Admin() => 
             View(await _formService.GetAllFormsAsync());
 
         [Authorize(Roles = "Admin")]
@@ -94,10 +64,8 @@ namespace MyFormixApp.UI.Controllers.Forms
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AdminDelete(Guid id)
         {
-            var result = await _formService.DeleteAsync(id, CurrentUserId);
-            return result
-                ? RedirectWithMessage("Admin", "Success", "Form deleted successfully.")
-                : RedirectWithMessage("Admin", "Error", "Failed to delete form.");
+            var result = await _formService.DeleteFormAsync(id, _currentUserId);
+            return RedirectToAction("Admin", new { message = result.Message, isSuccess = result.IsSuccess });
         }
     }
 }

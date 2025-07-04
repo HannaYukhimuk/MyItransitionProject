@@ -1,5 +1,8 @@
 using MyFormixApp.Domain.DTOs.Forms;
+using MyFormixApp.Application.Models;
 using MyFormixApp.Domain.DTOs.Templates;
+using Microsoft.AspNetCore.Http;
+using MyFormixApp.Application.Results.Forms;
 
 namespace MyFormixApp.Application.Services
 {
@@ -14,5 +17,11 @@ namespace MyFormixApp.Application.Services
         Task<IEnumerable<FormDetailsDto>> GetByTemplateAsync(Guid templateId, Guid currentUserId);
         Task<TemplateStatisticsDto> GetTemplateStatisticsAsync(Guid templateId, Guid currentUserId);
         Task<FormDetailsDto?> GetByUserAndTemplateAsync(Guid userId, Guid templateId);
+        Task<FormResult> ProcessFormResponseAsync(Guid templateId, Guid userId, IFormCollection formCollection);
+        Task<ServiceResult<TemplateFormsView>> GetTemplateFormsAsync(Guid templateId, Guid userId);
+        Task<ServiceResult<FormDetailsDto>> GetFormDetailsAsync(Guid id, Guid userId);
+        Task<FormOperationResult> UpdateFormAsync(FormDto dto, Guid userId, bool isAdmin);
+        Task<OperationResult> DeleteFormAsync(Guid id, Guid userId);
+        Task<IEnumerable<FormDetailsDto>> GetUserFormsAsync(Guid userId);
     }
 }
