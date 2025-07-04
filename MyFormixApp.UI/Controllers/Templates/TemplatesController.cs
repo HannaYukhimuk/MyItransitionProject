@@ -29,120 +29,75 @@ namespace MyFormixApp.UI.Controllers
             _cloudStorageService = cloudStorageService;
         }
 
-        private Guid CurrentUserId => 
-            Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? 
-            throw new InvalidOperationException("User ID not found"));
+        private Guid CurrentUserId =>
+            Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value 
+            ?? throw new InvalidOperationException("User ID not found"));
 
-        public async Task<IActionResult> Index() => 
-            View(await GetTemplatesForCurrentUser());
+        public async Task<IActionResult> Index()
+        {
+            var isAdmin = User.IsInRole("Admin");
+            var templates = isAdmin
+                ? await _templateService.GetAllTemplatesAsync()
+                : await _templateService.GetUserTemplatesAsync(CurrentUserId);
+
+            return View(templates);
+        }
 
         public async Task<IActionResult> Create()
         {
-            ViewBag.Themes = await _themeService.GetAllThemesAsync();
-            return View(await CreateDefaultTemplateDto());
+            var themes = await _themeService.GetAllThemesAsync();
+            ViewBag.Themes = themes;
+
+            return View(new TemplateDto
+            {
+                Tags = new(),
+                ThemeId = themes.FirstOrDefault()?.Id ?? 0,
+                IsPublic = true
+            });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(TemplateDto dto, IFormFile templateImage)
         {
-            await ProcessImageUpload(dto, templateImage);
-            if (!await ValidateAndProcessTemplate(dto, "create")) return View(dto);
-            return RedirectToCreatedTemplate(await _templateService.CreateAsync(dto, CurrentUserId));
+            if (templateImage?.Length > 0)
+                dto.ImageUrl = await _cloudStorageService.UploadFileAsync(templateImage, "templates");
+
+            dto.Tags = ParseTagsFromForm();
+            dto.Questions = ParseQuestionsFromForm();
+
+            var validation = await _validator.ValidateAsync(dto);
+            if (!validation.IsValid)
+            {
+                foreach (var e in validation.Errors)
+                    ModelState.AddModelError(e.PropertyName, e.ErrorMessage);
+
+                ViewBag.Themes = await _themeService.GetAllThemesAsync();
+                return View(dto);
+            }
+
+            try
+            {
+                var created = await _templateService.CreateAsync(dto, CurrentUserId);
+                return RedirectToAction("Details", "TemplateViews", new { id = created.Id });
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Error creating template: " + ex.Message);
+                ViewBag.Themes = await _themeService.GetAllThemesAsync();
+                return View(dto);
+            }
         }
 
         public async Task<IActionResult> Edit(Guid id)
         {
-            var template = await GetTemplateForEdit(id);
-            if (template == null) return NotFound();
-            return View(await MapToTemplateDto(template));
-        }
+            var template = await _templateService.GetByIdAsync(id, CurrentUserId);
+            if (template == null || (!User.IsInRole("Admin") && template.Author.Id != CurrentUserId))
+                return NotFound();
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, TemplateDto dto, IFormFile templateImage)
-        {
-            if (id != dto.Id) return NotFound();
-            await ProcessImageUpload(dto, templateImage);
-            if (!await ValidateAndProcessTemplate(dto, "edit", id)) return View(dto);
-            return RedirectToUpdatedTemplate(id);
-        }
-
-        public async Task<IActionResult> Delete(Guid id)
-        {
-            var template = await GetTemplateForDelete(id);
-            return template == null ? NotFound() : View(template);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id) => 
-            await _templateService.DeleteAsync(id, GetDeleteUserId()) ? 
-            RedirectToAction(nameof(Index)) : 
-            NotFound();
-
-        private async Task<IEnumerable<TemplateListItemDto>> GetTemplatesForCurrentUser() => 
-            User.IsInRole("Admin") ? 
-            await _templateService.GetAllTemplatesAsync() : 
-            await _templateService.GetUserTemplatesAsync(CurrentUserId);
-
-        private async Task<TemplateDto> CreateDefaultTemplateDto() => new()
-        {
-            Tags = new(),
-            ThemeId = (await _themeService.GetAllThemesAsync()).FirstOrDefault()?.Id ?? 0,
-            IsPublic = true
-        };
-
-        private async Task ProcessImageUpload(TemplateDto dto, IFormFile image)
-        {
-            if (image?.Length <= 0) return;
-            dto.ImageUrl = await _cloudStorageService.UploadFileAsync(image, "templates");
-        }
-
-        private async Task<bool> ValidateAndProcessTemplate(TemplateDto dto, string action, Guid? id = null)
-        {
-            SetTemplateDataFromForm(dto);
-            var validation = await _validator.ValidateAsync(dto);
-            if (validation.IsValid) return true;
-            AddValidationErrors(validation);
-            await LoadThemesForView();
-            return false;
-        }
-
-        private void SetTemplateDataFromForm(TemplateDto dto)
-        {
-            dto.Tags = ParseTagsFromForm();
-            dto.Questions = ParseQuestionsFromForm();
-        }
-
-        private void AddValidationErrors(FluentValidation.Results.ValidationResult validation)
-        {
-            foreach (var e in validation.Errors)
-                ModelState.AddModelError(e.PropertyName, e.ErrorMessage);
-        }
-
-        private async Task LoadThemesForView() => 
             ViewBag.Themes = await _themeService.GetAllThemesAsync();
 
-        private IActionResult RedirectToCreatedTemplate(TemplateDetailsDto created) => 
-            RedirectToAction("Details", "TemplateViews", new { id = created.Id });
-
-        private IActionResult RedirectToUpdatedTemplate(Guid id) => 
-            RedirectToAction("Details", "TemplateViews", new { id });
-
-        private async Task<TemplateDetailsDto?> GetTemplateForEdit(Guid id)
-        {
-            var template = await _templateService.GetByIdAsync(id, CurrentUserId);
-            return template == null || !CanEditTemplate(template) ? null : template;
-        }
-
-        private bool CanEditTemplate(TemplateDetailsDto template) => 
-            User.IsInRole("Admin") || template.Author.Id == CurrentUserId;
-
-        private async Task<TemplateDto> MapToTemplateDto(TemplateDetailsDto template)
-        {
-            var themes = await _themeService.GetAllThemesAsync();
-            return new TemplateDto
+            return View(new TemplateDto
             {
                 Id = template.Id,
                 Title = template.Title,
@@ -164,31 +119,89 @@ namespace MyFormixApp.UI.Controllers
                         Position = o.Position
                     }).ToList() ?? new()
                 }).ToList()
-            };
+            });
         }
 
-        private async Task<TemplateDetailsDto?> GetTemplateForDelete(Guid id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Guid id, TemplateDto dto, IFormFile templateImage)
+        {
+            if (id != dto.Id) return NotFound();
+
+            if (templateImage?.Length > 0)
+            {
+                if (!string.IsNullOrEmpty(dto.ImageUrl))
+                    await _cloudStorageService.DeleteFileAsync(dto.ImageUrl, "templates");
+
+                dto.ImageUrl = await _cloudStorageService.UploadFileAsync(templateImage, "templates");
+            }
+
+            var existing = await _templateService.GetByIdAsync(id, CurrentUserId);
+            if (existing == null || (!User.IsInRole("Admin") && existing.Author.Id != CurrentUserId))
+                return NotFound();
+
+            dto.Tags = ParseTagsFromForm();
+            dto.Questions = ParseQuestionsFromForm();
+
+            var validation = await _validator.ValidateAsync(dto);
+            if (!validation.IsValid)
+            {
+                foreach (var e in validation.Errors)
+                    ModelState.AddModelError(e.PropertyName, e.ErrorMessage);
+
+                ViewBag.Themes = await _themeService.GetAllThemesAsync();
+                return View(dto);
+            }
+
+            try
+            {
+                var updated = await _templateService.UpdateAsync(dto, User.IsInRole("Admin") ? null : CurrentUserId);
+                if (updated == null) return NotFound();
+                return RedirectToAction("Details", "TemplateViews", new { id });
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Error updating template: " + ex.Message);
+                ViewBag.Themes = await _themeService.GetAllThemesAsync();
+                return View(dto);
+            }
+        }
+
+        public async Task<IActionResult> Delete(Guid id)
         {
             var template = await _templateService.GetByIdAsync(id, CurrentUserId);
-            return template == null || !CanEditTemplate(template) ? null : template;
+            if (template == null || (!User.IsInRole("Admin") && template.Author.Id != CurrentUserId))
+                return NotFound();
+
+            return View(template);
         }
 
-        private Guid? GetDeleteUserId() => 
-            User.IsInRole("Admin") ? null : CurrentUserId;
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        {
+            var result = await _templateService.DeleteAsync(id, User.IsInRole("Admin") ? null : CurrentUserId);
+            return result ? RedirectToAction(nameof(Index)) : NotFound();
+        }
 
-        private List<string> ParseTagsFromForm() => 
-            Request.Form.ContainsKey("Tags") ? 
-            Request.Form["Tags"].ToString()
+        // Helpers
+        private List<string> ParseTagsFromForm()
+        {
+            if (!Request.Form.ContainsKey("Tags")) return new();
+            return Request.Form["Tags"].ToString()
                 .Split(',')
                 .Select(t => t.Trim())
                 .Where(t => !string.IsNullOrEmpty(t))
-                .ToList() : 
-            new();
+                .ToList();
+        }
 
-        private List<QuestionDto> ParseQuestionsFromForm() => 
-            Request.Form.ContainsKey("QuestionsData") && 
-            !string.IsNullOrEmpty(Request.Form["QuestionsData"]) ? 
-            JsonSerializer.Deserialize<List<QuestionDto>>(Request.Form["QuestionsData"]) ?? new() : 
-            new();
+        private List<QuestionDto> ParseQuestionsFromForm()
+        {
+            if (!Request.Form.ContainsKey("QuestionsData")) return new();
+            var json = Request.Form["QuestionsData"];
+            return string.IsNullOrEmpty(json)
+                ? new()
+                : JsonSerializer.Deserialize<List<QuestionDto>>(json) ?? new();
+        }
     }
 }
