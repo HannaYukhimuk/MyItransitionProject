@@ -18,39 +18,58 @@ namespace MyFormixApp.Infrastructure.Services
 
         public async Task<LikeStatusDto> ToggleLikeAsync(LikeDto dto, Guid userId)
         {
-            if (await _templateRepository.GetByIdAsync(dto.TemplateId) == null)
-                throw new ArgumentException("Template not found");
-
-            var isLiked = await _likeRepository.ExistsAsync(userId, dto.TemplateId);
-
-            if (isLiked)
-                await _likeRepository.RemoveAsync(userId, dto.TemplateId);
-            else
-                await _likeRepository.AddAsync(new Like { UserId = userId, TemplateId = dto.TemplateId });
-
-            return new LikeStatusDto
-            {
-                IsLiked = !isLiked,
-                TotalLikes = await _likeRepository.CountAsync(dto.TemplateId)
-            };
+            await ValidateTemplateExists(dto.TemplateId);
+            var isLiked = await GetCurrentLikeStatus(userId, dto.TemplateId);
+            await UpdateLikeStatus(userId, dto.TemplateId, isLiked);
+            return await CreateLikeStatusDto(dto.TemplateId, isLiked);
         }
-        
+
         public async Task<(bool IsSuccess, string Message)> TryToggleLikeAsync(LikeDto dto, Guid userId)
         {
             try
             {
                 await ToggleLikeAsync(dto, userId);
-                return (true, string.Empty);
+                return CreateSuccessResult();
             }
             catch (ArgumentException ex)
             {
-                return (false, ex.Message);
+                return CreateErrorResult(ex.Message);
             }
             catch (Exception)
             {
-                return (false, "Ошибка при изменении статуса лайка.");
+                return CreateErrorResult("Ошибка при изменении статуса лайка.");
             }
         }
 
+        private async Task ValidateTemplateExists(Guid templateId)
+        {
+            if (await _templateRepository.GetByIdAsync(templateId) == null)
+                throw new ArgumentException("Template not found");
+        }
+
+        private async Task<bool> GetCurrentLikeStatus(Guid userId, Guid templateId) => 
+            await _likeRepository.ExistsAsync(userId, templateId);
+
+        private async Task UpdateLikeStatus(Guid userId, Guid templateId, bool isLiked)
+        {
+            if (isLiked) await _likeRepository.RemoveAsync(userId, templateId);
+            else await _likeRepository.AddAsync(CreateLike(userId, templateId));
+        }
+
+        private Like CreateLike(Guid userId, Guid templateId) => 
+            new Like { UserId = userId, TemplateId = templateId };
+
+        private async Task<LikeStatusDto> CreateLikeStatusDto(Guid templateId, bool isLiked) => 
+            new LikeStatusDto
+            {
+                IsLiked = !isLiked,
+                TotalLikes = await _likeRepository.CountAsync(templateId)
+            };
+
+        private static (bool, string) CreateSuccessResult() => 
+            (true, string.Empty);
+
+        private static (bool, string) CreateErrorResult(string message) => 
+            (false, message);
     }
 }

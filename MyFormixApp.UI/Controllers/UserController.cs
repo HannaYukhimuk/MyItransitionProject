@@ -32,11 +32,6 @@ namespace MyFormixApp.UI.Controllers
             return await ToggleAdminAsync(userId, false, "removed");
         }
 
-
-
-
-
-
         [HttpGet("getIdByEmail")]
         public async Task<IActionResult> GetUserIdByEmail([FromQuery] string email)
         {

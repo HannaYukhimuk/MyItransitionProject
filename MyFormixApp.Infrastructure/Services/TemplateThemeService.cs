@@ -27,12 +27,10 @@ namespace MyFormixApp.Infrastructure.Services
         {
             var theme = await _repository.GetByIdAsync(id);
             if (theme == null) return null;
-
             theme.Name = dto.Name;
             await _repository.UpdateAsync(theme);  
             return MapToDto(theme);               
         }
-
 
         public async Task<bool> DeleteThemeAsync(int id)
         {
