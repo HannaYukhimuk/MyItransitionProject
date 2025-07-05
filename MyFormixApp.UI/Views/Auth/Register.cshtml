@@ -52,32 +52,13 @@
                             <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
                         </div>
                         
-                        <div class="mb-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="agreeTerms" required>
-                                <label class="form-check-label" for="agreeTerms">
-                                    I agree to the <a href="#" class="text-decoration-none">Terms of Service</a> and <a href="#" class="text-decoration-none">Privacy Policy</a>
-                                </label>
-                                <span class="text-danger small field-validation-valid" data-valmsg-for="agreeTerms" data-valmsg-replace="true"></span>
-                            </div>
-                        </div>
-                        
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-success btn-lg">
                                 <i class="fas fa-user-plus me-2"></i>Create Account
                             </button>
                         </div>
                     </form>
-                    
-                    <div class="text-center mt-4">
-                        <p class="text-muted mb-3">Or sign up with</p>
-                        <div class="d-flex justify-content-center gap-3">
-                            <a href="#" class="btn btn-outline-success rounded-circle">
-                                <i class="fab fa-google"></i>
-                            </a>
-                        </div>
-                    </div>
-                    
+
                     <div class="text-center mt-4">
                         <p class="text-muted">Already have an account? 
                             <a asp-action="Login" class="text-decoration-none fw-bold">Sign in</a>
@@ -91,20 +72,4 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            $("form").validate({
-                rules: {
-                    agreeTerms: "required",
-                    ConfirmPassword: {
-                        equalTo: "#Password"
-                    }
-                },
-                messages: {
-                    agreeTerms: "You must agree to the terms",
-                    ConfirmPassword: "Passwords do not match"
-                }
-            });
-        });
-    </script>
 }

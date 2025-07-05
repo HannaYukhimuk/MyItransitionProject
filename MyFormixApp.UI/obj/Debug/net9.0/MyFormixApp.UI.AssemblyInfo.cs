@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MyFormixApp.UI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+44a72c58fc03f65e64cb5ef68f23124a61b24817")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+27d5a538e7755d376831bbeb36c3663e433cc6bb")]
 [assembly: System.Reflection.AssemblyProductAttribute("MyFormixApp.UI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MyFormixApp.UI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

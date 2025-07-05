@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="HomePageTitle" xml:space="preserve">
+    <value>Главная страница</value>
+  </data>
+  <data name="WelcomeTitle" xml:space="preserve">
+    <value>Добро пожаловать в MyFormixApp</value>
+  </data>
+  <data name="WelcomeSubtitle" xml:space="preserve">
+    <value>Создавайте и делитесь формами, тестами и опросами</value>
+  </data>
+  <data name="CreateTemplate" xml:space="preserve">
+    <value>Создать шаблон</value>
+  </data>
+  <data name="RecentTemplates" xml:space="preserve">
+    <value>Последние шаблоны</value>
+  </data>
+  <data name="SearchTemplates" xml:space="preserve">
+    <value>Поиск шаблонов...</value>
+  </data>
+  <data name="ViewTemplate" xml:space="preserve">
+    <value>Просмотр шаблона</value>
+  </data>
+  <data name="NoTemplatesTitle" xml:space="preserve">
+    <value>Шаблоны пока не добавлены</value>
+  </data>
+  <data name="NoTemplatesSubtitle" xml:space="preserve">
+    <value>Станьте первым, кто создаст шаблон!</value>
+  </data>
+  <data name="PopularTags" xml:space="preserve">
+    <value>Популярные теги</value>
+  </data>
+  <data name="SearchByTag" xml:space="preserve">
+    <value>Поиск по тегу...</value>
+  </data>
+  <data name="NoTagsYet" xml:space="preserve">
+    <value>Пока нет тегов</value>
+  </data>
+  <data name="TopTemplates" xml:space="preserve">
+    <value>Топ шаблонов</value>
+  </data>
+  <data name="NoTopTemplates" xml:space="preserve">
+    <value>Пока нет популярных шаблонов</value>
+  </data>
+</root>

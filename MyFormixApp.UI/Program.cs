@@ -8,7 +8,7 @@ using MyFormixApp.UI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddCustomLocalization();
 builder.Services.AddRazorPages();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<UserDtoValidator>();
@@ -57,6 +57,7 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseCustomLocalization(); 
 app.UseAuthentication();
 app.UseAuthorization();
 

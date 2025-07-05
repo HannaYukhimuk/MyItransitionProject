@@ -1,14 +1,15 @@
 @model MyFormixApp.UI.ViewModels.HomeViewModel
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = Localizer["HomePageTitle"];
 }
 
 <div class="hero-section bg-light py-5 mb-5">
     <div class="container text-center">
-        <h1 class="display-4">Welcome to MyFormixApp</h1>
-        <p class="lead">Create and share custom forms, quizzes and surveys</p>
-        <a href="/Templates/Create" class="btn btn-primary btn-lg">Create New Template</a>
+        <h1 class="display-4">@Localizer["WelcomeTitle"]</h1>
+        <p class="lead">@Localizer["WelcomeSubtitle"]</p>
+        <a href="/Templates/Create" class="btn btn-primary btn-lg">@Localizer["CreateTemplate"]</a>
     </div>
 </div>
 
@@ -18,16 +19,15 @@
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-white border-bottom-0">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h2 class="h4 mb-0"><i class="fas fa-file-alt text-primary me-2"></i> Recent Templates</h2>
+                        <h2 class="h4 mb-0"><i class="fas fa-file-alt text-primary me-2"></i> @Localizer["RecentTemplates"]</h2>
                         <div class="input-group w-50">
-                            <input type="text" id="titleSearchInput" class="form-control" placeholder="Search templates...">
+                            <input type="text" id="titleSearchInput" class="form-control" placeholder="@Localizer["SearchTemplates"]">
                             <button class="btn btn-outline-primary" type="button" onclick="searchByTitle()">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
                     </div>
                 </div>
-                
                 <div class="card-body">
                     <div id="templateContainer">
                         @if (Model.RecentTemplates?.Any() == true)
@@ -44,7 +44,7 @@
                                                 <p class="card-text text-muted">@(template.Description?.Length > 100 ? template.Description.Substring(0, 100) + "..." : template.Description)</p>
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <a href="/TemplateViews/View/@template.Id" class="btn btn-sm btn-outline-primary">
-                                                        View Template <i class="fas fa-arrow-right ms-1"></i>
+                                                        @Localizer["ViewTemplate"] <i class="fas fa-arrow-right ms-1"></i>
                                                     </a>
                                                     @if (template.Author != null)
                                                     {
@@ -76,10 +76,10 @@
                         {
                             <div class="text-center py-5">
                                 <i class="fas fa-file-alt fa-4x text-muted mb-3"></i>
-                                <h4 class="text-muted">No templates available yet</h4>
-                                <p class="text-muted">Be the first to create a template!</p>
+                                <h4 class="text-muted">@Localizer["NoTemplatesTitle"]</h4>
+                                <p class="text-muted">@Localizer["NoTemplatesSubtitle"]</p>
                                 <a href="/Templates/Create" class="btn btn-primary">
-                                    <i class="fas fa-plus me-1"></i> Create Template
+                                    <i class="fas fa-plus me-1"></i> @Localizer["CreateTemplate"]
                                 </a>
                             </div>
                         }
@@ -91,23 +91,21 @@
         <div class="col-lg-4">
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-white">
-                    <h3 class="h5 mb-0"><i class="fas fa-tags text-primary me-2"></i> Popular Tags</h3>
+                    <h3 class="h5 mb-0"><i class="fas fa-tags text-primary me-2"></i> @Localizer["PopularTags"]</h3>
                 </div>
                 <div class="card-body">
                     <div class="input-group mb-3">
-                        <input type="text" id="tagSearchInput" class="form-control" placeholder="Search by tag...">
+                        <input type="text" id="tagSearchInput" class="form-control" placeholder="@Localizer["SearchByTag"]">
                         <button class="btn btn-outline-primary" type="button" onclick="searchByTag()">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
-                    
                     @if (Model.PopularTags?.Any() == true)
                     {
                         <div class="d-flex flex-wrap gap-2">
                             @foreach (var tag in Model.PopularTags)
                             {
-                                <a href="#" class="badge bg-light text-dark text-decoration-none py-2 px-3" 
-                                   onclick="searchByTag('@tag.Name')">
+                                <a href="#" class="badge bg-light text-dark text-decoration-none py-2 px-3" onclick="searchByTag('@tag.Name')">
                                     #@tag.Name
                                 </a>
                             }
@@ -117,7 +115,7 @@
                     {
                         <div class="text-center py-3">
                             <i class="fas fa-tag fa-2x text-muted mb-2"></i>
-                            <p class="text-muted mb-0">No tags yet</p>
+                            <p class="text-muted mb-0">@Localizer["NoTagsYet"]</p>
                         </div>
                     }
                 </div>
@@ -125,7 +123,7 @@
 
             <div class="card shadow-sm">
                 <div class="card-header bg-white">
-                    <h3 class="h5 mb-0"><i class="fas fa-star text-primary me-2"></i> Top Templates</h3>
+                    <h3 class="h5 mb-0"><i class="fas fa-star text-primary me-2"></i> @Localizer["TopTemplates"]</h3>
                 </div>
                 @if (Model.TopTemplates?.Any() == true)
                 {
@@ -145,13 +143,14 @@
                 {
                     <div class="card-body text-center py-3">
                         <i class="fas fa-star fa-2x text-muted mb-2"></i>
-                        <p class="text-muted mb-0">No top templates yet</p>
+                        <p class="text-muted mb-0">@Localizer["NoTopTemplates"]</p>
                     </div>
                 }
             </div>
         </div>
     </div>
 </div>
+
 
 @section Scripts {
     <script>

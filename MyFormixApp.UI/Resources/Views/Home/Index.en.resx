@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="HomePageTitle" xml:space="preserve">
+    <value>Home Page</value>
+  </data>
+  <data name="WelcomeTitle" xml:space="preserve">
+    <value>Welcome to MyFormixApp</value>
+  </data>
+  <data name="WelcomeSubtitle" xml:space="preserve">
+    <value>Create and share custom forms, quizzes and surveys</value>
+  </data>
+  <data name="CreateTemplate" xml:space="preserve">
+    <value>Create New Template</value>
+  </data>
+  <data name="RecentTemplates" xml:space="preserve">
+    <value>Recent Templates</value>
+  </data>
+  <data name="SearchTemplates" xml:space="preserve">
+    <value>Search templates...</value>
+  </data>
+  <data name="ViewTemplate" xml:space="preserve">
+    <value>View Template</value>
+  </data>
+  <data name="NoTemplatesTitle" xml:space="preserve">
+    <value>No templates available yet</value>
+  </data>
+  <data name="NoTemplatesSubtitle" xml:space="preserve">
+    <value>Be the first to create a template!</value>
+  </data>
+  <data name="PopularTags" xml:space="preserve">
+    <value>Popular Tags</value>
+  </data>
+  <data name="SearchByTag" xml:space="preserve">
+    <value>Search by tag...</value>
+  </data>
+  <data name="NoTagsYet" xml:space="preserve">
+    <value>No tags yet</value>
+  </data>
+  <data name="TopTemplates" xml:space="preserve">
+    <value>Top Templates</value>
+  </data>
+  <data name="NoTopTemplates" xml:space="preserve">
+    <value>No top templates yet</value>
+  </data>
+</root>
