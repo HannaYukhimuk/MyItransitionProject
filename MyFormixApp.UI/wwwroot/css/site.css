@@ -15,9 +15,6 @@
     object-fit: cover;
 }
 
-
-
-/* Стили для комментариев */
 .card {
     margin-bottom: 1rem;
     transition: all 0.3s ease;
@@ -43,36 +40,40 @@
 }
 
 
-/*
-.bg-primary {
-    background-color: #008484 !important;
-}*/
 
 
 
 
 
-/* Стили для комментариев */
-.card {
-    margin-bottom: 1rem;
-    transition: all 0.3s ease;
+
+
+
+:root[data-bs-theme='dark'] {
+    --bs-primary: #320ee6;
+    --bs-primary-rgb: 50, 14, 230;
 }
 
-.reply-form {
-    background-color: #f8f9fa;
-    padding: 1rem;
-    border-radius: 0.25rem;
-    margin-top: 0.5rem;
+[data-bs-theme='dark'] .btn-primary {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+    color: #fff;
 }
 
-.replies-container {
-    border-left: 2px solid #dee2e6;
-    padding-left: 1rem;
-    margin-top: 1rem;
+[data-bs-theme='dark'] .btn-primary:hover {
+    background-color: #00a991;
+    border-color: #009f88;
 }
 
-.field-validation-error {
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-    display: none;
+[data-bs-theme='dark'] .navbar,
+[data-bs-theme='dark'] .navbar.bg-primary {
+    background-color: var(--bs-primary) !important;
+    color: #fff;
+}
+
+[data-bs-theme='dark'] .navbar a {
+    color: #fff;
+}
+
+[data-bs-theme='dark'] .navbar a:hover {
+    color: #e0e0e0;
 }

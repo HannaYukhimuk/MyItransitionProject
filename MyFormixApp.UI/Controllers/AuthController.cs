@@ -31,14 +31,13 @@ namespace MyFormixApp.UI.Controllers
 
         [HttpGet] public IActionResult Login() => View();
 
-        // AuthController.cs (изменения только в методе Login)
-[HttpPost]
-public async Task<IActionResult> Login(UserDto model)
-{
-    if (!ModelState.IsValid) return View(model);
-    var result = await _authService.LoginAndSignInAsync(model, HttpContext);
-    return result.Success ? RedirectToAction(result.RedirectAction, result.RedirectController) : View(model);
-}
+        [HttpPost]
+        public async Task<IActionResult> Login(UserDto model)
+        {
+            if (!ModelState.IsValid) return View(model);
+            var result = await _authService.LoginAndSignInAsync(model, HttpContext);
+            return result.Success ? RedirectToAction(result.RedirectAction, result.RedirectController) : View(model);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Logout()

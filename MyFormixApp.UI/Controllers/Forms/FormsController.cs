@@ -21,12 +21,12 @@ namespace MyFormixApp.UI.Controllers.Forms
         }
 
         [HttpGet] 
-public async Task<IActionResult> Details(Guid id)
-{
-    var result = await _formService.GetFormDetailsAsync(id, _currentUserId);
-    
-    return View(result.Data);
-}
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var result = await _formService.GetFormDetailsAsync(id, _currentUserId);
+            
+            return View(result.Data);
+        }
 
         [HttpGet] public async Task<IActionResult> My() => 
             View(await _formService.GetUserFormsAsync(_currentUserId));
