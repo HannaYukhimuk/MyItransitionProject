@@ -349,17 +349,20 @@ public async Task<TemplateStatisticsDto> GetTemplateStatisticsAsync(Guid templat
         {
             if (template == null) throw new ArgumentNullException(nameof(template));
             
+            var formList = forms?.ToList() ?? new List<Form>();
+            
             return new()
             {
                 TemplateId = template.Id,
                 TemplateTitle = template.Title,
-                SubmissionsByDay = forms?
+                TotalSubmissions = formList.Count,
+                SubmissionsByDay = formList
                     .GroupBy(f => f.CreatedAt.Date)
-                    .ToDictionary(g => g.Key.ToString("yyyy-MM-dd"), g => g.Count()) ?? new(),
+                    .ToDictionary(g => g.Key.ToString("yyyy-MM-dd"), g => g.Count()),
                 QuestionStatistics = template.Questions?
                     .ToDictionary(
                         q => q.Title,
-                        q => GetQuestionStatistics(q, forms ?? Enumerable.Empty<Form>())) ?? new()
+                        q => GetQuestionStatistics(q, formList)) ?? new()
             };
         }
 
