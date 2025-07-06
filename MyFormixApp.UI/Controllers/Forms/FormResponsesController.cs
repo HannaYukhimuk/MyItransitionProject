@@ -46,12 +46,15 @@ namespace MyFormixApp.UI.Controllers.Forms
             try
             {
                 var result = await _formService.GetTemplateStatisticsAsync(templateId, _currentUserId);
+                ViewBag.TemplateTitle = result.TemplateTitle;
                 return View(result);
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine($"[StatsError] {ex.Message}");
                 return RedirectToAction("Details", "Templates", new { id = templateId });
             }
         }
+
     }
 }
