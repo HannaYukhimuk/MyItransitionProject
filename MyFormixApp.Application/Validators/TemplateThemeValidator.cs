@@ -11,7 +11,5 @@ namespace MyFormixApp.Application.Validators
                 .NotEmpty().WithMessage("Theme name is required")
                 .MaximumLength(50).WithMessage("Theme name cannot exceed 50 characters");
         }
-
-        
     }
 }

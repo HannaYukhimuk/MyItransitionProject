@@ -17,10 +17,5 @@ namespace MyFormixApp.Application.Validators
             RuleFor(x => x.Position)
                 .GreaterThanOrEqualTo(0).WithMessage("Position must be positive");
         }
-
-        private bool BeValidType(string type)
-        {
-            return type is "text" or "textarea" or "number" or "checkbox";
-        }
     }
 }

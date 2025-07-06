@@ -297,30 +297,16 @@ namespace MyFormixApp.Infrastructure.Services
                 TemplateId = templateId,
                 UserId = userId,
                 CreatedAt = DateTime.UtcNow,
-                Answers = responses.Select(r => new Answer { QuestionId = r.Key, ValueText = r.Value }).ToList()
+                Answers = responses.Select(r => new Answer 
+                { 
+                    QuestionId = r.Key, 
+                    ValueText = r.Value,
+                }).ToList()
             };
             await _formRepository.CreateAsync(form);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-public async Task<TemplateStatisticsDto> GetTemplateStatisticsAsync(Guid templateId, Guid currentUserId)
+        public async Task<TemplateStatisticsDto> GetTemplateStatisticsAsync(Guid templateId, Guid currentUserId)
         {
             try
             {
@@ -337,12 +323,6 @@ public async Task<TemplateStatisticsDto> GetTemplateStatisticsAsync(Guid templat
                 Console.WriteLine($"Error in GetTemplateStatisticsAsync: {ex}");
                 throw;
             }
-        }
-
-        private async Task<TemplateStatisticsDto> CalculateStatistics(Template template)
-        {
-            var forms = await _formRepository.GetByTemplateWithDetailsAsync(template.Id);
-            return CreateStatisticsDto(template, forms);
         }
 
         private static TemplateStatisticsDto CreateStatisticsDto(Template template, IEnumerable<Form> forms)
@@ -426,24 +406,6 @@ public async Task<TemplateStatisticsDto> GetTemplateStatisticsAsync(Guid templat
             return stats;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         private async Task<FormDetailsDto?> GetUserTemplateForm(Guid userId, Guid templateId)
         {
             var form = await _formRepository.GetByUserAndTemplateAsync(userId, templateId);
@@ -509,20 +471,6 @@ public async Task<TemplateStatisticsDto> GetTemplateStatisticsAsync(Guid templat
 
         private static FormResult ErrorFormResult(Exception ex) => 
             new FormResult(ex.Message);
-
-        private async Task<ServiceResult<TemplateFormsView>> CreateTemplateFormsResult(Template template)
-        {
-            var forms = await MapForms(await _formRepository.GetByTemplateAsync(template.Id));
-            return new ServiceResult<TemplateFormsView>(new TemplateFormsView
-            {
-                Forms = forms,
-                TemplateTitle = template.Title,
-                TemplateId = template.Id
-            });
-        }
-
-        private static ServiceResult<TemplateFormsView> ErrorTemplateFormsResult(Exception ex) => 
-            new ServiceResult<TemplateFormsView>(ex.Message);
 
         private async Task<FormDetailsDto> GetFormOrThrow(Guid id, Guid userId)
         {

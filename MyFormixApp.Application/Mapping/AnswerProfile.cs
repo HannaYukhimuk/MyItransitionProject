@@ -22,22 +22,22 @@ namespace MyFormixApp.Application.Mapping
             .ForMember(dest => dest.Options, opt => opt.Ignore())
             .ForMember(dest => dest.TextValue, opt => opt.Ignore())
             .AfterMap((src, dest) =>
-{
-    dest.Options = src.Question?.Options != null
-        ? src.Question.Options.OrderBy(o => o.Position).Select(o => o.Text).ToList()
-        : new List<string>();
+            {
+                dest.Options = src.Question?.Options != null
+                    ? src.Question.Options.OrderBy(o => o.Position).Select(o => o.Text).ToList()
+                    : new List<string>();
 
-    if (src.Question?.Type == "radio" || src.Question?.Type == "select")
-    {
-        var match = src.Question?.Options?
-            .FirstOrDefault(o => o.Id.ToString().Equals(src.ValueText, StringComparison.OrdinalIgnoreCase));
-        dest.TextValue = match?.Text ?? src.ValueText;
-    }
-    else
-    {
-        dest.TextValue = src.ValueText;
-    }
-});
+                if (src.Question?.Type == "radio" || src.Question?.Type == "select")
+                {
+                    var match = src.Question?.Options?
+                        .FirstOrDefault(o => o.Id.ToString().Equals(src.ValueText, StringComparison.OrdinalIgnoreCase));
+                    dest.TextValue = match?.Text ?? src.ValueText;
+                }
+                else
+                {
+                    dest.TextValue = src.ValueText;
+                }
+            });
 
     }
 }
