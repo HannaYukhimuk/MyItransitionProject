@@ -1,6 +1,6 @@
 @model IEnumerable<MyFormixApp.Domain.DTOs.Forms.FormDetailsDto>
 @{
-    ViewData["Title"] = "Admin - All Forms";
+    ViewData["Title"] = Localizer["AdminAllForms"];
     ViewData["IsAdmin"] = true;
 }
 
@@ -15,20 +15,27 @@
             @if (!Model.Any())
             {
                 <div class="alert alert-info">
-                    <i class="fas fa-info-circle me-2"></i> No forms have been submitted yet.
+                    <i class="fas fa-info-circle me-2"></i> @Localizer["NoFormsSubmitted"]
                 </div>
             }
             else
             {
                 <table class="table">
-                    <!-- Your table headers here -->
+                    <thead>
+                        <tr>
+                            <th>@Localizer["TemplateTitle"]</th>
+                            <th>@Localizer["UserName"]</th>
+                            <th>@Localizer["CreatedAt"]</th>
+                            <th>@Localizer["Actions"]</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         @foreach (var form in Model)
                         {
                             <tr>
                                 <td>@form.TemplateTitle</td>
                                 <td>@form.UserName</td>
-                                <td>@form.CreatedAt</td>
+                                <td>@form.CreatedAt.ToString("g")</td>
                                 <td>
                                     <partial name="~/Views/FormResponses/Partials/_FormActions.cshtml" model="form" />
                                 </td>

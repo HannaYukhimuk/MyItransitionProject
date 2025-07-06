@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Edit"><value>Edit</value></data>
+  <data name="Delete"><value>Delete</value></data>
+  <data name="Forms"><value>Forms</value></data>
+  <data name="Stats"><value>Stats</value></data>
+  <data name="Description"><value>Description</value></data>
+  <data name="Questions"><value>Questions</value></data>
+  <data name="NoQuestions"><value>No questions in this template yet.</value></data>
+  <data name="Required"><value>Required</value></data>
+  <data name="Optional"><value>Optional</value></data>
+  <data name="InTable"><value>In Table</value></data>
+  <data name="Author"><value>Author</value></data>
+  <data name="Theme"><value>Theme</value></data>
+  <data name="Created"><value>Created</value></data>
+  <data name="LastUpdated"><value>Last Updated</value></data>
+  <data name="Visibility"><value>Visibility</value></data>
+  <data name="Public"><value>Public</value></data>
+  <data name="Private"><value>Private</value></data>
+  <data name="FormsCount"><value>Forms</value></data>
+  <data name="Likes"><value>Likes</value></data>
+  <data name="Tags"><value>Tags</value></data>
+  <data name="BackToMyTemplates"><value>Back to My Templates</value></data>
+</root>

@@ -1,7 +1,9 @@
 @model IEnumerable<MyFormixApp.Domain.DTOs.Templates.TemplateListItemDto>
 
+@inject IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "Shared Templates";
+    ViewData["Title"] = Localizer["SharedTemplates"];
 }
 
 <div class="container mt-4">
@@ -12,7 +14,7 @@
     @if (!Model.Any())
     {
         <div class="alert alert-info">
-            You don't have access to any private templates yet.
+            @Localizer["NoAccessToPrivateTemplates"]
         </div>
     }
     else
@@ -26,7 +28,11 @@
                             <h5 class="card-title mb-0">@template.Title</h5>
                         </div>
                         <div class="card-body">
-                            <p class="card-text">@(template.Description ?? "No description")</p>
+                            <p class="card-text">
+                                @(string.IsNullOrEmpty(template.Description) 
+                                    ? Localizer["NoDescription"] 
+                                    : template.Description)
+                            </p>
                             <div class="mb-2">
                                 @foreach (var tag in template.Tags)
                                 {
@@ -34,14 +40,15 @@
                                 }
                             </div>
                             <p class="text-muted small">
-                                Author: @template.AuthorName<br>
-                                Questions: @template.QuestionsCount<br>
-                                Created: @template.CreatedAt.ToString("d")
+                                @Localizer["Author"]: @template.AuthorName<br />
+                                @Localizer["Questions"]: @template.QuestionsCount<br />
+                                @Localizer["Created"]: @template.CreatedAt.ToString("d")
                             </p>
                         </div>
                         <div class="card-footer bg-transparent">
-                            <a asp-action="View" asp-route-id="@template.Id" 
-                               class="btn btn-primary btn-sm">View</a>
+                            <a asp-action="View" asp-route-id="@template.Id" class="btn btn-primary btn-sm">
+                                @Localizer["View"]
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="UserAnswerPlaceholder"><value>Ответ пользователя появится здесь</value></data>
+  <data name="Required"><value>Обязательный</value></data>
+</root>

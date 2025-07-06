@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="FormResponseDetails" xml:space="preserve">
+    <value>Детали ответа на форму</value>
+  </data>
+  <data name="Submitted" xml:space="preserve">
+    <value>Отправлено</value>
+  </data>
+  <data name="EditAnswers" xml:space="preserve">
+    <value>Редактировать ответы</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Сохранить изменения</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="DeleteFormConfirm" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить эту форму?</value>
+  </data>
+  <data name="DeleteForm" xml:space="preserve">
+    <value>Удалить форму</value>
+  </data>
+</root>

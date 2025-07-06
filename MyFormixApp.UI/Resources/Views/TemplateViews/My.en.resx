@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="MyTemplates" xml:space="preserve">
+    <value>My Templates</value>
+  </data>
+  <data name="ManageYourFormTemplatesAndDesigns" xml:space="preserve">
+    <value>Manage your form templates and designs</value>
+  </data>
+  <data name="CreateNew" xml:space="preserve">
+    <value>Create New</value>
+  </data>
+  <data name="NoTemplatesCreatedYet" xml:space="preserve">
+    <value>No templates created yet</value>
+  </data>
+  <data name="StartByCreatingYourFirstTemplate" xml:space="preserve">
+    <value>Start by creating your first template</value>
+  </data>
+  <data name="CreateTemplate" xml:space="preserve">
+    <value>Create Template</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="NoDescription" xml:space="preserve">
+    <value>No description</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>Questions</value>
+  </data>
+  <data name="Submissions" xml:space="preserve">
+    <value>Submissions</value>
+  </data>
+  <data name="Likes" xml:space="preserve">
+    <value>Likes</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+</root>

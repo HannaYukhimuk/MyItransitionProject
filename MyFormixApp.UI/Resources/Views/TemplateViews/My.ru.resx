@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="MyTemplates" xml:space="preserve">
+    <value>Мои шаблоны</value>
+  </data>
+  <data name="ManageYourFormTemplatesAndDesigns" xml:space="preserve">
+    <value>Управляйте своими шаблонами форм и дизайнами</value>
+  </data>
+  <data name="CreateNew" xml:space="preserve">
+    <value>Создать новый</value>
+  </data>
+  <data name="NoTemplatesCreatedYet" xml:space="preserve">
+    <value>Шаблоны ещё не созданы</value>
+  </data>
+  <data name="StartByCreatingYourFirstTemplate" xml:space="preserve">
+    <value>Начните с создания первого шаблона</value>
+  </data>
+  <data name="CreateTemplate" xml:space="preserve">
+    <value>Создать шаблон</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Активный</value>
+  </data>
+  <data name="NoDescription" xml:space="preserve">
+    <value>Нет описания</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>Вопросы</value>
+  </data>
+  <data name="Submissions" xml:space="preserve">
+    <value>Отправлено</value>
+  </data>
+  <data name="Likes" xml:space="preserve">
+    <value>Лайки</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Просмотр</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Предыдущая</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Следующая</value>
+  </data>
+</root>

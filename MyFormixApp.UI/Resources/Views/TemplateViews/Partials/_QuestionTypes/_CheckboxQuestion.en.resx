@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="MultipleChoice"><value>Multiple Choice</value></data>
+  <data name="AtLeastOneRequired"><value>At least one option required</value></data>
+  <data name="Optional"><value>Optional</value></data>
+  <data name="ShownInTable"><value>• Shown in results table</value></data>
+</root>

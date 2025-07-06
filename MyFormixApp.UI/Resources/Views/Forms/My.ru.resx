@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="MySubmittedForms" xml:space="preserve"><value>Мои отправленные формы</value></data>
+  <data name="SearchFormsPlaceholder" xml:space="preserve"><value>Поиск форм...</value></data>
+  <data name="YourFormSubmissions" xml:space="preserve"><value>Ваши отправленные формы</value></data>
+  <data name="Filter" xml:space="preserve"><value>Фильтр</value></data>
+  <data name="AllForms" xml:space="preserve"><value>Все формы</value></data>
+  <data name="RecentFirst" xml:space="preserve"><value>Сначала новые</value></data>
+  <data name="OldestFirst" xml:space="preserve"><value>Сначала старые</value></data>
+  <data name="NoFormsSubmittedYet" xml:space="preserve"><value>Формы еще не отправлялись</value></data>
+  <data name="StartByFillingTemplates" xml:space="preserve"><value>Начните с заполнения одного из шаблонов</value></data>
+  <data name="BrowseTemplates" xml:space="preserve"><value>Просмотр шаблонов</value></data>
+  <data name="SubmissionNumber" xml:space="preserve"><value>Отправка №{0}</value></data>
+  <data name="AnswersCount" xml:space="preserve"><value>{0} ответов</value></data>
+  <data name="Previous" xml:space="preserve"><value>Предыдущая</value></data>
+  <data name="Next" xml:space="preserve"><value>Следующая</value></data>
+</root>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="MySubmittedForms" xml:space="preserve"><value>My Submitted Forms</value></data>
+  <data name="SearchFormsPlaceholder" xml:space="preserve"><value>Search forms...</value></data>
+  <data name="YourFormSubmissions" xml:space="preserve"><value>Your Form Submissions</value></data>
+  <data name="Filter" xml:space="preserve"><value>Filter</value></data>
+  <data name="AllForms" xml:space="preserve"><value>All Forms</value></data>
+  <data name="RecentFirst" xml:space="preserve"><value>Recent First</value></data>
+  <data name="OldestFirst" xml:space="preserve"><value>Oldest First</value></data>
+  <data name="NoFormsSubmittedYet" xml:space="preserve"><value>No forms submitted yet</value></data>
+  <data name="StartByFillingTemplates" xml:space="preserve"><value>Start by filling out one of our templates</value></data>
+  <data name="BrowseTemplates" xml:space="preserve"><value>Browse Templates</value></data>
+  <data name="SubmissionNumber" xml:space="preserve"><value>Submission #{0}</value></data>
+  <data name="AnswersCount" xml:space="preserve"><value>{0} answers</value></data>
+  <data name="Previous" xml:space="preserve"><value>Previous</value></data>
+  <data name="Next" xml:space="preserve"><value>Next</value></data>
+</root>

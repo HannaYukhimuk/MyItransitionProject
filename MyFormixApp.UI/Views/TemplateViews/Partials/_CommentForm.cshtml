@@ -6,8 +6,8 @@
     
     <div class="mb-3">
         <textarea asp-for="Text" class="form-control" rows="3" 
-                  placeholder="Write your comment..." required></textarea>
+                  placeholder="@Localizer["CommentPlaceholder"]" required></textarea>
         <span asp-validation-for="Text" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Post Comment</button>
+    <button type="submit" class="btn btn-primary">@Localizer["PostComment"]</button>
 </form>

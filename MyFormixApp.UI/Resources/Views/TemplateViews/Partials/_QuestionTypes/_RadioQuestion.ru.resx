@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="SingleChoice"><value>Один вариант</value></data>
+  <data name="Required"><value>Обязательный</value></data>
+  <data name="Optional"><value>Необязательный</value></data>
+  <data name="ShownInTable"><value>• Отображается в таблице результатов</value></data>
+</root>

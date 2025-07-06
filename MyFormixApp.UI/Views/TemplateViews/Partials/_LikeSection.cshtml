@@ -5,7 +5,7 @@
     {
         <form asp-controller="Likes" asp-action="Toggle" method="post">
             <input type="hidden" name="TemplateId" value="@Model.Id" />
-            <button type="submit" class="btn btn-link p-0 border-0 bg-transparent">
+            <button type="submit" class="btn btn-link p-0 border-0 bg-transparent" title="@Localizer["LoginToLike"]">
                 <i class="@(Model.IsLikedByCurrentUser ? "fas" : "far") fa-heart text-danger fs-4"></i>
                 <span class="ms-1">@Model.LikesCount</span>
             </button>
@@ -13,7 +13,7 @@
     }
     else
     {
-        <a asp-controller="Account" asp-action="Login" class="text-decoration-none">
+        <a asp-controller="Account" asp-action="Login" class="text-decoration-none" title="@Localizer["LoginToLike"]">
             <i class="far fa-heart text-danger fs-4"></i>
             <span class="ms-1">@Model.LikesCount</span>
         </a>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Reply"><value>Reply</value></data>
+  <data name="Edit"><value>Edit</value></data>
+  <data name="Delete"><value>Delete</value></data>
+  <data name="PostReply"><value>Post Reply</value></data>
+  <data name="WriteReplyPlaceholder"><value>Write your reply...</value></data>
+  <data name="DeleteConfirmation"><value>Are you sure you want to delete this comment and all replies?</value></data>
+  <data name="Save"><value>Save</value></data>
+  <data name="Cancel"><value>Cancel</value></data>
+</root>

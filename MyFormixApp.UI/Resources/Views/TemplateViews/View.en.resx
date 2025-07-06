@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="CreatedBy" xml:space="preserve"><value>Created by</value></data>
+    <data name="FillForm" xml:space="preserve"><value>Fill Form</value></data>
+    <data name="FormAlreadySubmitted" xml:space="preserve"><value>You've already submitted this form.</value></data>
+    <data name="ViewYourResponse" xml:space="preserve"><value>View your response</value></data>
+    <data name="LoginToFillForm" xml:space="preserve"><value>Login to Fill Form</value></data>
+    <data name="TemplatePreview" xml:space="preserve"><value>Template Preview</value></data>
+    <data name="FillFormTitle" xml:space="preserve"><value>Fill Form: {0}</value></data>
+    <data name="Close" xml:space="preserve"><value>Close</value></data>
+    <data name="EnterYourAnswer" xml:space="preserve"><value>Enter your answer</value></data>
+    <data name="SelectOption" xml:space="preserve"><value>-- Select an option --</value></data>
+    <data name="Cancel" xml:space="preserve"><value>Cancel</value></data>
+    <data name="SubmitForm" xml:space="preserve"><value>Submit Form</value></data>
+    <data name="FillAllRequiredQuestions" xml:space="preserve"><value>Please fill all required questions (marked with *)</value></data>
+</root>

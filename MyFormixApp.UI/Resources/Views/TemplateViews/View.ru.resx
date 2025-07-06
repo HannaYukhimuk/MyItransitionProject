@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, ...</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, ...</value>
+  </resheader>
+
+  <data name="CreatedBy" xml:space="preserve">
+    <value>Создано пользователем</value>
+  </data>
+  <data name="FillForm" xml:space="preserve">
+    <value>Заполнить форму</value>
+  </data>
+  <data name="FormAlreadySubmitted" xml:space="preserve">
+    <value>Вы уже отправили эту форму.</value>
+  </data>
+  <data name="ViewYourResponse" xml:space="preserve">
+    <value>Посмотреть ваш ответ</value>
+  </data>
+  <data name="LoginToFillForm" xml:space="preserve">
+    <value>Войдите, чтобы заполнить форму</value>
+  </data>
+  <data name="TemplatePreview" xml:space="preserve">
+    <value>Предварительный просмотр шаблона</value>
+  </data>
+  <data name="FillFormTitle" xml:space="preserve">
+    <value>Заполнение формы: {0}</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="EnterYourAnswer" xml:space="preserve">
+    <value>Введите ваш ответ</value>
+  </data>
+  <data name="SelectOption" xml:space="preserve">
+    <value>-- Выберите вариант --</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="SubmitForm" xml:space="preserve">
+    <value>Отправить форму</value>
+  </data>
+  <data name="FillAllRequiredQuestions" xml:space="preserve">
+    <value>Пожалуйста, заполните все обязательные вопросы (отмечены *)</value>
+  </data>
+</root>

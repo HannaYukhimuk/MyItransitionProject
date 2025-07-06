@@ -1,8 +1,10 @@
 @using MyFormixApp.Domain.DTOs.Templates
 @model IEnumerable<TemplateListItemDto>
 
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "My Templates";
+    ViewData["Title"] = Localizer["MyTemplates"];
 }
 
 <div class="container py-4">
@@ -11,13 +13,12 @@
             <h1 class="display-6 fw-bold">
                 <i class="fas fa-file-alt text-primary me-3"></i>@ViewData["Title"]
             </h1>
-            <p class="text-muted mb-0">Manage your form templates and designs</p>
+            <p class="text-muted mb-0">@Localizer["ManageYourFormTemplatesAndDesigns"]</p>
         </div>
         <div>
             <a asp-controller="Templates" asp-action="Create" class="btn btn-primary btn-lg px-4">
-    <i class="fas fa-plus me-2"></i>Create New
-</a>
-
+                <i class="fas fa-plus me-2"></i>@Localizer["CreateNew"]
+            </a>
         </div>
     </div>
 
@@ -26,11 +27,11 @@
         <div class="card shadow-sm text-center py-5">
             <div class="card-body">
                 <i class="fas fa-file-alt fa-4x text-muted mb-4"></i>
-                <h4 class="text-muted">No templates created yet</h4>
-                <p class="text-muted mb-4">Start by creating your first template</p>
+                <h4 class="text-muted">@Localizer["NoTemplatesCreatedYet"]</h4>
+                <p class="text-muted mb-4">@Localizer["StartByCreatingYourFirstTemplate"]</p>
                 <a asp-controller="Templates" asp-action="Create" class="btn btn-primary px-4">
-    <i class="fas fa-plus me-2"></i>Create Template
-</a>
+                    <i class="fas fa-plus me-2"></i>@Localizer["CreateTemplate"]
+                </a>
             </div>
         </div>
     }
@@ -45,10 +46,10 @@
                         <div class="card-header bg-white border-bottom-0 pb-0">
                             <div class="d-flex justify-content-between align-items-start">
                                 <h5 class="card-title mb-0 text-truncate" title="@template.Title">@template.Title</h5>
-                                <span class="badge bg-primary">Active</span>
+                                <span class="badge bg-primary">@Localizer["Active"]</span>
                             </div>
                         </div>
-                        
+
                         <!-- Template Body -->
                         <div class="card-body">
                             <p class="card-text text-muted mb-3">
@@ -60,10 +61,10 @@
                                 }
                                 else
                                 {
-                                    <span class="text-muted">No description</span>
+                                    <span class="text-muted">@Localizer["NoDescription"]</span>
                                 }
                             </p>
-                            
+
                             <!-- Tags -->
                             @if (template.Tags.Any())
                             {
@@ -78,28 +79,27 @@
                                     }
                                 </div>
                             }
-                            
+
                             <!-- Stats -->
                             <div class="d-flex justify-content-between text-muted small">
-                                <span title="Questions">
+                                <span title="@Localizer["Questions"]">
                                     <i class="fas fa-question-circle me-1"></i> @template.QuestionsCount
                                 </span>
-                                <span title="Submissions">
+                                <span title="@Localizer["Submissions"]">
                                     <i class="fas fa-file-alt me-1"></i> @template.FormsCount
                                 </span>
-                                <span title="Likes">
+                                <span title="@Localizer["Likes"]">
                                     <i class="fas fa-heart me-1"></i> @template.LikesCount
                                 </span>
-                                
                             </div>
                         </div>
-                        
+
                         <!-- Template Footer -->
                         <div class="card-footer bg-white border-top-0 pt-0">
                             <div class="d-flex justify-content-between align-items-center">
                                 <a asp-action="Details" asp-route-id="@template.Id" 
                                    class="btn btn-sm btn-outline-primary">
-                                    <i class="fas fa-eye me-1"></i>View
+                                    <i class="fas fa-eye me-1"></i>@Localizer["View"]
                                 </a>
                                 <div class="btn-group">
                                     <a asp-action="Edit" asp-route-id="@template.Id" 
@@ -117,26 +117,25 @@
                 </div>
             }
         </div>
-        
+
         <nav aria-label="Template pagination" class="mt-5">
-    <ul class="pagination justify-content-center">
-        <li class="page-item @(ViewBag.CurrentPage <= 1 ? "disabled" : "")">
-            <a class="page-link" href="?page=@(ViewBag.CurrentPage - 1)">Previous</a>
-        </li>
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(ViewBag.CurrentPage <= 1 ? "disabled" : "")">
+                    <a class="page-link" href="?page=@(ViewBag.CurrentPage - 1)">@Localizer["Previous"]</a>
+                </li>
 
-        @for (int i = 1; i <= (int)ViewBag.TotalPages; i++)
-        {
-            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                <a class="page-link" href="?page=@i">@i</a>
-            </li>
-        }
+                @for (int i = 1; i <= (int)ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="?page=@i">@i</a>
+                    </li>
+                }
 
-        <li class="page-item @(ViewBag.CurrentPage >= ViewBag.TotalPages ? "disabled" : "")">
-            <a class="page-link" href="?page=@(ViewBag.CurrentPage + 1)">Next</a>
-        </li>
-    </ul>
-</nav>
-
+                <li class="page-item @(ViewBag.CurrentPage >= ViewBag.TotalPages ? "disabled" : "")">
+                    <a class="page-link" href="?page=@(ViewBag.CurrentPage + 1)">@Localizer["Next"]</a>
+                </li>
+            </ul>
+        </nav>
     }
 </div>
 

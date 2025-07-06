@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Reply"><value>Ответить</value></data>
+  <data name="Edit"><value>Редактировать</value></data>
+  <data name="Delete"><value>Удалить</value></data>
+  <data name="PostReply"><value>Отправить ответ</value></data>
+  <data name="WriteReplyPlaceholder"><value>Напишите ответ...</value></data>
+  <data name="DeleteConfirmation"><value>Вы уверены, что хотите удалить этот комментарий и все ответы?</value></data>
+  <data name="Save"><value>Сохранить</value></data>
+  <data name="Cancel"><value>Отмена</value></data>
+</root>

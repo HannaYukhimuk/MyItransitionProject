@@ -10,10 +10,12 @@
         "dependencies": {
           "Azure.Storage.Blobs": "12.24.1",
           "FluentValidation.AspNetCore": "11.3.1",
+          "Microsoft.AspNetCore.Localization": "2.3.0",
           "Microsoft.EntityFrameworkCore": "9.0.6",
           "Microsoft.EntityFrameworkCore.Design": "9.0.6",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.6",
           "Microsoft.EntityFrameworkCore.Tools": "9.0.6",
+          "Microsoft.Extensions.Localization": "9.0.6",
           "Microsoft.Extensions.Logging": "9.0.6",
           "MyFormixApp.Domain": "1.0.0",
           "MyFormixApp.Infrastructure": "1.0.0",
@@ -22,6 +24,14 @@
         },
         "runtime": {
           "MyFormixApp.UI.dll": {}
+        },
+        "resources": {
+          "en/MyFormixApp.UI.resources.dll": {
+            "locale": "en"
+          },
+          "ru/MyFormixApp.UI.resources.dll": {
+            "locale": "ru"
+          }
         }
       },
       "AutoMapper/14.0.0": {
@@ -241,6 +251,14 @@
           "Microsoft.AspNetCore.Cryptography.KeyDerivation": "2.3.0",
           "Microsoft.AspNetCore.Hosting.Abstractions": "2.3.0",
           "Microsoft.Extensions.Identity.Core": "2.3.0"
+        }
+      },
+      "Microsoft.AspNetCore.Localization/2.3.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Extensions": "2.3.0",
+          "Microsoft.Extensions.Localization.Abstractions": "9.0.6",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.6",
+          "Microsoft.Extensions.Options": "9.0.6"
         }
       },
       "Microsoft.AspNetCore.WebUtilities/2.3.0": {
@@ -779,6 +797,28 @@
           "Microsoft.Extensions.Logging": "9.0.6",
           "Microsoft.Extensions.Options": "9.0.6",
           "System.ComponentModel.Annotations": "5.0.0"
+        }
+      },
+      "Microsoft.Extensions.Localization/9.0.6": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.6",
+          "Microsoft.Extensions.Localization.Abstractions": "9.0.6",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.6",
+          "Microsoft.Extensions.Options": "9.0.6"
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.Extensions.Localization.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.625.26701"
+          }
+        }
+      },
+      "Microsoft.Extensions.Localization.Abstractions/9.0.6": {
+        "runtime": {
+          "lib/net9.0/Microsoft.Extensions.Localization.Abstractions.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.625.26701"
+          }
         }
       },
       "Microsoft.Extensions.Logging/9.0.6": {
@@ -1529,6 +1569,13 @@
       "path": "microsoft.aspnetcore.identity/2.3.1",
       "hashPath": "microsoft.aspnetcore.identity.2.3.1.nupkg.sha512"
     },
+    "Microsoft.AspNetCore.Localization/2.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-91LqEBTZnV8xkn56f2y3q6q4Lo+TgzxFkz72+zRzWR4tVwtGisqa/Rjjkvc5rJAnz6tAbuqiddKl03pAIUVrtQ==",
+      "path": "microsoft.aspnetcore.localization/2.3.0",
+      "hashPath": "microsoft.aspnetcore.localization.2.3.0.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.WebUtilities/2.3.0": {
       "type": "package",
       "serviceable": true,
@@ -1738,6 +1785,20 @@
       "sha512": "sha512-yR0eFnUbAM2k+q5QsX0NKinfShIe1B/aiHXEywiNT5Cs2MvEhxQIbIn5rWXnEAfmwW+i+t5D8odPSEHz/taIyQ==",
       "path": "microsoft.extensions.identity.core/2.3.0",
       "hashPath": "microsoft.extensions.identity.core.2.3.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Localization/9.0.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jnG+Y1uaF1X+Yl82EovGL5CnPvntmlP4B7svWugcDkXrdy1dg2AzDGt2AGQOxW3clA0h2EdcpFsmSXGDnwgrYg==",
+      "path": "microsoft.extensions.localization/9.0.6",
+      "hashPath": "microsoft.extensions.localization.9.0.6.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Localization.Abstractions/9.0.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-v7+PuyK4tt96CZfrOpLvKBTjngDZg93EXJ0X6g+js7WW19QZHqQgHGl7o7TOJ0PDaJ3MlHdsMWfFJ5GsHaqFaA==",
+      "path": "microsoft.extensions.localization.abstractions/9.0.6",
+      "hashPath": "microsoft.extensions.localization.abstractions.9.0.6.nupkg.sha512"
     },
     "Microsoft.Extensions.Logging/9.0.6": {
       "type": "package",

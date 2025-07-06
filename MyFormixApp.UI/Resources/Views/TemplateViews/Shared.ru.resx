@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="SharedTemplates" xml:space="preserve">
+    <value>Общие шаблоны</value>
+    </data>
+    <data name="NoAccessToPrivateTemplates" xml:space="preserve">
+    <value>У вас пока нет доступа к приватным шаблонам.</value>
+    </data>
+    <data name="NoDescription" xml:space="preserve">
+    <value>Нет описания</value>
+    </data>
+    <data name="Author" xml:space="preserve">
+    <value>Автор</value>
+    </data>
+    <data name="Questions" xml:space="preserve">
+    <value>Вопросы</value>
+    </data>
+    <data name="Created" xml:space="preserve">
+    <value>Создано</value>
+    </data>
+    <data name="View" xml:space="preserve">
+    <value>Просмотр</value>
+    </data>
+</root>

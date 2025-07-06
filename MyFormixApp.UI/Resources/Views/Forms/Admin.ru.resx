@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="AdminAllForms" xml:space="preserve">
+    <value>Админ - Все формы</value>
+  </data>
+  <data name="NoFormsSubmitted" xml:space="preserve">
+    <value>Формы ещё не были отправлены.</value>
+  </data>
+  <data name="TemplateTitle" xml:space="preserve">
+    <value>Название шаблона</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Имя пользователя</value>
+  </data>
+  <data name="CreatedAt" xml:space="preserve">
+    <value>Дата создания</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Действия</value>
+  </data>
+</root>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Edit"><value>Редактировать</value></data>
+  <data name="Delete"><value>Удалить</value></data>
+  <data name="Forms"><value>Формы</value></data>
+  <data name="Stats"><value>Статистика</value></data>
+  <data name="Description"><value>Описание</value></data>
+  <data name="Questions"><value>Вопросы</value></data>
+  <data name="NoQuestions"><value>В этом шаблоне пока нет вопросов.</value></data>
+  <data name="Required"><value>Обязательный</value></data>
+  <data name="Optional"><value>Необязательный</value></data>
+  <data name="InTable"><value>В таблице</value></data>
+  <data name="Author"><value>Автор</value></data>
+  <data name="Theme"><value>Тема</value></data>
+  <data name="Created"><value>Создан</value></data>
+  <data name="LastUpdated"><value>Последнее обновление</value></data>
+  <data name="Visibility"><value>Видимость</value></data>
+  <data name="Public"><value>Публичный</value></data>
+  <data name="Private"><value>Приватный</value></data>
+  <data name="FormsCount"><value>Формы</value></data>
+  <data name="Likes"><value>Лайки</value></data>
+  <data name="Tags"><value>Теги</value></data>
+  <data name="BackToMyTemplates"><value>Назад к моим шаблонам</value></data>
+</root>

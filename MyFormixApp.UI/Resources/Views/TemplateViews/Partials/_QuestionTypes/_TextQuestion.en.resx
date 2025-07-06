@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="UserAnswerPlaceholder"><value>User answer will appear here</value></data>
+  <data name="Required"><value>Required</value></data>
+</root>

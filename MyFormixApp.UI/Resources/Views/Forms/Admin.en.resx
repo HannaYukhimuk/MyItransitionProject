@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="AdminAllForms" xml:space="preserve"><value>Admin - All Forms</value></data>
+    <data name="NoFormsSubmitted" xml:space="preserve"><value>No forms have been submitted yet.</value></data>
+    <data name="TemplateTitle" xml:space="preserve"><value>Template Title</value></data>
+    <data name="UserName" xml:space="preserve"><value>User Name</value></data>
+    <data name="CreatedAt" xml:space="preserve"><value>Created At</value></data>
+    <data name="Actions" xml:space="preserve"><value>Actions</value></data>
+</root>

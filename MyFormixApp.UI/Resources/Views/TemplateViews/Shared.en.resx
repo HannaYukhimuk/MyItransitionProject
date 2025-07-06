@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="SharedTemplates" xml:space="preserve">
+    <value>Shared Templates</value>
+    </data>
+    <data name="NoAccessToPrivateTemplates" xml:space="preserve">
+    <value>You don't have access to any private templates yet.</value>
+    </data>
+    <data name="NoDescription" xml:space="preserve">
+    <value>No description</value>
+    </data>
+    <data name="Author" xml:space="preserve">
+    <value>Author</value>
+    </data>
+    <data name="Questions" xml:space="preserve">
+    <value>Questions</value>
+    </data>
+    <data name="Created" xml:space="preserve">
+    <value>Created</value>
+    </data>
+    <data name="View" xml:space="preserve">
+    <value>View</value>
+    </data>
+</root>

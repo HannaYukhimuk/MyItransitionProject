@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="MultipleChoice"><value>Множественный выбор</value></data>
+  <data name="AtLeastOneRequired"><value>Необходимо выбрать хотя бы один вариант</value></data>
+  <data name="Optional"><value>Необязательный вопрос</value></data>
+  <data name="ShownInTable"><value>• Отображается в таблице результатов</value></data>
+</root>

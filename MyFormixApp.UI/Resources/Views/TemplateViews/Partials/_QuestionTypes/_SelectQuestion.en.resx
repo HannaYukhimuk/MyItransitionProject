@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Dropdown"><value>Dropdown</value></data>
+  <data name="SelectOption"><value>Select an option</value></data>
+  <data name="Required"><value>Required</value></data>
+  <data name="Optional"><value>Optional</value></data>
+  <data name="ShownInTable"><value>• Shown in results table</value></data>
+</root>

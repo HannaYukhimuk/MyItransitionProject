@@ -1,6 +1,6 @@
 @model IEnumerable<MyFormixApp.Domain.DTOs.Forms.FormDetailsDto>
 @{
-    ViewData["Title"] = "My Submitted Forms";
+    ViewData["Title"] = Localizer["MySubmittedForms"];
 }
 
 <div class="container py-4">
@@ -12,22 +12,22 @@
             <span class="input-group-text bg-transparent">
                 <i class="fas fa-search"></i>
             </span>
-            <input type="text" class="form-control" placeholder="Search forms...">
+            <input type="text" class="form-control" placeholder="@Localizer["SearchFormsPlaceholder"]">
         </div>
     </div>
 
     <div class="card shadow-sm">
         <div class="card-header bg-white border-bottom-0 py-3">
             <div class="d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Your Form Submissions</h5>
+                <h5 class="mb-0">@Localizer["YourFormSubmissions"]</h5>
                 <div class="dropdown">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown">
-                        <i class="fas fa-filter me-2"></i>Filter
+                        <i class="fas fa-filter me-2"></i>@Localizer["Filter"]
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">All Forms</a></li>
-                        <li><a class="dropdown-item" href="#">Recent First</a></li>
-                        <li><a class="dropdown-item" href="#">Oldest First</a></li>
+                        <li><a class="dropdown-item" href="#">@Localizer["AllForms"]</a></li>
+                        <li><a class="dropdown-item" href="#">@Localizer["RecentFirst"]</a></li>
+                        <li><a class="dropdown-item" href="#">@Localizer["OldestFirst"]</a></li>
                     </ul>
                 </div>
             </div>
@@ -37,10 +37,10 @@
         {
             <div class="card-body text-center py-5">
                 <i class="fas fa-file-alt fa-4x text-muted mb-4"></i>
-                <h4 class="text-muted">No forms submitted yet</h4>
-                <p class="text-muted mb-4">Start by filling out one of our templates</p>
+                <h4 class="text-muted">@Localizer["NoFormsSubmittedYet"]</h4>
+                <p class="text-muted mb-4">@Localizer["StartByFillingTemplates"]</p>
                 <a asp-controller="Templates" asp-action="Index" class="btn btn-primary px-4">
-                    <i class="fas fa-clipboard-list me-2"></i>Browse Templates
+                    <i class="fas fa-clipboard-list me-2"></i>@Localizer["BrowseTemplates"]
                 </a>
             </div>
         }
@@ -59,7 +59,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <h6 class="mb-1">Submission #@form.Id</h6>
+                                    <h6 class="mb-1">@Localizer["SubmissionNumber", form.Id]</h6>
                                     <div class="d-flex flex-wrap gap-2 align-items-center">
                                         <small class="text-muted">
                                             <i class="fas fa-calendar-alt me-1"></i>
@@ -76,7 +76,7 @@
                             <div class="d-flex align-items-center gap-2">
                                 <span class="badge bg-primary rounded-pill">
                                     <i class="fas fa-check-circle me-1"></i>
-                                    @form.Answers.Count answers
+                                    @Localizer["AnswersCount", form.Answers.Count]
                                 </span>
                                 <i class="fas fa-chevron-right text-muted"></i>
                             </div>
@@ -90,13 +90,13 @@
             <nav aria-label="Forms pagination">
                 <ul class="pagination justify-content-center mb-0">
                     <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        <a class="page-link" href="#" tabindex="-1">@Localizer["Previous"]</a>
                     </li>
                     <li class="page-item active"><a class="page-link" href="#">1</a></li>
                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                     <li class="page-item"><a class="page-link" href="#">3</a></li>
                     <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
+                        <a class="page-link" href="#">@Localizer["Next"]</a>
                     </li>
                 </ul>
             </nav>

@@ -4,7 +4,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h3>Comments (@Model.Comments.Count)</h3>
+        <h3>@Localizer["CommentsHeading"] (@Model.Comments.Count)</h3>
     </div>
     <div class="card-body">
         @if (ViewBag.IsAuthenticated)
@@ -14,7 +14,7 @@
         else
         {
             <div class="alert alert-info">
-                <a asp-controller="Account" asp-action="Login">Login</a> to leave a comment
+                @Html.Raw(Localizer["LoginToComment"])
             </div>
         }
 

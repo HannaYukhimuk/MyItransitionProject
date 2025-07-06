@@ -1,7 +1,7 @@
 @model MyFormixApp.Domain.DTOs.Questions.QuestionDto
 
 <div class="mb-4">
-    <h5>@Model.Title @(Model.IsRequired ? "*" : "")</h5>
+    <h5>@Model.Title @(Model.IsRequired ? $"* ({Localizer["Required"]})" : "")</h5>
     
     @if (!string.IsNullOrEmpty(Model.Description))
     {
@@ -9,8 +9,8 @@
     }
     
     <div class="form-floating">
-        <textarea class="form-control" placeholder="User answer will appear here" style="height: 100px" disabled></textarea>
-        <label>User answer will appear here</label>
+        <textarea class="form-control" placeholder="@Localizer["UserAnswerPlaceholder"]" style="height: 100px" disabled></textarea>
+        <label>@Localizer["UserAnswerPlaceholder"]</label>
     </div>
     
     @if (!string.IsNullOrEmpty(Model.ImageUrl))

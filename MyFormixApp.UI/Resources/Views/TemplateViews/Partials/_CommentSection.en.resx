@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="CommentsHeading"><value>Comments</value></data>
+  <data name="LoginToComment"><value><a href="/Account/Login">Login</a> to leave a comment</value></data>
+</root>

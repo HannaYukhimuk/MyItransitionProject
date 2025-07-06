@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="FormResponseDetails" xml:space="preserve">
+    <value>Form Response Details</value>
+  </data>
+  <data name="Submitted" xml:space="preserve">
+    <value>Submitted</value>
+  </data>
+  <data name="EditAnswers" xml:space="preserve">
+    <value>Edit Answers</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DeleteFormConfirm" xml:space="preserve">
+    <value>Are you sure you want to delete this form?</value>
+  </data>
+  <data name="DeleteForm" xml:space="preserve">
+    <value>Delete Form</value>
+  </data>
+</root>
