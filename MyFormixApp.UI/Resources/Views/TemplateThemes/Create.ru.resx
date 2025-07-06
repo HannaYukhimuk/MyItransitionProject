@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="CreateNewTheme"><value>Создать новую тему</value></data>
+  <data name="ThemeName"><value>Название темы</value></data>
+  <data name="Cancel"><value>Отмена</value></data>
+  <data name="CreateTheme"><value>Создать тему</value></data>
+  <data name="ValidationSummaryError"><value>Пожалуйста, исправьте ошибки ниже.</value></data>
+</root>

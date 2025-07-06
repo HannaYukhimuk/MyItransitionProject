@@ -8,10 +8,10 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="display-6 fw-bold">
-            <i class="fas fa-palette text-primary me-2"></i>@ViewData["Title"]
+            <i class="fas fa-palette text-primary me-2"></i>@Localizer["TemplateThemesTitle"]
         </h2>
         <a asp-action="Create" class="btn btn-primary">
-            <i class="fas fa-plus me-2"></i>Create New Theme
+            <i class="fas fa-plus me-2"></i>@Localizer["CreateNewTheme"]
         </a>
     </div>
 
@@ -19,7 +19,7 @@
         <div class="card-header bg-white border-bottom-0 py-3">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <h5 class="mb-0">All Theme Styles</h5>
+                    <h5 class="mb-0">@Localizer["AllThemeStyles"]</h5>
                 </div>
             </div>
         </div>
@@ -28,9 +28,9 @@
             <table class="table table-hover align-middle mb-0">
                 <thead class="table-light">
                     <tr>
-                        <th class="ps-4">ID</th>
-                        <th>Theme Name</th>
-                        <th class="text-end pe-4">Actions</th>
+                        <th class="ps-4">@Localizer["ColumnId"]</th>
+                        <th>@Localizer["ColumnThemeName"]</th>
+                        <th class="text-end pe-4">@Localizer["ColumnActions"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,13 +61,13 @@
             <nav aria-label="Theme pagination">
                 <ul class="pagination justify-content-center mb-0">
                     <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        <a class="page-link" href="#" tabindex="-1">@Localizer["Previous"]</a>
                     </li>
                     <li class="page-item active"><a class="page-link" href="#">1</a></li>
                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                     <li class="page-item"><a class="page-link" href="#">3</a></li>
                     <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
+                        <a class="page-link" href="#">@Localizer["Next"]</a>
                     </li>
                 </ul>
             </nav>

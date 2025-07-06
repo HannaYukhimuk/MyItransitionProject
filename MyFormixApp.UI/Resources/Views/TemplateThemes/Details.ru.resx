@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="ThemeDetailsTitle"><value>Theme Details</value></data>
+  <data name="ThemeInformation"><value>Theme Information</value></data>
+  <data name="Id"><value>ID</value></data>
+  <data name="Name"><value>Name</value></data>
+  <data name="BackToList"><value>Back to List</value></data>
+  <data name="Edit"><value>Edit</value></data>
+  <data name="Delete"><value>Delete</value></data>
+</root>

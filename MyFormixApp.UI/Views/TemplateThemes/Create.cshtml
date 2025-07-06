@@ -8,7 +8,7 @@
     <div class="card shadow">
         <div class="card-header bg-success text-white py-3">
             <h3 class="h5 mb-0">
-                <i class="fas fa-plus-circle me-2"></i>@ViewData["Title"]
+                <i class="fas fa-plus-circle me-2"></i>@Localizer["CreateNewTheme"]
             </h3>
         </div>
         <div class="card-body p-4">
@@ -17,7 +17,7 @@
                 
                 <div class="mb-4">
                     <label asp-for="Name" class="form-label fw-bold">
-                        <i class="fas fa-tag me-2"></i>Theme Name
+                        <i class="fas fa-tag me-2"></i>@Localizer["ThemeName"]
                     </label>
                     <input asp-for="Name" class="form-control form-control-lg" required />
                     <span asp-validation-for="Name" class="text-danger small"></span>
@@ -25,10 +25,10 @@
                 
                 <div class="d-flex justify-content-between mt-4">
                     <a asp-action="Index" class="btn btn-outline-secondary btn-lg px-4">
-                        <i class="fas fa-arrow-left me-2"></i>Cancel
+                        <i class="fas fa-arrow-left me-2"></i>@Localizer["Cancel"]
                     </a>
                     <button type="submit" class="btn btn-success btn-lg px-4">
-                        <i class="fas fa-check-circle me-2"></i>Create Theme
+                        <i class="fas fa-check-circle me-2"></i>@Localizer["CreateTheme"]
                     </button>
                 </div>
             </form>

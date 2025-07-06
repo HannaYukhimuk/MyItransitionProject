@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="DeleteThemeTitle"><value>Delete Theme</value></data>
+  <data name="WarningTitle"><value>Warning!</value></data>
+  <data name="WarningMessage"><value>You are about to permanently delete this theme. This action cannot be undone.</value></data>
+  <data name="ThemeDetails"><value>Theme Details</value></data>
+  <data name="Id"><value>ID</value></data>
+  <data name="Name"><value>Name</value></data>
+  <data name="Cancel"><value>Cancel</value></data>
+  <data name="ConfirmDelete"><value>Confirm Delete</value></data>
+</root>

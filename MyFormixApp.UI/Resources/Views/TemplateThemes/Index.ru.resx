@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="TemplateThemesTitle"><value>Темы шаблонов</value></data>
+  <data name="CreateNewTheme"><value>Создать новую тему</value></data>
+  <data name="AllThemeStyles"><value>Все стили тем</value></data>
+  <data name="ColumnId"><value>ID</value></data>
+  <data name="ColumnThemeName"><value>Название темы</value></data>
+  <data name="ColumnActions"><value>Действия</value></data>
+  <data name="View"><value>Просмотр</value></data>
+  <data name="Previous"><value>Назад</value></data>
+  <data name="Next"><value>Далее</value></data>
+</root>

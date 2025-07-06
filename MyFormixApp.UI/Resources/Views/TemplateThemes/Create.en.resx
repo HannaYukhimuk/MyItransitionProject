@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="CreateNewTheme"><value>Create New Theme</value></data>
+  <data name="ThemeName"><value>Theme Name</value></data>
+  <data name="Cancel"><value>Cancel</value></data>
+  <data name="CreateTheme"><value>Create Theme</value></data>
+  <data name="ValidationSummaryError"><value>Please fix the errors below.</value></data>
+</root>

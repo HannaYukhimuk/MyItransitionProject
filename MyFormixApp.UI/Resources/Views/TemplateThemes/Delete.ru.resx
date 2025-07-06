@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="DeleteThemeTitle"><value>Удалить тему</value></data>
+  <data name="WarningTitle"><value>Внимание!</value></data>
+  <data name="WarningMessage"><value>Вы собираетесь безвозвратно удалить эту тему. Это действие нельзя отменить.</value></data>
+  <data name="ThemeDetails"><value>Детали темы</value></data>
+  <data name="Id"><value>ID</value></data>
+  <data name="Name"><value>Название</value></data>
+  <data name="Cancel"><value>Отмена</value></data>
+  <data name="ConfirmDelete"><value>Подтвердить удаление</value></data>
+</root>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="TemplateThemesTitle"><value>Template Themes</value></data>
+  <data name="CreateNewTheme"><value>Create New Theme</value></data>
+  <data name="AllThemeStyles"><value>All Theme Styles</value></data>
+  <data name="ColumnId"><value>ID</value></data>
+  <data name="ColumnThemeName"><value>Theme Name</value></data>
+  <data name="ColumnActions"><value>Actions</value></data>
+  <data name="View"><value>View</value></data>
+  <data name="Previous"><value>Previous</value></data>
+  <data name="Next"><value>Next</value></data>
+</root>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="EditThemeTitle"><value>Edit Theme</value></data>
+  <data name="ThemeName"><value>Theme Name</value></data>
+  <data name="Cancel"><value>Cancel</value></data>
+  <data name="SaveChanges"><value>Save Changes</value></data>
+</root>
