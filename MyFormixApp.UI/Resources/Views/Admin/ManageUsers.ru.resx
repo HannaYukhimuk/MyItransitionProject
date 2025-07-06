@@ -1,0 +1,17 @@
+<data name="ManageUsers"><value>Управление пользователями</value></data>
+<data name="SearchUsers"><value>Поиск пользователей...</value></data>
+<data name="UserList"><value>Список пользователей</value></data>
+<data name="Filter"><value>Фильтр</value></data>
+<data name="AllUsers"><value>Все пользователи</value></data>
+<data name="AdminsOnly"><value>Только админы</value></data>
+<data name="RegularUsers"><value>Обычные пользователи</value></data>
+<data name="User"><value>Пользователь</value></data>
+<data name="Email"><value>Email</value></data>
+<data name="Role"><value>Роль</value></data>
+<data name="Actions"><value>Действия</value></data>
+<data name="RemoveAdmin"><value>Снять админа</value></data>
+<data name="MakeAdmin"><value>Назначить админом</value></data>
+<data name="Previous"><value>Назад</value></data>
+<data name="Next"><value>Вперёд</value></data>
+<data name="Admin"><value>Админ</value></data>
+<data name="User"><value>Пользователь</value></data>

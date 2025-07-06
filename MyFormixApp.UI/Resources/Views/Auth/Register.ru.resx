@@ -1,0 +1,13 @@
+<data name="CreateAccountTitle"><value>Создайте аккаунт Formix</value></data>
+<data name="RegistrationErrors"><value>Ошибки регистрации</value></data>
+<data name="Username"><value>Имя пользователя</value></data>
+<data name="UsernamePlaceholder"><value>Выберите имя пользователя</value></data>
+<data name="EmailAddress"><value>Электронная почта</value></data>
+<data name="EmailPlaceholder"><value>Введите электронную почту</value></data>
+<data name="Password"><value>Пароль</value></data>
+<data name="PasswordPlaceholder"><value>Придумайте пароль</value></data>
+<data name="ConfirmPassword"><value>Подтвердите пароль</value></data>
+<data name="ConfirmPasswordPlaceholder"><value>Подтвердите пароль</value></data>
+<data name="CreateAccountButton"><value>Создать аккаунт</value></data>
+<data name="AlreadyHaveAccount"><value>Уже есть аккаунт?</value></data>
+<data name="SignInHere"><value>Войти</value></data>

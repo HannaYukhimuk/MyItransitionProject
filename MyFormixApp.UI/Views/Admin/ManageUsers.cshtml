@@ -1,6 +1,7 @@
 @model IEnumerable<MyFormixApp.Domain.DTOs.Users.UserDto>
+
 @{
-    ViewData["Title"] = "Manage Users";
+    ViewData["Title"] = Localizer["ManageUsers"];
 }
 
 <div class="container py-4">
@@ -12,22 +13,22 @@
             <span class="input-group-text bg-transparent">
                 <i class="fas fa-search"></i>
             </span>
-            <input type="text" class="form-control" placeholder="Search users...">
+            <input type="text" class="form-control" placeholder="@Localizer["SearchUsers"]">
         </div>
     </div>
 
     <div class="card shadow-sm">
         <div class="card-header bg-white border-bottom-0 py-3">
             <div class="d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">User List</h5>
+                <h5 class="mb-0">@Localizer["UserList"]</h5>
                 <div class="dropdown">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown">
-                        <i class="fas fa-filter me-2"></i>Filter
+                        <i class="fas fa-filter me-2"></i>@Localizer["Filter"]
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">All Users</a></li>
-                        <li><a class="dropdown-item" href="#">Admins Only</a></li>
-                        <li><a class="dropdown-item" href="#">Regular Users</a></li>
+                        <li><a class="dropdown-item" href="#">@Localizer["AllUsers"]</a></li>
+                        <li><a class="dropdown-item" href="#">@Localizer["AdminsOnly"]</a></li>
+                        <li><a class="dropdown-item" href="#">@Localizer["RegularUsers"]</a></li>
                     </ul>
                 </div>
             </div>
@@ -37,10 +38,10 @@
             <table class="table table-hover align-middle mb-0">
                 <thead class="table-light">
                     <tr>
-                        <th class="ps-4">User</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th class="text-end pe-4">Actions</th>
+                        <th class="ps-4">@Localizer["User"]</th>
+                        <th>@Localizer["Email"]</th>
+                        <th>@Localizer["Role"]</th>
+                        <th class="text-end pe-4">@Localizer["Actions"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,14 +57,13 @@
                                     </div>
                                     <div>
                                         <h6 class="mb-0">@user.Username</h6>
-                                      
                                     </div>
                                 </div>
                             </td>
                             <td>@user.Email</td>
                             <td>
                                 <span class="badge @(user.Role == "Admin" ? "bg-primary" : "bg-secondary")">
-                                    @(user.Role ?? "User")
+                                    @Localizer[user.Role ?? "User"]
                                 </span>
                             </td>
                             <td class="text-end pe-4">
@@ -71,7 +71,7 @@
                                 {
                                     <form asp-action="RemoveAdmin" asp-route-userId="@user.Id" method="post" class="d-inline">
                                         <button type="submit" class="btn btn-sm btn-outline-warning">
-                                            <i class="fas fa-user-minus me-1"></i>Remove Admin
+                                            <i class="fas fa-user-minus me-1"></i>@Localizer["RemoveAdmin"]
                                         </button>
                                     </form>
                                 }
@@ -79,7 +79,7 @@
                                 {
                                     <form asp-action="MakeAdmin" asp-route-userId="@user.Id" method="post" class="d-inline">
                                         <button type="submit" class="btn btn-sm btn-outline-success">
-                                            <i class="fas fa-user-shield me-1"></i>Make Admin
+                                            <i class="fas fa-user-shield me-1"></i>@Localizer["MakeAdmin"]
                                         </button>
                                     </form>
                                 }
@@ -94,13 +94,13 @@
             <nav aria-label="User pagination">
                 <ul class="pagination justify-content-center mb-0">
                     <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        <a class="page-link" href="#" tabindex="-1">@Localizer["Previous"]</a>
                     </li>
                     <li class="page-item active"><a class="page-link" href="#">1</a></li>
                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                     <li class="page-item"><a class="page-link" href="#">3</a></li>
                     <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
+                        <a class="page-link" href="#">@Localizer["Next"]</a>
                     </li>
                 </ul>
             </nav>

@@ -47,8 +47,18 @@
                 </ul>
 
 
-<a asp-controller="Language" asp-action="SetLanguage" asp-route-culture="en">English</a> |
-<a asp-controller="Language" asp-action="SetLanguage" asp-route-culture="ru">Русский</a>
+                <div class="d-flex align-items-center ms-3">
+                    <a asp-controller="Language" asp-action="SetLanguage" asp-route-culture="en"
+                    class="language-link nav-link px-2 @(System.Threading.Thread.CurrentThread.CurrentCulture.Name.StartsWith("en") ? "active" : "")">
+                        EN
+                    </a>
+                    <span class="text-white-50 mx-1">|</span>
+                    <a asp-controller="Language" asp-action="SetLanguage" asp-route-culture="ru"
+                    class="language-link nav-link px-2 @(System.Threading.Thread.CurrentThread.CurrentCulture.Name.StartsWith("ru") ? "active" : "")">
+                        RU
+                    </a>
+                </div>
+
             
                 <partial name="_AuthPartial" />
 

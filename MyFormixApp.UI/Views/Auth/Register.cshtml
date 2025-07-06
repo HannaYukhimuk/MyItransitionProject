@@ -6,7 +6,7 @@
             <div class="card shadow">
                 <div class="card-header bg-primary text-white">
                     <h2 class="h4 mb-0 text-center">
-                        <i class="fas fa-user-plus me-2"></i>Create Your Formix Account
+                        <i class="fas fa-user-plus me-2"></i>@Localizer["CreateAccountTitle"]
                     </h2>
                 </div>
                 
@@ -14,7 +14,7 @@
                     @if (ViewData.ModelState.ErrorCount > 0)
                     {
                         <div class="alert alert-danger mb-4">
-                            <h5 class="alert-heading">Registration Errors</h5>
+                            <h5 class="alert-heading">@Localizer["RegistrationErrors"]</h5>
                             <div asp-validation-summary="All"></div>
                         </div>
                     }
@@ -22,46 +22,46 @@
                     <form method="post">
                         <div class="mb-4">
                             <label asp-for="Username" class="form-label fw-bold">
-                                <i class="fas fa-user me-2"></i>Username
+                                <i class="fas fa-user me-2"></i>@Localizer["Username"]
                             </label>
-                            <input asp-for="Username" class="form-control form-control-lg" placeholder="Choose your username">
+                            <input asp-for="Username" class="form-control form-control-lg" placeholder="@Localizer["UsernamePlaceholder"]">
                             <span asp-validation-for="Username" class="text-danger small"></span>
                         </div>
                         
                         <div class="mb-4">
                             <label asp-for="Email" class="form-label fw-bold">
-                                <i class="fas fa-envelope me-2"></i>Email Address
+                                <i class="fas fa-envelope me-2"></i>@Localizer["EmailAddress"]
                             </label>
-                            <input asp-for="Email" type="email" class="form-control form-control-lg" placeholder="Enter your email">
+                            <input asp-for="Email" type="email" class="form-control form-control-lg" placeholder="@Localizer["EmailPlaceholder"]">
                             <span asp-validation-for="Email" class="text-danger small"></span>
                         </div>
                         
                         <div class="mb-4">
                             <label asp-for="Password" class="form-label fw-bold">
-                                <i class="fas fa-lock me-2"></i>Password
+                                <i class="fas fa-lock me-2"></i>@Localizer["Password"]
                             </label>
-                            <input asp-for="Password" type="password" class="form-control form-control-lg" placeholder="Create a password">
+                            <input asp-for="Password" type="password" class="form-control form-control-lg" placeholder="@Localizer["PasswordPlaceholder"]">
                             <span asp-validation-for="Password" class="text-danger small"></span>
                         </div>
 
                         <div class="mb-4">
                             <label asp-for="ConfirmPassword" class="form-label fw-bold">
-                                <i class="fas fa-lock me-2"></i>Confirm Password
+                                <i class="fas fa-lock me-2"></i>@Localizer["ConfirmPassword"]
                             </label>
-                            <input asp-for="ConfirmPassword" type="password" class="form-control form-control-lg" placeholder="Confirm your password">
+                            <input asp-for="ConfirmPassword" type="password" class="form-control form-control-lg" placeholder="@Localizer["ConfirmPasswordPlaceholder"]">
                             <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
                         </div>
                         
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-success btn-lg">
-                                <i class="fas fa-user-plus me-2"></i>Create Account
+                                <i class="fas fa-user-plus me-2"></i>@Localizer["CreateAccountButton"]
                             </button>
                         </div>
                     </form>
 
                     <div class="text-center mt-4">
-                        <p class="text-muted">Already have an account? 
-                            <a asp-action="Login" class="text-decoration-none fw-bold">Sign in</a>
+                        <p class="text-muted">@Localizer["AlreadyHaveAccount"]
+                            <a asp-action="Login" class="text-decoration-none fw-bold">@Localizer["SignInHere"]</a>
                         </p>
                     </div>
                 </div>
