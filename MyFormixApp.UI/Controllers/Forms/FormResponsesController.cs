@@ -40,7 +40,7 @@ namespace MyFormixApp.UI.Controllers.Forms
             return View(result.Data.Forms);
         }
 
-        [HttpGet("templates/{templateId}/forms/statistics")]
+        [HttpGet("form-responses/templates/{templateId}/statistics")]
         public async Task<IActionResult> TemplateFormsStatistics(Guid templateId)
         {
             try
