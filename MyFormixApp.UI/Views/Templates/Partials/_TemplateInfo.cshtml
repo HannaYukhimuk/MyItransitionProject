@@ -2,10 +2,10 @@
 
 <div class="card mb-3">
     <div class="card-body">
-        <h5 class="card-title">Template Info</h5>
+        <h5 class="card-title">@Localizer["TemplateInfo"]</h5>
         <ul class="list-group list-group-flush">
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>Author:</strong></span>
+                <span><strong>@Localizer["Author"]:</strong></span>
                 <span>
                     <a href="@Url.Action("Profile", "Account", new { id = Model.Author.Id })" 
                        class="text-decoration-none">
@@ -14,46 +14,46 @@
                 </span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>Theme:</strong></span>
+                <span><strong>@Localizer["Theme"]:</strong></span>
                 <span class="badge rounded-pill" 
                       style="background-color: @Model.Theme;">
                     @Model.Theme.Name
                 </span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>Created:</strong></span>
+                <span><strong>@Localizer["Created"]:</strong></span>
                 <span>@Model.CreatedAt.ToString("MMMM dd, yyyy")</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>Last Updated:</strong></span>
+                <span><strong>@Localizer["LastUpdated"]:</strong></span>
                 <span>@Model.UpdatedAt.ToString("MMMM dd, yyyy")</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>Visibility:</strong></span>
+                <span><strong>@Localizer["Visibility"]:</strong></span>
                 <span>
                     @if (Model.IsPublic)
                     {
-                        <span class="badge bg-success">Public</span>
+                        <span class="badge bg-success">@Localizer["Public"]</span>
                     }
                     else
                     {
-                        <span class="badge bg-warning text-dark">Private</span>
+                        <span class="badge bg-warning text-dark">@Localizer["Private"]</span>
                     }
                 </span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>Forms created:</strong></span>
+                <span><strong>@Localizer["FormsCreated"]:</strong></span>
                 <span>@Model.FormsCount</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>Likes:</strong></span>
+                <span><strong>@Localizer["Likes"]:</strong></span>
                 <span>@Model.LikesCount</span>
             </li>
             @if (Model.Tags.Any())
             {
                 <li class="list-group-item">
                     <div class="d-flex justify-content-between align-items-center">
-                        <span><strong>Tags:</strong></span>
+                        <span><strong>@Localizer["Tags"]:</strong></span>
                         <div>
                             @foreach (var tag in Model.Tags)
                             {

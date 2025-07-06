@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="TemplateTitle"><value>Название шаблона</value></data>
+    <data name="Description"><value>Описание</value></data>
+    <data name="Theme"><value>Тема</value></data>
+    <data name="MakeTemplatePublic"><value>Сделать шаблон публичным</value></data>
+    <data name="HeaderImage"><value>Изображение заголовка</value></data>
+    <data name="HeaderImageHint"><value>Загрузите изображение, которое будет отображаться вверху шаблона</value></data>
+    <data name="GrantAccess"><value>Ограничить доступ для пользователей</value></data>
+    <data name="EnterUserEmail"><value>Введите email пользователя</value></data>
+    <data name="PressEnterToAddUser"><value>Нажмите Enter, чтобы добавить пользователя</value></data>
+    <data name="Tags"><value>Теги</value></data>
+    <data name="AddTagsHint"><value>Добавьте теги (нажмите Enter)</value></data>
+    <data name="PressEnterToAddTags"><value>Нажмите Enter, чтобы добавить теги</value></data>
+    <data name="Questions"><value>Вопросы</value></data>
+    <data name="AddQuestion"><value>Добавить вопрос</value></data>
+    <data name="QuestionType"><value>Тип вопроса</value></data>
+    <data name="TextAnswer"><value>Текстовый ответ</value></data>
+    <data name="SingleChoice"><value>Один вариант</value></data>
+    <data name="MultipleChoice"><value>Несколько вариантов</value></data>
+    <data name="Dropdown"><value>Выпадающий список</value></data>
+</root>

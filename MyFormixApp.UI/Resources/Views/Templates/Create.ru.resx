@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="CreateNewTemplate"><value>Создать новый шаблон</value></data>
+    <data name="CreateTemplate"><value>Создать шаблон</value></data>
+    <data name="Cancel"><value>Отмена</value></data>
+</root>

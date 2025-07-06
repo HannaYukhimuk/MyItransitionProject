@@ -4,14 +4,14 @@
 <div class="row mb-3">
     <div class="col-md-6">
         <div class="form-group">
-            <label asp-for="Title" class="form-label">Template Title *</label>
+            <label asp-for="Title" class="form-label">@Localizer["TemplateTitle"] *</label>
             <input asp-for="Title" class="form-control" required />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            <label asp-for="Description" class="form-label">Description</label>
+            <label asp-for="Description" class="form-label">@Localizer["Description"]</label>
             <textarea asp-for="Description" class="form-control" rows="2"></textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
@@ -21,7 +21,7 @@
 <div class="row mb-3">
     <div class="col-md-6">
         <div class="form-group">
-            <label asp-for="ThemeId" class="form-label">Theme *</label>
+            <label asp-for="ThemeId" class="form-label">@Localizer["Theme"] *</label>
             <select asp-for="ThemeId" class="form-select" required>
                 @foreach (var theme in ViewBag.Themes ?? new List<TemplateThemeDto>())
                 {
@@ -34,23 +34,23 @@
     <div class="col-md-6">
         <div class="form-check form-switch mt-4 pt-2">
             <input asp-for="IsPublic" class="form-check-input" type="checkbox">
-            <label asp-for="IsPublic" class="form-check-label">Make template public</label>
+            <label asp-for="IsPublic" class="form-check-label">@Localizer["MakeTemplatePublic"]</label>
         </div>
     </div>
 </div>
 
 <div class="form-group mb-3">
-    <label class="form-label">Header Image</label>
+    <label class="form-label">@Localizer["HeaderImage"]</label>
     <input type="file" class="form-control" name="templateImage" accept="image/*">
-    <small class="text-muted">Upload an image to display at the top of your template</small>
+    <small class="text-muted">@Localizer["HeaderImageHint"]</small>
 </div>
 
 <div class="row mb-3" id="allowedUsersSection" style="display: none;">
     <div class="col-md-12">
         <div class="form-group">
-            <label class="form-label">Grant access to specific users</label>
-            <input type="text" id="userEmailInput" class="form-control" placeholder="Enter user email">
-            <small class="text-muted">Press Enter to add user</small>
+            <label class="form-label">@Localizer["GrantAccess"]</label>
+            <input type="text" id="userEmailInput" class="form-control" placeholder="@Localizer["EnterUserEmail"]">
+            <small class="text-muted">@Localizer["PressEnterToAddUser"]</small>
             <div id="allowedUsersContainer" class="mt-2">
                 @if (Model.AllowedUserIds != null)
                 {
@@ -69,9 +69,9 @@
 </div>
 
 <div class="form-group mb-4">
-    <label class="form-label">Tags</label>
-    <input type="text" id="tagInput" class="form-control" placeholder="Add tags (press Enter)">
-    <small class="text-muted">Press Enter to add tags</small>
+    <label class="form-label">@Localizer["Tags"]</label>
+    <input type="text" id="tagInput" class="form-control" placeholder="@Localizer["AddTagsHint"]">
+    <small class="text-muted">@Localizer["PressEnterToAddTags"]</small>
     <div id="tagsContainer" class="mt-2">
         @if (Model.Tags != null)
         {
@@ -91,7 +91,7 @@
 
 <div class="row">
     <div class="col-md-8">
-        <h4>Questions</h4>
+        <h4>@Localizer["Questions"]</h4>
         <div id="questionsContainer">
             @if (Model.Questions != null && Model.Questions.Any())
             {
@@ -105,20 +105,20 @@
     <div class="col-md-4">
         <div class="card sticky-top" style="top: 20px;">
             <div class="card-header bg-light">
-                <h5 class="mb-0">Add Question</h5>
+                <h5 class="mb-0">@Localizer["AddQuestion"]</h5>
             </div>
             <div class="card-body">
                 <div class="mb-3">
-                    <label class="form-label">Question Type</label>
+                    <label class="form-label">@Localizer["QuestionType"]</label>
                     <select id="questionTypeSelect" class="form-select">
-                        <option value="text">Text Answer</option>
-                        <option value="radio">Single Choice</option>
-                        <option value="checkbox">Multiple Choice</option>
-                        <option value="select">Dropdown</option>
+                        <option value="text">@Localizer["TextAnswer"]</option>
+                        <option value="radio">@Localizer["SingleChoice"]</option>
+                        <option value="checkbox">@Localizer["MultipleChoice"]</option>
+                        <option value="select">@Localizer["Dropdown"]</option>
                     </select>
                 </div>
                 <button type="button" id="addQuestionBtn" class="btn btn-primary w-100">
-                    <i class="fas fa-plus me-1"></i> Add Question
+                    <i class="fas fa-plus me-1"></i> @Localizer["AddQuestion"]
                 </button>
             </div>
         </div>

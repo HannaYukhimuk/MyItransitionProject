@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="TextQuestion" xml:space="preserve"><value>Текстовый вопрос</value></data>
+    <data name="SingleChoiceQuestion" xml:space="preserve"><value>Вопрос с одним выбором</value></data>
+    <data name="MultipleChoiceQuestion" xml:space="preserve"><value>Вопрос с несколькими вариантами</value></data>
+    <data name="DropdownQuestion" xml:space="preserve"><value>Вопрос с выпадающим списком</value></data>
+    <data name="EnterQuestionText" xml:space="preserve"><value>Введите текст вопроса</value></data>
+    <data name="UserWillSeeTextInput" xml:space="preserve"><value>Пользователь увидит поле ввода</value></data>
+    <data name="UserAnswerPreview" xml:space="preserve"><value>Ответ пользователя появится здесь</value></data>
+    <data name="Option" xml:space="preserve"><value>Вариант</value></data>
+    <data name="AddOption" xml:space="preserve"><value>Добавить вариант</value></data>
+    <data name="RemoveQuestion" xml:space="preserve"><value>Удалить вопрос</value></data>
+    <data name="RequiredQuestion" xml:space="preserve"><value>Обязательный вопрос</value></data>
+    <data name="ShowInTable" xml:space="preserve"><value>Показывать в таблице</value></data>
+</root>

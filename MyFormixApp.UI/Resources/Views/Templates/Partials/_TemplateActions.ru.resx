@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="EditTemplate"><value>Редактировать шаблон</value></data>
+    <data name="ViewStatistics"><value>Просмотреть статистику</value></data>
+    <data name="DeleteTemplate"><value>Удалить шаблон</value></data>
+    <data name="TakeTemplate"><value>Взять шаблон</value></data>
+    <data name="ViewYourResponse"><value>Посмотреть ваш ответ</value></data>
+    <data name="ShareTemplate"><value>Поделиться шаблоном</value></data>
+    <data name="CopyLink"><value>Скопировать ссылку</value></data>
+    <data name="ManageAccess"><value>Управление доступом</value></data>
+    <data name="ConfirmDeletion"><value>Подтвердите удаление</value></data>
+    <data name="ConfirmDeleteTemplateText"><value>Вы уверены, что хотите удалить этот шаблон?</value></data>
+    <data name="DeleteCascadeWarning"><value>Это также удалит все формы, созданные на основе этого шаблона.</value></data>
+    <data name="Cancel"><value>Отмена</value></data>
+    <data name="Delete"><value>Удалить</value></data>
+</root>

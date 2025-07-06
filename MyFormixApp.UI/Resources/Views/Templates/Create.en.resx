@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="CreateNewTemplate"><value>Create New Template</value></data>
+    <data name="CreateTemplate"><value>Create Template</value></data>
+    <data name="Cancel"><value>Cancel</value></data>
+</root>

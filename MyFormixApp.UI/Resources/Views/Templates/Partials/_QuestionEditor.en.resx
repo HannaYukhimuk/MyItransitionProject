@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="TextQuestion" xml:space="preserve"><value>Text Question</value></data>
+    <data name="SingleChoiceQuestion" xml:space="preserve"><value>Single Choice Question</value></data>
+    <data name="MultipleChoiceQuestion" xml:space="preserve"><value>Multiple Choice Question</value></data>
+    <data name="DropdownQuestion" xml:space="preserve"><value>Dropdown Question</value></data>
+    <data name="EnterQuestionText" xml:space="preserve"><value>Enter question text</value></data>
+    <data name="UserWillSeeTextInput" xml:space="preserve"><value>User will see a text input field</value></data>
+    <data name="UserAnswerPreview" xml:space="preserve"><value>User answer will appear here</value></data>
+    <data name="Option" xml:space="preserve"><value>Option</value></data>
+    <data name="AddOption" xml:space="preserve"><value>Add Option</value></data>
+    <data name="RemoveQuestion" xml:space="preserve"><value>Remove question</value></data>
+    <data name="RequiredQuestion" xml:space="preserve"><value>Required question</value></data>
+    <data name="ShowInTable" xml:space="preserve"><value>Show in table</value></data>
+</root>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="PublicTemplates"><value>Public Templates</value></data>
+  <data name="BrowseCommunityTemplates"><value>Browse and use community-created templates</value></data>
+  <data name="MyTemplates"><value>My Templates</value></data>
+  <data name="CreateNew"><value>Create New</value></data>
+  <data name="NoPublicTemplates"><value>No public templates available</value></data>
+  <data name="BeFirstToShare"><value>Be the first to share your template with the community</value></data>
+  <data name="CreateTemplate"><value>Create Template</value></data>
+  <data name="Free"><value>Free</value></data>
+  <data name="NoDescription"><value>No description</value></data>
+  <data name="View"><value>View</value></data>
+  <data name="Previous"><value>Previous</value></data>
+  <data name="Next"><value>Next</value></data>
+</root>

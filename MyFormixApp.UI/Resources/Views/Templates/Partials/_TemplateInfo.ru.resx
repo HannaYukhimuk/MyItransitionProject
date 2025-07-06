@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="TemplateInfo"><value>Информация о шаблоне</value></data>
+    <data name="Author"><value>Автор</value></data>
+    <data name="Theme"><value>Тема</value></data>
+    <data name="Created"><value>Создан</value></data>
+    <data name="LastUpdated"><value>Последнее обновление</value></data>
+    <data name="Visibility"><value>Видимость</value></data>
+    <data name="Public"><value>Публичный</value></data>
+    <data name="Private"><value>Приватный</value></data>
+    <data name="FormsCreated"><value>Создано форм</value></data>
+    <data name="Likes"><value>Лайки</value></data>
+    <data name="Tags"><value>Теги</value></data>
+</root>

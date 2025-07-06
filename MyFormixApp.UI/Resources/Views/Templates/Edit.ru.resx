@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="EditTemplate"><value>Редактировать шаблон</value></data>
+    <data name="SaveChanges"><value>Сохранить изменения</value></data>
+    <data name="Cancel"><value>Отмена</value></data>
+</root>

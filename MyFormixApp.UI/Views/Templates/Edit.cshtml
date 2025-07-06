@@ -1,7 +1,6 @@
 @model MyFormixApp.Domain.DTOs.Templates.TemplateDto
-
 @{
-    ViewData["Title"] = "Edit Template";
+    ViewData["Title"] = Localizer["EditTemplate"];
     ViewData["FormAction"] = "Edit";
 }
 
@@ -19,10 +18,10 @@
                 
                 <div class="form-group mt-4">
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save me-1"></i> Save Changes
+                        <i class="fas fa-save me-1"></i> @Localizer["SaveChanges"]
                     </button>
                     <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">
-                        <i class="fas fa-times me-1"></i> Cancel
+                        <i class="fas fa-times me-1"></i> @Localizer["Cancel"]
                     </a>
                 </div>
             </form>

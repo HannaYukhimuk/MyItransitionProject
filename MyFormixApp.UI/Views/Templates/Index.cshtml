@@ -1,6 +1,6 @@
 @model IEnumerable<MyFormixApp.Domain.DTOs.Templates.TemplateListItemDto>
 @{
-    ViewData["Title"] = "Public Templates";
+    ViewData["Title"] = Localizer["PublicTemplates"];
 }
 
 <div class="container py-4">
@@ -10,28 +10,27 @@
             <h1 class="display-6 fw-bold">
                 <i class="fas fa-globe-americas text-primary me-3"></i>@ViewData["Title"]
             </h1>
-            <p class="text-muted mb-0">Browse and use community-created templates</p>
+            <p class="text-muted mb-0">@Localizer["BrowseCommunityTemplates"]</p>
         </div>
         <div class="d-flex gap-2">
             <a asp-action="My" class="btn btn-outline-primary">
-                <i class="fas fa-folder me-2"></i>My Templates
+                <i class="fas fa-folder me-2"></i>@Localizer["MyTemplates"]
             </a>
             <a asp-action="Create" class="btn btn-primary">
-                <i class="fas fa-plus me-2"></i>Create New
+                <i class="fas fa-plus me-2"></i>@Localizer["CreateNew"]
             </a>
         </div>
     </div>
 
-    
     @if (!Model.Any())
     {
         <div class="card shadow-sm text-center py-5">
             <div class="card-body">
                 <i class="fas fa-file-alt fa-4x text-muted mb-4"></i>
-                <h4 class="text-muted">No public templates available</h4>
-                <p class="text-muted mb-4">Be the first to share your template with the community</p>
+                <h4 class="text-muted">@Localizer["NoPublicTemplates"]</h4>
+                <p class="text-muted mb-4">@Localizer["BeFirstToShare"]</p>
                 <a asp-action="Create" class="btn btn-primary px-4">
-                    <i class="fas fa-plus me-2"></i>Create Template
+                    <i class="fas fa-plus me-2"></i>@Localizer["CreateTemplate"]
                 </a>
             </div>
         </div>
@@ -42,7 +41,7 @@
             @foreach (var template in Model)
             {
                 <div class="col">
-                    <div class="card h-100 shadow-sm border-0">
+                    <div class="card h-100 shadow-sm border-0 template-card">
                         <div class="position-relative">
                             @if (!string.IsNullOrEmpty(template.ImageUrl))
                             {
@@ -61,7 +60,7 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-start mb-2">
                                 <h5 class="card-title mb-0">@template.Title</h5>
-                                <span class="badge bg-primary">Free</span>
+                                <span class="badge bg-primary">@Localizer["Free"]</span>
                             </div>
                             <p class="card-text text-muted small mb-3">
                                 @(template.Description?.Length > 100 ? 
@@ -96,7 +95,7 @@
                                 </div>
                                 <a asp-controller="TemplateViews" asp-action="Details" asp-route-id="@template.Id" 
                                    class="btn btn-sm btn-outline-primary">
-                                    <i class="fas fa-arrow-right me-1"></i>View
+                                    <i class="fas fa-arrow-right me-1"></i>@Localizer["View"]
                                 </a>
                             </div>
                         </div>
@@ -108,13 +107,13 @@
         <nav aria-label="Page navigation" class="mt-5">
             <ul class="pagination justify-content-center">
                 <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    <a class="page-link" href="#" tabindex="-1">@Localizer["Previous"]</a>
                 </li>
                 <li class="page-item active"><a class="page-link" href="#">1</a></li>
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
+                    <a class="page-link" href="#">@Localizer["Next"]</a>
                 </li>
             </ul>
         </nav>

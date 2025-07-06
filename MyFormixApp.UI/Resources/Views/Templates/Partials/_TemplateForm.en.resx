@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="TemplateTitle"><value>Template Title</value></data>
+    <data name="Description"><value>Description</value></data>
+    <data name="Theme"><value>Theme</value></data>
+    <data name="MakeTemplatePublic"><value>Make template public</value></data>
+    <data name="HeaderImage"><value>Header Image</value></data>
+    <data name="HeaderImageHint"><value>Upload an image to display at the top of your template</value></data>
+    <data name="GrantAccess"><value>Grant access to specific users</value></data>
+    <data name="EnterUserEmail"><value>Enter user email</value></data>
+    <data name="PressEnterToAddUser"><value>Press Enter to add user</value></data>
+    <data name="Tags"><value>Tags</value></data>
+    <data name="AddTagsHint"><value>Add tags (press Enter)</value></data>
+    <data name="PressEnterToAddTags"><value>Press Enter to add tags</value></data>
+    <data name="Questions"><value>Questions</value></data>
+    <data name="AddQuestion"><value>Add Question</value></data>
+    <data name="QuestionType"><value>Question Type</value></data>
+    <data name="TextAnswer"><value>Text Answer</value></data>
+    <data name="SingleChoice"><value>Single Choice</value></data>
+    <data name="MultipleChoice"><value>Multiple Choice</value></data>
+    <data name="Dropdown"><value>Dropdown</value></data>
+</root>

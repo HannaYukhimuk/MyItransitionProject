@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="DeleteTemplate"><value>Удалить шаблон</value></data>
+    <data name="DeleteConfirmationMessage"><value>Вы уверены, что хотите удалить этот шаблон?</value></data>
+    <data name="Title"><value>Название</value></data>
+    <data name="Description"><value>Описание</value></data>
+    <data name="Author"><value>Автор</value></data>
+    <data name="Created"><value>Создан</value></data>
+    <data name="FormsCreated"><value>Создано форм</value></data>
+    <data name="Delete"><value>Удалить</value></data>
+    <data name="Cancel"><value>Отмена</value></data>
+</root>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="PublicTemplates"><value>Публичные шаблоны</value></data>
+  <data name="BrowseCommunityTemplates"><value>Просматривайте и используйте шаблоны, созданные сообществом</value></data>
+  <data name="MyTemplates"><value>Мои шаблоны</value></data>
+  <data name="CreateNew"><value>Создать новый</value></data>
+  <data name="NoPublicTemplates"><value>Публичные шаблоны отсутствуют</value></data>
+  <data name="BeFirstToShare"><value>Будьте первым, кто поделится шаблоном с сообществом</value></data>
+  <data name="CreateTemplate"><value>Создать шаблон</value></data>
+  <data name="Free"><value>Бесплатно</value></data>
+  <data name="NoDescription"><value>Описание отсутствует</value></data>
+  <data name="View"><value>Просмотр</value></data>
+  <data name="Previous"><value>Назад</value></data>
+  <data name="Next"><value>Вперед</value></data>
+</root>

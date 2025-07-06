@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="EditTemplate"><value>Edit Template</value></data>
+    <data name="SaveChanges"><value>Save Changes</value></data>
+    <data name="Cancel"><value>Cancel</value></data>
+</root>

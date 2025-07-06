@@ -1,7 +1,6 @@
 @model MyFormixApp.Domain.DTOs.Templates.TemplateDetailsDto
-
 @{
-    ViewData["Title"] = "Delete Template";
+    ViewData["Title"] = Localizer["DeleteTemplate"];
 }
 
 <div class="container mt-4">
@@ -10,29 +9,29 @@
             <h2>@ViewData["Title"]</h2>
         </div>
         <div class="card-body">
-            <h4 class="text-danger">Are you sure you want to delete this template?</h4>
+            <h4 class="text-danger">@Localizer["DeleteConfirmationMessage"]</h4>
             <hr />
             <dl class="row">
-                <dt class="col-sm-3">Title</dt>
+                <dt class="col-sm-3">@Localizer["Title"]</dt>
                 <dd class="col-sm-9">@Model.Title</dd>
                 
-                <dt class="col-sm-3">Description</dt>
+                <dt class="col-sm-3">@Localizer["Description"]</dt>
                 <dd class="col-sm-9">@Model.Description</dd>
                 
-                <dt class="col-sm-3">Author</dt>
+                <dt class="col-sm-3">@Localizer["Author"]</dt>
                 <dd class="col-sm-9">@Model.Author.Username</dd>
                 
-                <dt class="col-sm-3">Created</dt>
+                <dt class="col-sm-3">@Localizer["Created"]</dt>
                 <dd class="col-sm-9">@Model.CreatedAt.ToString("f")</dd>
                 
-                <dt class="col-sm-3">Forms Created</dt>
+                <dt class="col-sm-3">@Localizer["FormsCreated"]</dt>
                 <dd class="col-sm-9">@Model.FormsCount</dd>
             </dl>
             
-            <form asp-action="Delete">
+            <form asp-action="Delete" method="post">
                 <input type="hidden" asp-for="Id" />
-                <button type="submit" class="btn btn-danger">Delete</button>
-                <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-danger">@Localizer["Delete"]</button>
+                <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">@Localizer["Cancel"]</a>
             </form>
         </div>
     </div>

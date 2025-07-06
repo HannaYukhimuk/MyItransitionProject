@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="TemplateInfo"><value>Template Info</value></data>
+    <data name="Author"><value>Author</value></data>
+    <data name="Theme"><value>Theme</value></data>
+    <data name="Created"><value>Created</value></data>
+    <data name="LastUpdated"><value>Last Updated</value></data>
+    <data name="Visibility"><value>Visibility</value></data>
+    <data name="Public"><value>Public</value></data>
+    <data name="Private"><value>Private</value></data>
+    <data name="FormsCreated"><value>Forms created</value></data>
+    <data name="Likes"><value>Likes</value></data>
+    <data name="Tags"><value>Tags</value></data>
+</root>
