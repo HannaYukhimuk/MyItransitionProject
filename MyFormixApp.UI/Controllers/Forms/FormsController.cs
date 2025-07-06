@@ -1,4 +1,3 @@
-// FormsController.cs
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyFormixApp.Application.Services;

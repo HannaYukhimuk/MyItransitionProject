@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MyFormixApp.Application.Services;
 using Microsoft.AspNetCore.Authorization;
-using System.Threading.Tasks;
 
 namespace MyFormixApp.UI.Controllers
 {
