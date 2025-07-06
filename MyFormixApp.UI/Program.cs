@@ -8,9 +8,15 @@ using MyFormixApp.UI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllersWithViews()
+    .AddFluentValidation(fv => 
+    {
+        fv.AutomaticValidationEnabled = true;
+        fv.ImplicitlyValidateChildProperties = true;
+    });
+
 builder.Services.AddCustomLocalization();
 builder.Services.AddRazorPages();
-builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<UserDtoValidator>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -32,7 +38,6 @@ builder.Services
 
 var app = builder.Build();
 
-// миграции
 try
 {
     using var scope = app.Services.CreateScope();
@@ -47,7 +52,9 @@ catch (Exception ex)
 }
 
 if (app.Environment.IsDevelopment())
+{
     app.UseDeveloperExceptionPage();
+}
 else
 {
     app.UseExceptionHandler("/Home/Error");
@@ -57,7 +64,8 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-app.UseCustomLocalization(); 
+
+app.UseCustomLocalization();
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -69,14 +77,7 @@ app.MapControllers();
 app.MapRazorPages();
 app.Run();
 
-
 string GetConnectionString(IConfiguration config)
 {
-    var host = config["DB_HOST"];
-    var port = config["DB_PORT"];
-    var dbName = config["DB_NAME"];
-    var dbUser = config["DB_USER"];
-    var dbPassword = config["DB_PASSWORD"];
-    
-    return $"Host=dpg-d1jau33e5dus73d43hhg-a;Port=5432;Database=myformixapp_o1to;Username=myformixapp_o1to_user;Password=Nn5HwBM735DYzuKltyL8WpwKRlVExLSI";
+    return "Host=dpg-d1jau33e5dus73d43hhg-a;Port=5432;Database=myformixapp_o1to;Username=myformixapp_o1to_user;Password=Nn5HwBM735DYzuKltyL8WpwKRlVExLSI";
 }
