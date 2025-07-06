@@ -36,8 +36,7 @@ namespace MyFormixApp.Infrastructure.Services
             try
             {
                 var user = await RegisterUserAsync(request);
-                if (request.Role == "Admin") return await AdminSignInAsync(request, user, httpContext);
-                
+                if (request.Role == "Admin") return await AdminSignInAsync(request, user, httpContext);                
                 return new AuthResult { Success = true, RedirectAction = "Login" };
             }
             catch (ApplicationException ex)
@@ -50,12 +49,9 @@ namespace MyFormixApp.Infrastructure.Services
         {
             var token = await LoginAsync(request);
             if (token == null) return new AuthResult { ErrorMessage = "Incorrect login or password." };
-
             var user = await GetUserByUsernameAsync(request.Username);
             if (user == null) return new AuthResult { ErrorMessage = "User not found." };
-
             await SignInUserAsync(new UserDto { Username = user.Username }, user.Role, user.Id, token.AccessToken, httpContext);
-            
             return new AuthResult 
             { 
                 Success = true, 
@@ -68,7 +64,6 @@ namespace MyFormixApp.Infrastructure.Services
         {
             if (await _userRepository.GetByUsernameOrEmailAsync(request.Username, request.Email) != null)
                 throw new ApplicationException("Username or email already exists");
-
             var user = new User
             {
                 Username = request.Username,
@@ -76,7 +71,6 @@ namespace MyFormixApp.Infrastructure.Services
                 PasswordHash = _passwordHasher.HashPassword(null!, request.Password),
                 Role = request.Role ?? "User"
             };
-
             return await _userRepository.CreateAsync(user);
         }
 
@@ -84,7 +78,6 @@ namespace MyFormixApp.Infrastructure.Services
         {
             var token = await LoginAsync(request);
             if (token == null) return new AuthResult { ErrorMessage = "Login error after registration" };
-
             await SignInUserAsync(request, "Admin", user.Id, token.AccessToken, httpContext);
             return new AuthResult { Success = true, RedirectAction = "Index", RedirectController = "Admin" };
         }
@@ -98,7 +91,6 @@ namespace MyFormixApp.Infrastructure.Services
                 new(ClaimTypes.Role, role),
                 new("JWT", token)
             };
-
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity),
                 new AuthenticationProperties { IsPersistent = true, ExpiresUtc = DateTimeOffset.UtcNow.AddDays(7) });
@@ -108,7 +100,6 @@ namespace MyFormixApp.Infrastructure.Services
         {
             var user = await _userRepository.GetByUsernameOrEmailAsync(request.Username, request.Email);
             if (user is null || !user.IsActive) return null;
-
             return _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password) != PasswordVerificationResult.Failed 
                 ? await CreateTokenResponse(user) 
                 : null;

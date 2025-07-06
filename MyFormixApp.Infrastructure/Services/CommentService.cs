@@ -42,7 +42,6 @@ namespace MyFormixApp.Infrastructure.Services
         {
             var comment = await GetCommentIfBelongsToUser(id, userId);
             if (comment == null) return null;
-
             comment.Text = dto.Text;
             await _commentRepository.UpdateAsync(comment);
             return MapToDto(comment);
@@ -53,7 +52,6 @@ namespace MyFormixApp.Infrastructure.Services
         {
             var comment = await GetCommentIfBelongsToUser(id, userId);
             if (comment == null) return false;
-
             await _commentRepository.DeleteAsync(id);
             return true;
         }
@@ -62,7 +60,6 @@ namespace MyFormixApp.Infrastructure.Services
         {
             if (await _templateRepository.GetByIdAsync(dto.TemplateId) == null)
                 throw new ArgumentException("Template not found");
-
             if (dto.ParentCommentId.HasValue && !await _commentRepository.ExistsAsync(dto.ParentCommentId.Value))
                 throw new ArgumentException("Parent comment not found");
         }
@@ -76,7 +73,6 @@ namespace MyFormixApp.Infrastructure.Services
         private List<CommentDetailsDto> BuildCommentTree(IEnumerable<Comment> comments)
         {
             var commentDict = comments.ToDictionary(c => c.Id, MapToDto);
-
             comments.Where(c => c.ParentCommentId != null)
                 .ToList()
                 .ForEach(c =>
@@ -84,7 +80,6 @@ namespace MyFormixApp.Infrastructure.Services
                     if (commentDict.TryGetValue(c.ParentCommentId!.Value, out var parent))
                         parent.Replies.Add(commentDict[c.Id]);
                 });
-
             return commentDict.Values.Where(c => c.ParentCommentId == null).ToList();
         }
 

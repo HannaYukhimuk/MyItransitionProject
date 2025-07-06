@@ -9,14 +9,19 @@ namespace MyFormixApp.Infrastructure.Repositories
     {
         public FormRepository(AppDbContext context) : base(context) { }
 
-        public async Task<Form?> GetByIdWithDetailsAsync(Guid id)
+        private IQueryable<Form> IncludeFormDetails(IQueryable<Form> query)
         {
-            return await _context.Forms
+            return query
                 .Include(f => f.Template)
                 .Include(f => f.User)
                 .Include(f => f.Answers)
                     .ThenInclude(a => a.Question)
-                        .ThenInclude(q => q.Options)
+                        .ThenInclude(q => q.Options);
+        }
+
+        public async Task<Form?> GetByIdWithDetailsAsync(Guid id)
+        {
+            return await IncludeFormDetails(_context.Forms)
                 .FirstOrDefaultAsync(f => f.Id == id);
         }
 
@@ -34,12 +39,7 @@ namespace MyFormixApp.Infrastructure.Repositories
 
         public async Task<IEnumerable<Form>> GetAllWithDetailsAsync()
         {
-            return await _context.Forms
-                .Include(f => f.Answers)
-                    .ThenInclude(a => a.Question)
-                        .ThenInclude(q => q.Options)
-                .Include(f => f.Template)
-                .Include(f => f.User)
+            return await IncludeFormDetails(_context.Forms)
                 .OrderByDescending(f => f.CreatedAt)
                 .AsNoTracking()
                 .ToListAsync();
@@ -47,12 +47,8 @@ namespace MyFormixApp.Infrastructure.Repositories
 
         public async Task<IEnumerable<Form>> GetByTemplateWithDetailsAsync(Guid templateId)
         {
-            return await _context.Forms
-                .Where(f => f.TemplateId == templateId)
-                .Include(f => f.Answers)
-                    .ThenInclude(a => a.Question)
-                        .ThenInclude(q => q.Options)
-                .Include(f => f.User)
+            return await IncludeFormDetails(
+                    _context.Forms.Where(f => f.TemplateId == templateId))
                 .OrderByDescending(f => f.CreatedAt)
                 .ToListAsync();
         }

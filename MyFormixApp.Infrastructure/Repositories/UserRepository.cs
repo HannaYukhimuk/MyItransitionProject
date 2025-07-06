@@ -26,14 +26,14 @@ namespace MyFormixApp.Infrastructure.Repositories
                 user.Id = Guid.NewGuid();
 
             user.CreatedAt = DateTime.UtcNow;
-            await _context.Users.AddAsync(user);
+            _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return user;
         }
 
         public async Task<User> UpdateAsync(User user)
         {
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Users.Update(user);
             await _context.SaveChangesAsync();
             return user;
         }
@@ -50,39 +50,34 @@ namespace MyFormixApp.Infrastructure.Repositories
         }
 
         public async Task<bool> MakeAdminAsync(Guid userId)
+            => await UpdateRoleAsync(userId, "Admin");
+
+        public async Task<bool> RemoveAdminAsync(Guid userId)
+            => await UpdateRoleAsync(userId, "User");
+
+        private async Task<bool> UpdateRoleAsync(Guid userId, string role)
         {
             var user = await _context.Users.FindAsync(userId);
             if (user == null)
                 return false;
 
-            user.Role = "Admin";
-            _context.Entry(user).State = EntityState.Modified;
+            user.Role = role;
+            _context.Users.Update(user);
             await _context.SaveChangesAsync();
             return true;
         }
 
         public async Task<User?> GetByUsernameOrEmailAsync(string username, string email)
-            => await _context.Users.FirstOrDefaultAsync(u => u.Username == username || u.Email == email);
-
-        public async Task<bool> ExistsAsync(Guid userId)
-            => await _context.Users.AnyAsync(u => u.Id == userId);
+            => await _context.Users
+                .FirstOrDefaultAsync(u => u.Username == username || u.Email == email);
 
         public async Task<User?> GetByEmailAsync(string email)
             => await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
 
-        public async Task<bool> RemoveAdminAsync(Guid userId)
-        {
-            var user = await _context.Users.FindAsync(userId);
-            if (user == null)
-                return false;
-
-            user.Role = "User";
-            _context.Entry(user).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return true;
-        }
-
         public async Task<User?> GetByResetTokenAsync(string token)
             => await _context.Users.FirstOrDefaultAsync(u => u.ResetPasswordToken == token);
+
+        public async Task<bool> ExistsAsync(Guid userId)
+            => await _context.Users.AnyAsync(u => u.Id == userId);
     }
 }

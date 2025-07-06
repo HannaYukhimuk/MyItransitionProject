@@ -11,7 +11,8 @@ namespace MyFormixApp.Infrastructure.Repositories
 
         public async Task<Tag> GetOrCreateAsync(string name)
         {
-            var normalizedName = name.Trim().ToLower();
+            var normalizedName = Normalize(name);
+
             var tag = await _context.Tags
                 .FirstOrDefaultAsync(t => t.Name.ToLower() == normalizedName);
 
@@ -26,20 +27,29 @@ namespace MyFormixApp.Infrastructure.Repositories
         }
 
         public async Task<IEnumerable<Tag>> GetPopularTagsAsync(int count)
-            => await _context.Tags
+        {
+            return await _context.Tags
                 .OrderByDescending(t => t.Templates.Count)
                 .Take(count)
                 .ToListAsync();
+        }
 
         public async Task<int> GetUsageCountAsync(Guid tagId)
-            => await _context.TemplateTags
+        {
+            return await _context.TemplateTags
                 .CountAsync(tt => tt.TagId == tagId);
+        }
 
         public async Task<IEnumerable<Tag>> SearchTagsAsync(string term, int limit = 10)
-            => await _context.Tags
-                .Where(t => EF.Functions.Like(t.Name, $"%{term}%"))
+        {
+            var normalized = term.Trim();
+            return await _context.Tags
+                .Where(t => EF.Functions.Like(t.Name, $"%{normalized}%"))
                 .OrderBy(t => t.Name)
                 .Take(limit)
                 .ToListAsync();
+        }
+
+        private string Normalize(string name) => name.Trim().ToLower();
     }
 }

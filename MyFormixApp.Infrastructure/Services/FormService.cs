@@ -238,10 +238,8 @@ namespace MyFormixApp.Infrastructure.Services
         {
             var question = form.Template.Questions.FirstOrDefault(q => q.Id == answerDto.QuestionId);
             if (question == null) return;
-
             var storedValue = GetStoredValue(answerDto, question);
             var existingAnswer = form.Answers.FirstOrDefault(a => a.QuestionId == answerDto.QuestionId);
-
             if (existingAnswer != null) existingAnswer.ValueText = storedValue;
             else form.Answers.Add(new Answer { QuestionId = answerDto.QuestionId, ValueText = storedValue });
         }
@@ -252,10 +250,8 @@ namespace MyFormixApp.Infrastructure.Services
                 return string.Join(";", question.Options?
                     .Where(o => answerDto.MultiTextValue.Contains(o.Text))
                     .Select(o => o.Id.ToString()) ?? Enumerable.Empty<string>());
-
             if (!string.IsNullOrEmpty(answerDto.TextValue))
                 return GetOptionIdOrValue(question, answerDto.TextValue);
-
             return string.Empty;
         }
 
@@ -311,11 +307,8 @@ namespace MyFormixApp.Infrastructure.Services
             try
             {
                 var template = await ValidateTemplateAccess(templateId, currentUserId);
-                
                 var forms = await _formRepository.GetByTemplateWithDetailsAsync(template.Id);
-                
                 var stats = CreateStatisticsDto(template, forms);
-                
                 return stats;
             }
             catch (Exception ex)
@@ -328,9 +321,7 @@ namespace MyFormixApp.Infrastructure.Services
         private static TemplateStatisticsDto CreateStatisticsDto(Template template, IEnumerable<Form> forms)
         {
             if (template == null) throw new ArgumentNullException(nameof(template));
-            
             var formList = forms?.ToList() ?? new List<Form>();
-            
             return new()
             {
                 TemplateId = template.Id,
@@ -369,31 +360,25 @@ namespace MyFormixApp.Infrastructure.Services
 
         private static Dictionary<string, int> GetSingleOptionStatistics(Question question, IEnumerable<Answer> answers)
         {
-            var stats = new Dictionary<string, int>();
-            
+            var stats = new Dictionary<string, int>();            
             if (question.Options == null)
                 return stats;
-
             foreach (var option in question.Options)
             {
                 var count = answers.Count(a => 
                     a.ValueText != null && 
                     (a.ValueText.Equals(option.Id.ToString()) || 
                      a.ValueText.Equals(option.Text)));
-                
                 stats[option.Text] = count;
-            }
-            
+            }            
             return stats;
         }
 
         private static Dictionary<string, int> GetMultiOptionStatistics(Question question, IEnumerable<Answer> answers)
         {
             var stats = new Dictionary<string, int>();
-            
             if (question.Options == null)
                 return stats;
-
             foreach (var option in question.Options)
             {
                 var count = answers.Count(a => 
@@ -402,7 +387,6 @@ namespace MyFormixApp.Infrastructure.Services
                 
                 stats[option.Text] = count;
             }
-            
             return stats;
         }
 

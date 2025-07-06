@@ -9,35 +9,23 @@ namespace MyFormixApp.Infrastructure.Repositories
     {
         public TemplateRepository(AppDbContext context) : base(context) { }
 
-        public async Task<Template?> GetByIdWithDetailsAsync(Guid id)
+        private IQueryable<Template> IncludeBasicDetails(IQueryable<Template> query)
         {
-            return await _context.Templates
-                .Include(t => t.Accesses)
+            return query
                 .Include(t => t.User)
                 .Include(t => t.Theme)
-                .Include(t => t.Questions)
-                    .ThenInclude(q => q.Options)
-                .Include(t => t.Tags)
-                    .ThenInclude(tt => tt.Tag)
-                .Include(t => t.Comments)
-                    .ThenInclude(c => c.User)
-                .FirstOrDefaultAsync(t => t.Id == id);
+                .Include(t => t.Tags).ThenInclude(tt => tt.Tag);
         }
 
-        public async Task<IEnumerable<Template>> GetUserTemplatesAsync(Guid userId)
-            => await _context.Templates
-                .Where(t => t.UserId == userId)
-                .OrderByDescending(t => t.CreatedAt)
-                .ToListAsync();
+        private IQueryable<Template> IncludeFullDetails(IQueryable<Template> query)
+        {
+            return IncludeBasicDetails(query)
+                .Include(t => t.Questions).ThenInclude(q => q.Options)
+                .Include(t => t.Comments).ThenInclude(c => c.User)
+                .Include(t => t.Accesses);
+        }
 
-        public async Task<IEnumerable<Template>> GetPublicTemplatesAsync()
-            => await _context.Templates
-                .Where(t => t.IsPublic)
-                .OrderByDescending(t => t.CreatedAt)
-                .Take(100)
-                .ToListAsync();
-
-        public override async Task<Template> CreateAsync(Template template)
+        private void EnsureGuids(Template template)
         {
             if (template.Id == Guid.Empty)
                 template.Id = Guid.NewGuid();
@@ -53,7 +41,41 @@ namespace MyFormixApp.Infrastructure.Repositories
                         option.Id = Guid.NewGuid();
                 }
             }
+        }
 
+        private IQueryable<Template> FilterTemplates(bool isPublic = false, Guid? userId = null)
+        {
+            var query = _context.Templates.AsQueryable();
+
+            if (isPublic)
+                query = query.Where(t => t.IsPublic);
+
+            if (userId.HasValue)
+                query = query.Where(t => t.UserId == userId.Value);
+
+            return query;
+        }
+
+        public async Task<Template?> GetByIdWithDetailsAsync(Guid id)
+        {
+            return await IncludeFullDetails(_context.Templates)
+                .FirstOrDefaultAsync(t => t.Id == id);
+        }
+
+        public async Task<IEnumerable<Template>> GetUserTemplatesAsync(Guid userId)
+            => await FilterTemplates(userId: userId)
+                .OrderByDescending(t => t.CreatedAt)
+                .ToListAsync();
+
+        public async Task<IEnumerable<Template>> GetPublicTemplatesAsync()
+            => await FilterTemplates(isPublic: true)
+                .OrderByDescending(t => t.CreatedAt)
+                .Take(100)
+                .ToListAsync();
+
+        public override async Task<Template> CreateAsync(Template template)
+        {
+            EnsureGuids(template);
             return await base.CreateAsync(template);
         }
 
@@ -61,8 +83,7 @@ namespace MyFormixApp.Infrastructure.Repositories
         {
             return await _context.Templates
                 .Include(t => t.Theme)
-                .Include(t => t.Tags)
-                    .ThenInclude(tt => tt.Tag)
+                .Include(t => t.Tags).ThenInclude(tt => tt.Tag)
                 .Include(t => t.User)
                 .Include(t => t.Accesses)
                 .Where(t => !t.IsPublic &&
@@ -74,8 +95,7 @@ namespace MyFormixApp.Infrastructure.Repositories
         public override async Task DeleteAsync(Guid id)
         {
             var template = await _context.Templates
-                .Include(t => t.Questions)
-                    .ThenInclude(q => q.Options)
+                .Include(t => t.Questions).ThenInclude(q => q.Options)
                 .FirstOrDefaultAsync(t => t.Id == id);
 
             if (template != null)
@@ -93,8 +113,8 @@ namespace MyFormixApp.Infrastructure.Repositories
 
         public async Task<IEnumerable<Template>> GetPublicTemplatesByTagAsync(string tagName)
         {
-            return await _context.Templates
-                .Where(t => t.IsPublic && t.Tags.Any(tt => tt.Tag.Name == tagName))
+            return await FilterTemplates(isPublic: true)
+                .Where(t => t.Tags.Any(tt => tt.Tag.Name == tagName))
                 .Include(t => t.User)
                 .Include(t => t.Theme)
                 .OrderByDescending(t => t.CreatedAt)
@@ -103,8 +123,8 @@ namespace MyFormixApp.Infrastructure.Repositories
 
         public async Task<IEnumerable<Template>> SearchByTitleAsync(string title)
         {
-            return await _context.Templates
-                .Where(t => t.IsPublic && EF.Functions.Like(t.Title, $"%{title}%"))
+            return await FilterTemplates(isPublic: true)
+                .Where(t => EF.Functions.Like(t.Title, $"%{title}%"))
                 .Include(t => t.User)
                 .Include(t => t.Tags).ThenInclude(tt => tt.Tag)
                 .ToListAsync();
@@ -112,8 +132,8 @@ namespace MyFormixApp.Infrastructure.Repositories
 
         public async Task<IEnumerable<Template>> SearchByTagAsync(string tagName)
         {
-            return await _context.Templates
-                .Where(t => t.IsPublic && t.Tags.Any(tt => tt.Tag.Name == tagName))
+            return await FilterTemplates(isPublic: true)
+                .Where(t => t.Tags.Any(tt => tt.Tag.Name == tagName))
                 .Include(t => t.User)
                 .Include(t => t.Tags).ThenInclude(tt => tt.Tag)
                 .ToListAsync();
@@ -121,38 +141,27 @@ namespace MyFormixApp.Infrastructure.Repositories
 
         public async Task<IEnumerable<Template>> GetAllTemplatesAsync()
         {
-            return await _context.Templates
+            return await IncludeBasicDetails(_context.Templates)
                 .Include(t => t.Questions)
-                .Include(t => t.Tags).ThenInclude(tt => tt.Tag)
-                .Include(t => t.User)
-                .Include(t => t.Theme)
                 .OrderByDescending(t => t.CreatedAt)
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<Template>> GetPublicTemplatesPagedAsync(int page, int pageSize)
         {
-            return await _context.Templates
-                .Where(t => t.IsPublic)
+            return await IncludeBasicDetails(FilterTemplates(isPublic: true))
                 .OrderByDescending(t => t.CreatedAt)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
-                .Include(t => t.User)
-                .Include(t => t.Tags)
-                    .ThenInclude(tt => tt.Tag)
                 .ToListAsync();
         }
 
         public async Task<int> GetPublicTemplatesCountAsync()
-            => await _context.Templates.CountAsync(t => t.IsPublic);
+            => await FilterTemplates(isPublic: true).CountAsync();
 
         public async Task<List<Template>> GetUserTemplatesPagedAsync(Guid userId, int page, int pageSize)
         {
-            return await _context.Templates
-                .Where(t => t.UserId == userId)
-                .Include(t => t.User)
-                .Include(t => t.Tags)
-                    .ThenInclude(tt => tt.Tag)
+            return await IncludeBasicDetails(FilterTemplates(userId: userId))
                 .OrderByDescending(t => t.CreatedAt)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
@@ -161,9 +170,7 @@ namespace MyFormixApp.Infrastructure.Repositories
 
         public async Task<int> GetUserTemplatesCountAsync(Guid userId)
         {
-            return await _context.Templates
-                .Where(t => t.UserId == userId)
-                .CountAsync();
+            return await FilterTemplates(userId: userId).CountAsync();
         }
     }
 }
