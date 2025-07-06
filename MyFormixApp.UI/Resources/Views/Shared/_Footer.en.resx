@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="PlatformDescription" xml:space="preserve">
+    <value>Professional platform for creating and managing forms.</value>
+    </data>
+    <data name="Navigation" xml:space="preserve">
+    <value>Navigation</value>
+    </data>
+    <data name="Home" xml:space="preserve">
+    <value>Home</value>
+    </data>
+    <data name="AboutUs" xml:space="preserve">
+    <value>About us</value>
+    </data>
+    <data name="Contacts" xml:space="preserve">
+    <value>Contacts</value>
+    </data>
+    <data name="WorkHours" xml:space="preserve">
+    <value>Mon-Fri: 9:00 - 18:00</value>
+    </data>
+    <data name="AllRightsReserved" xml:space="preserve">
+    <value>All rights reserved.</value>
+    </data>
+</root>

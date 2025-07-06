@@ -2,7 +2,7 @@
 
 @if (!Model.Any())
 {
-    <div class="alert alert-warning">No templates found.</div>
+    <div class="alert alert-warning">@Localizer["NoTemplatesFound"]</div>
 }
 else
 {
@@ -11,13 +11,13 @@ else
         {
             <div class="col-md-6 mb-4">
                 <div class="card h-100">
-                    <h4>PIC-PIC</h4>
                     <div class="card-body">
                         <h5 class="card-title">@template.Title</h5>
                         <p class="card-text">@template.Description</p>
-                        <a href="/Templates/View/@template.Id" class="btn btn-outline-primary">View Template</a>
+                        <a href="/Templates/View/@template.Id" class="btn btn-outline-primary">
+                            @Localizer["ViewTemplate"]
+                        </a>
                     </div>
-              
                 </div>
             </div>
         }

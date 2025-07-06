@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="FormsForTemplate" xml:space="preserve">
+    <value>Forms for {0}</value>
+    </data>
+    <data name="BackToTemplate" xml:space="preserve">
+    <value>Back to Template</value>
+    </data>
+    <data name="ViewStatistics" xml:space="preserve">
+    <value>View Statistics</value>
+    </data>
+    <data name="NoFormsSubmitted" xml:space="preserve">
+    <value>No forms have been submitted yet.</value>
+    </data>
+</root>

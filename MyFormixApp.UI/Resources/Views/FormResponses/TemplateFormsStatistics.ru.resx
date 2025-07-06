@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="StatisticsForTemplate" xml:space="preserve">
+    <value>Статистика по шаблону {0}</value>
+    </data>
+    <data name="BackToTemplate" xml:space="preserve">
+    <value>Назад к шаблону</value>
+    </data>
+    <data name="ViewAllForms" xml:space="preserve">
+    <value>Просмотреть все формы</value>
+    </data>
+    <data name="Summary" xml:space="preserve">
+    <value>Сводка</value>
+    </data>
+    <data name="TotalSubmissions" xml:space="preserve">
+    <value>Всего отправок</value>
+    </data>
+    <data name="SubmissionsOverTime" xml:space="preserve">
+    <value>Отправки по времени</value>
+    </data>
+    <data name="Submissions" xml:space="preserve">
+    <value>Отправки</value>
+    </data>
+    <data name="Responses" xml:space="preserve">
+    <value>Ответы</value>
+    </data>
+</root>

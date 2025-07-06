@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="FormsForTemplate" xml:space="preserve">
+    <value>Формы для {0}</value>
+    </data>
+    <data name="BackToTemplate" xml:space="preserve">
+    <value>Назад к шаблону</value>
+    </data>
+    <data name="ViewStatistics" xml:space="preserve">
+    <value>Просмотр статистики</value>
+    </data>
+    <data name="NoFormsSubmitted" xml:space="preserve">
+    <value>Формы пока не отправлены.</value>
+    </data>
+</root>

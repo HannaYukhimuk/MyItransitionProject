@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="NoTemplatesFound" xml:space="preserve">
+    <value>No templates found.</value>
+    </data>
+    <data name="ViewTemplate" xml:space="preserve">
+    <value>View Template</value>
+    </data>
+</root>

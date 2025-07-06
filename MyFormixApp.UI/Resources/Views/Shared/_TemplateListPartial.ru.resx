@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="NoTemplatesFound" xml:space="preserve">
+    <value>Шаблоны не найдены.</value>
+    </data>
+    <data name="ViewTemplate" xml:space="preserve">
+    <value>Просмотреть шаблон</value>
+    </data>
+</root>

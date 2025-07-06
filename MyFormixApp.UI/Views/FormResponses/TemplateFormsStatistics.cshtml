@@ -1,27 +1,32 @@
 @model MyFormixApp.Domain.DTOs.Templates.TemplateStatisticsDto
+
 @{
-    ViewData["Title"] = $"Statistics for {ViewBag.TemplateTitle}";
+    ViewData["Title"] = Localizer["StatisticsForTemplate", ViewBag.TemplateTitle];
 }
 
 <h2>@ViewData["Title"]</h2>
 
 <div class="row mb-3">
     <div class="col">
-        <a asp-controller="Templates" asp-action="Details" asp-route-id="@Model.TemplateId" class="btn btn-secondary">Back to Template</a>
-        <a asp-controller="FormResponses" asp-action="TemplateForms" asp-route-templateId="@Model.TemplateId" class="btn btn-info">View All Forms</a>
+        <a asp-controller="Templates" asp-action="Details" asp-route-id="@Model.TemplateId" class="btn btn-secondary">
+            @Localizer["BackToTemplate"]
+        </a>
+        <a asp-controller="FormResponses" asp-action="TemplateForms" asp-route-templateId="@Model.TemplateId" class="btn btn-info">
+            @Localizer["ViewAllForms"]
+        </a>
     </div>
 </div>
 
 <div class="card mb-4">
     <div class="card-header">
-        <h5>Summary</h5>
+        <h5>@Localizer["Summary"]</h5>
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col-md-4">
                 <div class="card text-white bg-primary mb-3">
                     <div class="card-body">
-                        <h5 class="card-title">Total Submissions</h5>
+                        <h5 class="card-title">@Localizer["TotalSubmissions"]</h5>
                         <p class="card-text display-4">@Model.TotalSubmissions</p>
                     </div>
                 </div>
@@ -32,7 +37,7 @@
 
 <div class="card mb-4">
     <div class="card-header">
-        <h5>Submissions Over Time</h5>
+        <h5>@Localizer["SubmissionsOverTime"]</h5>
     </div>
     <div class="card-body">
         <canvas id="submissionsChart" height="100"></canvas>
@@ -60,7 +65,7 @@
             data: {
                 labels: @Json.Serialize(Model.SubmissionsByDay.Keys),
                 datasets: [{
-                    label: 'Submissions',
+                    label: '@Localizer["Submissions"]',
                     data: @Json.Serialize(Model.SubmissionsByDay.Values),
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
@@ -86,7 +91,7 @@
                 data: {
                     labels: @Json.Serialize(question.Value.Keys),
                     datasets: [{
-                        label: 'Responses',
+                        label: '@Localizer["Responses"]',
                         data: @Json.Serialize(question.Value.Values),
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         borderColor: 'rgba(75, 192, 192, 1)',

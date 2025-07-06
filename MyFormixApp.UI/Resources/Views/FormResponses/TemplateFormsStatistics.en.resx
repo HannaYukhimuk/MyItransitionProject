@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="StatisticsForTemplate" xml:space="preserve">
+    <value>Statistics for {0}</value>
+    </data>
+    <data name="BackToTemplate" xml:space="preserve">
+    <value>Back to Template</value>
+    </data>
+    <data name="ViewAllForms" xml:space="preserve">
+    <value>View All Forms</value>
+    </data>
+    <data name="Summary" xml:space="preserve">
+    <value>Summary</value>
+    </data>
+    <data name="TotalSubmissions" xml:space="preserve">
+    <value>Total Submissions</value>
+    </data>
+    <data name="SubmissionsOverTime" xml:space="preserve">
+    <value>Submissions Over Time</value>
+    </data>
+    <data name="Submissions" xml:space="preserve">
+    <value>Submissions</value>
+    </data>
+    <data name="Responses" xml:space="preserve">
+    <value>Responses</value>
+    </data>
+</root>

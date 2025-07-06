@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="HelloUser" xml:space="preserve">
+    <value>Привет, {0}!</value>
+    </data>
+    <data name="RegisterAdmin" xml:space="preserve">
+    <value>Зарегистрировать админа</value>
+    </data>
+    <data name="Logout" xml:space="preserve">
+    <value>Выйти</value>
+    </data>
+    <data name="Register" xml:space="preserve">
+    <value>Регистрация</value>
+    </data>
+    <data name="Login" xml:space="preserve">
+    <value>Войти</value>
+    </data>
+</root>
