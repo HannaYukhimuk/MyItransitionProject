@@ -74,12 +74,6 @@ namespace MyFormixApp.Infrastructure.Services
             return await MapForms(await _formRepository.GetByTemplateAsync(templateId));
         }
 
-        public async Task<TemplateStatisticsDto> GetTemplateStatisticsAsync(Guid templateId, Guid currentUserId)
-        {
-            var template = await ValidateTemplateAccess(templateId, currentUserId);
-            return await CalculateStatistics(template);
-        }
-
         public async Task<FormDetailsDto?> GetByUserAndTemplateAsync(Guid userId, Guid templateId) => 
             await GetUserTemplateForm(userId, templateId);
 
@@ -308,23 +302,66 @@ namespace MyFormixApp.Infrastructure.Services
             await _formRepository.CreateAsync(form);
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public async Task<TemplateStatisticsDto> GetTemplateStatisticsAsync(Guid templateId, Guid currentUserId)
+        {
+            try
+            {
+                var template = await ValidateTemplateAccess(templateId, currentUserId);
+                
+                var forms = await _formRepository.GetByTemplateWithDetailsAsync(template.Id);
+                
+                var stats = CreateStatisticsDto(template, forms);
+                
+                return stats;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in GetTemplateStatisticsAsync: {ex}");
+                throw;
+            }
+        }
+
         private async Task<TemplateStatisticsDto> CalculateStatistics(Template template)
         {
             var forms = await _formRepository.GetByTemplateWithDetailsAsync(template.Id);
             return CreateStatisticsDto(template, forms);
         }
 
-        private static TemplateStatisticsDto CreateStatisticsDto(Template template, IEnumerable<Form> forms) => 
-            new()
+        private static TemplateStatisticsDto CreateStatisticsDto(Template template, IEnumerable<Form> forms)
+        {
+            if (template == null) throw new ArgumentNullException(nameof(template));
+            
+            return new()
             {
                 TemplateId = template.Id,
                 TemplateTitle = template.Title,
-                SubmissionsByDay = forms.GroupBy(f => f.CreatedAt.Date)
-                    .ToDictionary(g => g.Key.ToString("yyyy-MM-dd"), g => g.Count()),
-                QuestionStatistics = template.Questions.ToDictionary(
-                    q => q.Title,
-                    q => GetQuestionStatistics(q, forms))
+                SubmissionsByDay = forms?
+                    .GroupBy(f => f.CreatedAt.Date)
+                    .ToDictionary(g => g.Key.ToString("yyyy-MM-dd"), g => g.Count()) ?? new(),
+                QuestionStatistics = template.Questions?
+                    .ToDictionary(
+                        q => q.Title,
+                        q => GetQuestionStatistics(q, forms ?? Enumerable.Empty<Form>())) ?? new()
             };
+        }
 
         private static Dictionary<string, int> GetQuestionStatistics(Question question, IEnumerable<Form> forms)
         {
@@ -332,22 +369,77 @@ namespace MyFormixApp.Infrastructure.Services
             return question.Type switch
             {
                 "boolean" => GetBooleanStatistics(answers),
-                "radio" or "checkbox" => GetOptionStatistics(question, answers),
-                _ => new Dictionary<string, int>()
+                "radio" or "select" => GetSingleOptionStatistics(question, answers),
+                "checkbox" => GetMultiOptionStatistics(question, answers),
+                _ => new Dictionary<string, int>() 
             };
         }
 
-        private static Dictionary<string, int> GetBooleanStatistics(IEnumerable<Answer> answers) => 
-            new()
+        private static Dictionary<string, int> GetBooleanStatistics(IEnumerable<Answer> answers)
+        {
+            return new Dictionary<string, int>
             {
                 ["Yes"] = answers.Count(a => a.ValueBool == true),
                 ["No"] = answers.Count(a => a.ValueBool == false)
             };
+        }
 
-        private static Dictionary<string, int> GetOptionStatistics(Question question, IEnumerable<Answer> answers) => 
-            question.Options?.ToDictionary(
-                o => o.Text,
-                o => answers.Count(a => a.ValueText?.Contains(o.Text) == true)) ?? new Dictionary<string, int>();
+        private static Dictionary<string, int> GetSingleOptionStatistics(Question question, IEnumerable<Answer> answers)
+        {
+            var stats = new Dictionary<string, int>();
+            
+            if (question.Options == null)
+                return stats;
+
+            foreach (var option in question.Options)
+            {
+                var count = answers.Count(a => 
+                    a.ValueText != null && 
+                    (a.ValueText.Equals(option.Id.ToString()) || 
+                     a.ValueText.Equals(option.Text)));
+                
+                stats[option.Text] = count;
+            }
+            
+            return stats;
+        }
+
+        private static Dictionary<string, int> GetMultiOptionStatistics(Question question, IEnumerable<Answer> answers)
+        {
+            var stats = new Dictionary<string, int>();
+            
+            if (question.Options == null)
+                return stats;
+
+            foreach (var option in question.Options)
+            {
+                var count = answers.Count(a => 
+                    a.ValueText != null && 
+                    a.ValueText.Split(';').Contains(option.Id.ToString()));
+                
+                stats[option.Text] = count;
+            }
+            
+            return stats;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private async Task<FormDetailsDto?> GetUserTemplateForm(Guid userId, Guid templateId)
         {

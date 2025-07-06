@@ -51,6 +51,7 @@ namespace MyFormixApp.Infrastructure.Repositories
                 .Where(f => f.TemplateId == templateId)
                 .Include(f => f.Answers)
                     .ThenInclude(a => a.Question)
+                        .ThenInclude(q => q.Options)
                 .Include(f => f.User)
                 .OrderByDescending(f => f.CreatedAt)
                 .ToListAsync();

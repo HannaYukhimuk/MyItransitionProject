@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyFormixApp.Application.Services;
-using MyFormixApp.Domain.DTOs.Templates;
 
 namespace MyFormixApp.UI.Controllers
 {
