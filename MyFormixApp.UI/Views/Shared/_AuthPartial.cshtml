@@ -10,14 +10,6 @@
     <li class="nav-item">
         <span class="nav-link text-white">@Localizer["HelloUser", Context.User.Identity.Name]</span>
     </li>
-    @if (isAdmin)
-    {
-        <li class="nav-item">
-            <a class="nav-link text-white" asp-controller="Auth" asp-action="RegisterAdmin">
-                @Localizer["RegisterAdmin"]
-            </a>
-        </li>
-    }
     <li class="nav-item">
         <form class="form-inline" asp-controller="Auth" asp-action="Logout" method="post">
             <button type="submit" class="nav-link btn btn-link text-white">
