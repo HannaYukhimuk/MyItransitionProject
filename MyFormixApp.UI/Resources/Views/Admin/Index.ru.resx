@@ -1,18 +1,21 @@
-<data name="AdminDashboardTitle" xml:space="preserve">
-  <value>Админ-панель</value>
-</data>
-<data name="AdminControls" xml:space="preserve">
-  <value>Панель управления</value>
-</data>
-<data name="ManageTemplateThemes" xml:space="preserve">
-  <value>Темы шаблонов</value>
-</data>
-<data name="AddNewAdmin" xml:space="preserve">
-  <value>Добавить администратора</value>
-</data>
-<data name="ManageTemplates" xml:space="preserve">
-  <value>Управление шаблонами</value>
-</data>
-<data name="ManageForms" xml:space="preserve">
-  <value>Управление формами</value>
-</data>
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="AdminDashboardTitle" xml:space="preserve">
+    <value>Админ-панель</value>
+  </data>
+  <data name="AdminControls" xml:space="preserve">
+    <value>Панель управления</value>
+  </data>
+  <data name="ManageTemplateThemes" xml:space="preserve">
+    <value>Темы шаблонов</value>
+  </data>
+  <data name="AddNewAdmin" xml:space="preserve">
+    <value>Добавить администратора</value>
+  </data>
+  <data name="ManageTemplates" xml:space="preserve">
+    <value>Управление шаблонами</value>
+  </data>
+  <data name="ManageForms" xml:space="preserve">
+    <value>Управление формами</value>
+  </data>
+</root>

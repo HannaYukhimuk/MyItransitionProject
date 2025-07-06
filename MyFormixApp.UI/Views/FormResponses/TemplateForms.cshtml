@@ -1,6 +1,9 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @model IEnumerable<MyFormixApp.Domain.DTOs.Forms.FormDetailsDto>
+
 @{
-    ViewData["Title"] = $"Forms for {ViewBag.TemplateTitle}";
+    ViewData["Title"] = Localizer["FormsForTemplate", ViewBag.TemplateTitle];
     ViewData["HideTemplateColumn"] = true;
 }
 
@@ -15,12 +18,12 @@
                     <a asp-controller="TemplateViews" asp-action="Details" 
                        asp-route-id="@ViewBag.TemplateId" 
                        class="btn btn-secondary me-2">
-                        <i class="fas fa-arrow-left me-1"></i> Back to Template
+                        <i class="fas fa-arrow-left me-1"></i> @Localizer["BackToTemplate"]
                     </a>
                     <a asp-controller="TemplateForms" asp-action="TemplateFormsStatistics" 
                        asp-route-templateId="@ViewBag.TemplateId" 
                        class="btn btn-info">
-                        <i class="fas fa-chart-bar me-1"></i> View Statistics
+                        <i class="fas fa-chart-bar me-1"></i> @Localizer["ViewStatistics"]
                     </a>
                 </div>
             </div>
@@ -30,7 +33,7 @@
             @if (!Model.Any())
             {
                 <div class="alert alert-info">
-                    <i class="fas fa-info-circle me-2"></i> No forms have been submitted yet.
+                    <i class="fas fa-info-circle me-2"></i> @Localizer["NoFormsSubmitted"]
                 </div>
             }
             else

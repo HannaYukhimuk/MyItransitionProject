@@ -1,18 +1,21 @@
-<data name="AdminDashboardTitle" xml:space="preserve">
-  <value>Admin Dashboard</value>
-</data>
-<data name="AdminControls" xml:space="preserve">
-  <value>Admin Controls</value>
-</data>
-<data name="ManageTemplateThemes" xml:space="preserve">
-  <value>Manage Template Themes</value>
-</data>
-<data name="AddNewAdmin" xml:space="preserve">
-  <value>Add New Admin</value>
-</data>
-<data name="ManageTemplates" xml:space="preserve">
-  <value>Manage Templates</value>
-</data>
-<data name="ManageForms" xml:space="preserve">
-  <value>Manage Forms</value>
-</data>
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="AdminDashboardTitle" xml:space="preserve">
+    <value>Admin Dashboard</value>
+  </data>
+  <data name="AdminControls" xml:space="preserve">
+    <value>Admin Controls</value>
+  </data>
+  <data name="ManageTemplateThemes" xml:space="preserve">
+    <value>Manage Template Themes</value>
+  </data>
+  <data name="AddNewAdmin" xml:space="preserve">
+    <value>Add New Admin</value>
+  </data>
+  <data name="ManageTemplates" xml:space="preserve">
+    <value>Manage Templates</value>
+  </data>
+  <data name="ManageForms" xml:space="preserve">
+    <value>Manage Forms</value>
+  </data>
+</root>

@@ -1,13 +1,16 @@
-<data name="CreateAccountTitle"><value>Create Your Formix Account</value></data>
-<data name="RegistrationErrors"><value>Registration Errors</value></data>
-<data name="Username"><value>Username</value></data>
-<data name="UsernamePlaceholder"><value>Choose your username</value></data>
-<data name="EmailAddress"><value>Email Address</value></data>
-<data name="EmailPlaceholder"><value>Enter your email</value></data>
-<data name="Password"><value>Password</value></data>
-<data name="PasswordPlaceholder"><value>Create a password</value></data>
-<data name="ConfirmPassword"><value>Confirm Password</value></data>
-<data name="ConfirmPasswordPlaceholder"><value>Confirm your password</value></data>
-<data name="CreateAccountButton"><value>Create Account</value></data>
-<data name="AlreadyHaveAccount"><value>Already have an account?</value></data>
-<data name="SignInHere"><value>Sign in</value></data>
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="CreateAccountTitle"><value>Create Your Formix Account</value></data>
+    <data name="RegistrationErrors"><value>Registration Errors</value></data>
+    <data name="Username"><value>Username</value></data>
+    <data name="UsernamePlaceholder"><value>Choose your username</value></data>
+    <data name="EmailAddress"><value>Email Address</value></data>
+    <data name="EmailPlaceholder"><value>Enter your email</value></data>
+    <data name="Password"><value>Password</value></data>
+    <data name="PasswordPlaceholder"><value>Create a password</value></data>
+    <data name="ConfirmPassword"><value>Confirm Password</value></data>
+    <data name="ConfirmPasswordPlaceholder"><value>Confirm your password</value></data>
+    <data name="CreateAccountButton"><value>Create Account</value></data>
+    <data name="AlreadyHaveAccount"><value>Already have an account?</value></data>
+    <data name="SignInHere"><value>Sign in</value></data>
+</root>
